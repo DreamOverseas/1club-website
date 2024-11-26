@@ -5,9 +5,12 @@ import "../Styles/Home.css";
 const Home = () => {
 
     return (
-        <div>
-            
-        </div>
+        <header className="App-header">
+            <img src="favicon.ico" className="App-logo" alt="logo" />
+            <p>
+            Home Page Under Construction, pls wait...
+            </p>
+        </header>
     );
 };
 

@@ -4,9 +4,12 @@ import "../Styles/GuestInfo.css";
 const GuestInfo = () => {
 
     return (
-        <div>
-                This is the GuestInfo Page
-        </div>
+        <header className="App-header">
+            <img src="favicon.ico" className="App-logo" alt="logo" />
+            <p>
+            GuestInfo Page Under Construction, pls wait...
+            </p>
+        </header>
     );
 };
 

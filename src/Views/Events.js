@@ -4,9 +4,12 @@ import "../Styles/Events.css";
 const Events = () => {
 
     return (
-        <div>
-                This is the Events Page
-        </div>
+        <header className="App-header">
+            <img src="favicon.ico" className="App-logo" alt="logo" />
+            <p>
+                Events Page Under Construction, pls wait...
+            </p>
+        </header>
     );
 };
 

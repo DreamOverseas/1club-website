@@ -4,9 +4,12 @@ import "../Styles/Location.css";
 const Location = () => {
 
     return (
-        <div>
-                This is the Location Page
-        </div>
+        <header className="App-header">
+            <img src="favicon.ico" className="App-logo" alt="logo" />
+            <p>
+                Location Page Under Construction, pls wait...
+            </p>
+        </header>
     );
 };
 
