@@ -1,0 +1,36 @@
+.footer-overall {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.footer-logo {
+    height: 2rem;
+    width: auto;
+}
+
+.footer-links-row {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.footer-texts {
+    font-size: smaller;
+    text-align: end;
+}
+
+.footer-quick-links {
+    text-decoration: none;
+    margin-right: 1rem;
+    color: black;
+    background-color: transparent;
+}
+
+.footer-notification {
+    padding: 0.2rem;
+    font-size: smaller;
+    height: 1.5rem;
+    border: none;
+    background: none;
+    text-align: end;
+}
