@@ -14,7 +14,7 @@ const Footer = () => {
     const subscribMe = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://mail-service.do360.com/subscribe/360media-quick/', {
+            await axios.post('https://mail-service.do360.com/subscribe/chateau-le-marais-quick/', {
                 // Using the 360media one for now since they are the same in function
                 "email": email
             });
