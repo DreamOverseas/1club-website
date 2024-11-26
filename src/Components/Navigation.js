@@ -1,18 +1,64 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "../Styles/Navigation.css";
-import { Navbar } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
+import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 
 const Navigation = () => {
+    const location = useLocation();
+  const [activeLink, setActiveLink] = useState(''); // Track the selected nav item
+  const navLinks = ['Property', 'Wildlife', 'Events', 'Location', 'Guest information'];
 
-    return (
-        <div>
-            <Navbar>
+  useEffect(() => {
+    // Update active link based on the current pathname
+    const currentPath = location.pathname.split('/')[1] || 'Property'; 
+    setActiveLink(currentPath.charAt(0).toUpperCase() + currentPath.slice(1).replace(/-/g, ' '));
+  }, [location]);
 
-                This is the Navbar
+  return (
+    <Navbar bg="white" expand="lg" fixed="top" className="shadow-sm">
+      <Container>
+        <Navbar.Brand href="/" className="d-flex align-items-center">
+          <img
+            src='logo512.png'
+            alt="Logo"
+            height="40"
+            className="me-2"
+          />
+        </Navbar.Brand>
 
-            </Navbar>
-        </div>
-    );
+        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Collapse id="navbar-nav" className="justify-content-end">
+          {/* Navigation Links are derived from Link name with lowercase and white spaces become hyphen */}
+          <Nav className="me-4 d-flex align-items-center">
+            {navLinks.map((item) => (
+              <Nav.Link
+                key={item}
+                href={`/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                eventKey={item}
+                className= {`navigation-link-item ${activeLink === item ? 'active-nav-item' : ''}`}
+              >
+                {item}
+              </Nav.Link>
+            ))}
+          </Nav>
+
+          <div className="nav-delimiter"></div>
+
+          {/* Book Now Button (Overrided Black variant for now) */}
+          <Button
+            variant="dark"
+            href="/book-now-link-to-be-selected"
+            className="fw-bold"
+          >
+            <div className="nav-button-text">
+            Book Now
+            </div>
+          </Button>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 };
 
 export default Navigation;
+

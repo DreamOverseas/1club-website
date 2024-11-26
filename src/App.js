@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 // Style Imports
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./Styles/Fonts.css";
 import "./App.css";
 
 // Pages/Components Imports
@@ -22,6 +23,7 @@ function App() {
       <Navigation />
       <Routes>
         <Route exact path='/' element={<Home />} />
+        <Route exact path='/property' element={<Home />} />
         <Route path='/wildlife' element={<Wildlife />} />
         <Route path='/events' element={<Events />} />
         <Route path='/location' element={<Location />} />
