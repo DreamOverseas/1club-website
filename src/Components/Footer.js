@@ -14,9 +14,10 @@ const Footer = () => {
     const subscribMe = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://mail-service.do360.com/subscribe/chateau-le-marais-quick/', {
+            await axios.post('https://mail-service.do360.com/subscribe/quick-subscription/', {
                 // Using the 360media one for now since they are the same in function
-                "email": email
+                "email": email,
+                "source": "1 Club"
             });
             setMessage("Successfully subscribed!");
             setEmail('');
