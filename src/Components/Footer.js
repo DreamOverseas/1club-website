@@ -38,9 +38,9 @@ const Footer = () => {
                     <Row className="justify-content-start">
                         <span className="footer-links-row">
                             <a href="/property" className="footer-quick-links footer-texts">Property</a>
-                            <a href="/location" className="footer-quick-links footer-texts">Location</a>
+                            <a href="/finance" className="footer-quick-links footer-texts">Finance</a>
                             <a href="/events" className="footer-quick-links footer-texts">Events</a>
-                            <a href="/guest-information" className="footer-quick-links footer-texts">Guest Information</a>
+                            <a href="/about-us" className="footer-quick-links footer-texts">About Us</a>
                         </span>
                     </Row>
                 </Col>
@@ -50,7 +50,7 @@ const Footer = () => {
                         {/* Text Section */}
                         <Col xs={12}>
                             <p className="footer-texts mb-2">
-                                Get the Latest Chateau Le Marais Updates! <br />
+                                Get the Latest Updates from #1Club! <br />
                             </p>
                         </Col>
 

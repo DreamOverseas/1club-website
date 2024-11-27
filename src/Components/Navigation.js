@@ -6,7 +6,7 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 const Navigation = () => {
     const location = useLocation();
   const [activeLink, setActiveLink] = useState(''); // Track the selected nav item
-  const navLinks = ['Property', 'Wildlife', 'Events', 'Location', 'Guest information'];
+  const navLinks = ['Property', 'Finance', 'Events', 'About Us', 'Membership'];
 
   useEffect(() => {
     // Update active link based on the current pathname
@@ -19,10 +19,9 @@ const Navigation = () => {
       <Container>
         <Navbar.Brand href="/" className="d-flex align-items-center">
           <img
-            src='logo512.png'
+            src='logo192.png'
             alt="Logo"
-            height="40"
-            className="me-2"
+            className="me-2 nav-logo-1club"
           />
         </Navbar.Brand>
 
@@ -51,7 +50,7 @@ const Navigation = () => {
             className="fw-bold"
           >
             <div className="nav-button-text">
-            Book Now
+             Contact Us
             </div>
           </Button>
         </Navbar.Collapse>

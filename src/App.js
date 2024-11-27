@@ -12,10 +12,10 @@ import "./App.css";
 import Footer from "./Components/Footer";
 import Navigation from "./Components/Navigation";
 import Home from "./Views/Home";
-import GuestInfo from "./Views/GuestInfo";
-import Location from "./Views/Location";
 import Events from "./Views/Events";
-import Wildlife from "./Views/Wildlife";
+import Finance from "./Views/Finance";
+import AboutUs from "./Views/AboutUs";
+import Membership from "./Views/Membership";
 
 function App() {
   return (
@@ -24,10 +24,10 @@ function App() {
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route exact path='/property' element={<Home />} />
-        <Route path='/wildlife' element={<Wildlife />} />
+        <Route path='/finance' element={<Finance />} />
         <Route path='/events' element={<Events />} />
-        <Route path='/location' element={<Location />} />
-        <Route path='/guest-information' element={<GuestInfo />} />
+        <Route path='/about-us' element={<AboutUs />} />
+        <Route path='/membership' element={<Membership />} />
       </Routes>
       <Footer />
     </div>

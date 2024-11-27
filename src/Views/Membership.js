@@ -1,16 +1,16 @@
 import React from "react";
-import "../Styles/Location.css";
+import "../Styles/Membership.css";
 
-const Location = () => {
+const Membership = () => {
 
     return (
         <header className="App-header">
             <img src="favicon.ico" className="App-logo" alt="logo" />
             <p>
-                Location Page Under Construction, pls wait...
+            GuestInfo Page Under Construction, pls wait...
             </p>
         </header>
     );
 };
 
-export default Location;
+export default Membership;

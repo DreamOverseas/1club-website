@@ -1,16 +1,16 @@
 import React from "react";
-import "../Styles/GuestInfo.css";
+import "../Styles/Finance.css";
 
-const GuestInfo = () => {
+const Finance = () => {
 
     return (
         <header className="App-header">
             <img src="favicon.ico" className="App-logo" alt="logo" />
             <p>
-            GuestInfo Page Under Construction, pls wait...
+             Wildlife Page Under Construction, pls wait...
             </p>
         </header>
     );
 };
 
-export default GuestInfo;
+export default Finance;
