@@ -23,6 +23,7 @@ const Navigation = () => {
             alt="Logo"
             className="me-2 nav-logo-1club"
           />
+          <span className="nav-brand-text">1 Club</span>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbar-nav" />
@@ -43,7 +44,6 @@ const Navigation = () => {
 
           <div className="nav-delimiter"></div>
 
-          {/* Book Now Button (Overrided Black variant for now) */}
           <Button
             variant="dark"
             href="/book-now-link-to-be-selected"

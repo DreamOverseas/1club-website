@@ -36,3 +36,10 @@
     font-weight: 400;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'LogoFont';
+    src: url('../../public/fonts/Chopinscript.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
