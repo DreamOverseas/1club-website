@@ -6,6 +6,8 @@ import { Container, Row, Col, Image } from 'react-bootstrap';
 const Home = () => {
     const onDesktop = useMediaQuery({ query: "(min-width: 768px)" });
 
+    const collabs = ["Chateau", "Thirdhome", "Airpay", "36OMedia", "NGOhub", "MI", "DO"];
+
     return (
         <>
             <div className="landing-title-section">
@@ -56,6 +58,16 @@ const Home = () => {
                         <p>Experience a world of unparalleled privileges with our exclusive membership. From luxurious vacations and premium accommodations to prestigious beauty pageants and high-level business and social events, our club offers a gateway to extraordinary opportunities. Membership is by invitation or through a rigorous approval process, ensuring a community of like-minded individuals who value excellence and exclusivity.</p>
                     </Col>
                 </Row>
+
+                <Row className="home-section justify-content-between">
+                    <h1>Honorable Collaborators</h1> <br />
+                    {collabs.map((collab) => (
+                        <a className="home-collab-icon-container" href="/">
+                            <Image className="home-collab-icons" src={`/collab/${collab}.png`} alt={`${collab}`} />
+                        </a>
+                    ))}
+                </Row>
+                <br />
 
             </Container>
         </>

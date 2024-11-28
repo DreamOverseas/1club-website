@@ -62,6 +62,19 @@
     text-align: right;
 }
 
+.home-collab-icon-container {
+    width: 120px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-collab-icons {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
 
 /* Animation for scroll text */
 @keyframes fadeInOut {
