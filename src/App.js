@@ -16,6 +16,7 @@ import Events from "./Views/Events";
 import Finance from "./Views/Finance";
 import AboutUs from "./Views/AboutUs";
 import Membership from "./Views/Membership";
+import Property from "./Views/Property";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
       <Navigation />
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route exact path='/property' element={<Home />} />
+        <Route path='/property' element={<Property />} />
         <Route path='/finance' element={<Finance />} />
         <Route path='/events' element={<Events />} />
         <Route path='/about-us' element={<AboutUs />} />

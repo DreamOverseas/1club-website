@@ -30,4 +30,9 @@
     font-style: italic;
 }
 
-/* Add more Fonts here */
+@font-face {
+    font-family: 'TitleFont';
+    src: url('../../public/fonts/HeidanRounded-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}

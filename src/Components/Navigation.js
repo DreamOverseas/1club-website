@@ -10,7 +10,7 @@ const Navigation = () => {
 
   useEffect(() => {
     // Update active link based on the current pathname
-    const currentPath = location.pathname.split('/')[1] || 'Property'; 
+    const currentPath = location.pathname.split('/')[1] || ''; 
     setActiveLink(currentPath.charAt(0).toUpperCase() + currentPath.slice(1).replace(/-/g, ' '));
   }, [location]);
 
