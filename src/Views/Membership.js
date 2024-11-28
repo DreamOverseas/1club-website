@@ -7,7 +7,7 @@ const Membership = () => {
         <header className="App-header">
             <img src="favicon.ico" className="App-logo" alt="logo" />
             <p>
-            GuestInfo Page Under Construction, pls wait...
+            Membership Page Under Construction, pls wait...
             </p>
         </header>
     );

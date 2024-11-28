@@ -7,7 +7,7 @@ const AboutUs = () => {
         <header className="App-header">
             <img src="favicon.ico" className="App-logo" alt="logo" />
             <p>
-                Location Page Under Construction, pls wait...
+                About Us Page Under Construction, pls wait...
             </p>
         </header>
     );

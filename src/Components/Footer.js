@@ -50,7 +50,7 @@ const Footer = () => {
                         {/* Text Section */}
                         <Col xs={12}>
                             <p className="footer-texts mb-2">
-                                Get the Latest Updates from #1Club! <br />
+                                Get the Latest Updates from 1# Club! <br />
                             </p>
                         </Col>
 
