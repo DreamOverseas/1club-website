@@ -5,12 +5,14 @@ import "../Styles/Property.css";
 const Property = () => {
 
     return (
-        <header className="App-header">
+        <>
+            <div className="sticky-navbar-page-start-placeholder"/>
+            
             <img src="favicon.ico" className="App-logo" alt="logo" />
             <p>
                 Property Page Under Construction, pls wait...
             </p>
-        </header>
+        </>
     );
 };
 

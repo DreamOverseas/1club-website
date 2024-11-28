@@ -33,3 +33,16 @@
     transform: rotate(360deg);
   }
 }
+
+.sticky-navbar-page-start-placeholder {
+  height: 70px;
+  background-color: aqua; /* set color for test purpose only */
+}
+
+
+@media (max-width: 768px) {
+  .sticky-navbar-page-start-placeholder {
+      height: 0; /* Hide when in mobile views */
+  }
+}
+
