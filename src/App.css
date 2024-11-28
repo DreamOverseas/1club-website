@@ -39,10 +39,12 @@
   background-color: aqua; /* set color for test purpose only */
 }
 
+.page-body-1club { /* Make sure the footer will not float in the mid-air */
+  min-height: calc(100vh - 120px); /* Calc: screen height - footer height */
+}
 
 @media (max-width: 768px) {
   .sticky-navbar-page-start-placeholder {
       height: 0; /* Hide when in mobile views */
   }
 }
-

@@ -38,9 +38,9 @@ const Footer = () => {
                     <Row className="justify-content-start">
                         <span className="footer-links-row">
                             <a href="/property" className="footer-quick-links footer-texts">Property</a>
-                            <a href="/finance" className="footer-quick-links footer-texts">Finance</a>
+                            <a href="/prize" className="footer-quick-links footer-texts">Prize</a>
                             <a href="/events" className="footer-quick-links footer-texts">Events</a>
-                            <a href="/about-us" className="footer-quick-links footer-texts">About Us</a>
+                            <a href="/about-us" className="footer-quick-links footer-texts">About us</a>
                         </span>
                     </Row>
                 </Col>
