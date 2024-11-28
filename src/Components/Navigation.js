@@ -6,7 +6,7 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 const Navigation = () => {
     const location = useLocation();
   const [activeLink, setActiveLink] = useState(''); // Track the selected nav item
-  const navLinks = ['Property', 'Prize', 'Events', 'About us', 'Membership'];
+  const navLinks = ['Property', 'Prize', 'Events', 'About us', 'Membership', 'Contact us'];
 
   useEffect(() => {
     // Update active link based on the current pathname
@@ -46,11 +46,11 @@ const Navigation = () => {
 
           <Button
             variant="dark"
-            href="/book-now-link-to-be-selected"
+            href="/membership"
             className="fw-bold"
           >
             <div className="nav-button-text">
-             Contact Us
+             Log in
             </div>
           </Button>
         </Navbar.Collapse>

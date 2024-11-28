@@ -17,6 +17,7 @@ import Prize from "./Views/Prize";
 import AboutUs from "./Views/AboutUs";
 import Membership from "./Views/Membership";
 import Property from "./Views/Property";
+import ContactUs from "./Views/ContactUs";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path='/events' element={<Events />} />
         <Route path='/about-us' element={<AboutUs />} />
         <Route path='/membership' element={<Membership />} />
+        <Route path='/contact-us' element={<ContactUs />} />
       </Routes>
       <Footer />
     </div>
