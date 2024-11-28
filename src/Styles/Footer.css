@@ -3,6 +3,12 @@
     margin-bottom: 30px;
 }
 
+.footer-delimiter {
+    width: 100vw;
+    height: 2px;
+    background-color: rgb(224, 224, 224);
+}
+
 .footer-logo {
     height: 2rem;
     width: auto;

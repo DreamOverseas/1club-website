@@ -35,6 +35,34 @@
     animation: fadeInOut 2s infinite;
 }
 
+.home-section {
+    margin-top: 20px;
+}
+
+.home-icon-container {
+    padding: 30px;
+}
+
+.home-section-icon {
+    height: 240px;
+    width: auto;
+}
+
+.home-section-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.home-section-text-rev {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+}
+
+
 /* Animation for scroll text */
 @keyframes fadeInOut {
 
@@ -45,5 +73,19 @@
 
     50% {
         opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-section-text {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .home-section-text-rev {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
     }
 }

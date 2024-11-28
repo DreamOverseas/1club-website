@@ -29,6 +29,8 @@ const Footer = () => {
     };
 
     return (
+        <>
+        <div className="footer-delimiter" />
         <Container className="footer-overall">
             <Row>
                 <Col>
@@ -86,6 +88,7 @@ const Footer = () => {
                 </Col>
             </Row>
         </Container>
+        </>
     );
 };
 
