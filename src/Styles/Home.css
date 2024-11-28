@@ -1,0 +1,49 @@
+.landing-title-section {
+    height: 100vh;
+    /* Full viewport height */
+    background: url('../../public/homepage/bg.webp') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.home-title-container {
+    position: absolute;  /* Use absolute after making sure everything is responsive for diff views */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: 'TitleFont', sans-serif;
+    font-size: 5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.home-scroll-indicator {
+    position: absolute;  /* Use absolute after making sure everything is responsive for diff views */
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    animation: fadeInOut 2s infinite;
+}
+
+/* Animation for scroll text */
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
