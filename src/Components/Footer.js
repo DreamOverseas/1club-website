@@ -33,7 +33,7 @@ const Footer = () => {
         <div className="footer-delimiter" />
         <Container className="footer-overall">
             <Row>
-                <Col>
+                <Col sm={12} md={6} className="mb-4 mb-md-0">
                     <Row>
                         <Image src="logo512.png" className="footer-logo" />
                     </Row>
@@ -46,8 +46,7 @@ const Footer = () => {
                         </span>
                     </Row>
                 </Col>
-                <Col className='d-flex justify-content-end'>
-
+                <Col sm={12} md={6} >
                     <Row>
                         {/* Text Section */}
                         <Col xs={12}>
