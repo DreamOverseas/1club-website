@@ -6,7 +6,7 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 const Navigation = () => {
     const location = useLocation();
   const [activeLink, setActiveLink] = useState(''); // Track the selected nav item
-  const navLinks = ['Property', 'Prize', 'Events', 'About us', 'Membership', 'Contact us'];
+  const navLinks = ['Prize', 'Events', 'About us', 'Membership', 'Contact us'];
 
   useEffect(() => {
     // Update active link based on the current pathname

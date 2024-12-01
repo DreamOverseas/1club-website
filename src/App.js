@@ -16,7 +16,6 @@ import Events from "./Views/Events";
 import Prize from "./Views/Prize";
 import AboutUs from "./Views/AboutUs";
 import Membership from "./Views/Membership";
-import Property from "./Views/Property";
 import ContactUs from "./Views/ContactUs";
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
       <Navigation />
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route path='/property' element={<Property />} />
         <Route path='/prize' element={<Prize />} />
         <Route path='/events' element={<Events />} />
         <Route path='/about-us' element={<AboutUs />} />
