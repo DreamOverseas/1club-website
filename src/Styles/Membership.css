@@ -1,0 +1,48 @@
+.membership-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.membership-intro {
+    margin: 10px;
+}
+
+.membership-level-div {
+    margin-top: 25px;
+}
+
+.membership-level-title {
+    font-family: 'TitleFont', sans-serif;
+}
+
+.membership-title.gold {
+    color: #d4af37;
+}
+
+.membership-title.platinum {
+    color: #e5e4e2;
+}
+
+.membership-title.diamond {
+    color: #b9f2ff;
+}
+
+.membership-benefits li {
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Card Styling */
+.membership-card {
+    border: none;
+    border-radius: 12px;
+}
+
+.membership-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
