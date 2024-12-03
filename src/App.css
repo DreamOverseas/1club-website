@@ -36,7 +36,7 @@
 
 .sticky-navbar-page-start-placeholder {
   height: 75px;
-  background-color: aqua; /* set color for test purpose only */
+  background-color: transparent;
 }
 
 .page-body-1club { /* Make sure the footer will not float in the mid-air */
