@@ -13,13 +13,6 @@
     padding: 0;
 }
 
-.nav-brand-text {
-    font-family: 'LogoFont', sans-serif;
-    font-size: 2.5rem;
-    color: rgb(55, 80, 161);
-    margin-left: 5px;
-}
-
 .navigation-link-item {
     font-size: small;
     padding: 0.5rem 1rem;

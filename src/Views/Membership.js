@@ -1,41 +1,45 @@
 import React from "react";
 import "../Styles/Membership.css";
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 
 const memberships = [
     {
         level: 'Gold',
-        price: '$5,888 / 5 Years',
+        levelDisplay: '黄金会员',
+        price: '$5,888 AUD / 5年',
         benefits: [
-            'Access to Roseneath Holiday Park',
-            'Could bring Friends at any amount',
-            "Including Taking away the place's products (Conditions apply)"
+            '进入Roseneath度假公园',
+            '可携带不限人数的朋友',
+            '包括带走园区特产（需符合条件）'
         ]
     },
     {
         level: 'Platinum',
-        price: '$18,888 / 5 Years',
+        levelDisplay: '铂金会员',
+        price: '$18,888 AUD / 5年',
         benefits: [
-            'Access to Roseneath Holiday Park',
-            'Could bring Friends at any amount',
-            "Access to Chateau Le Marais, a Private French-styled Mansion",
-            "Including Taking away the places' products (Conditions apply)",
-            'One week of any holiday plan from Thirdhome (1 person/times)'
+            '进入Roseneath度假公园',
+            '可携带不限人数的朋友',
+            '进入Chateau Le Marais，法式风格的私人豪宅庄园',
+            '包括带走园区特产（需符合条件）',
+            '可享受Thirdhome的任何度假计划一周（1人/次）'
         ]
     },
     {
         level: 'Diamond',
-        price: '$58,888 / 5 Years',
+        levelDisplay: '钻石会员',
+        price: '$58,888 AUD / 5年',
         benefits: [
-            'Access to Roseneath Holiday Park',
-            'Could bring Friends at any amount',
-            "Access to Chateau Le Marais, a Private French-styled Mansion",
-            "Including Taking away the places' products (Conditions apply)",
-            'One week of any holiday plan from Thirdhome (2 person/times)',
-            'Business/Political Events held by NGO Hub, including a VIP seat in annual beauty pageant'
+            '进入Roseneath度假公园',
+            '可携带不限人数的朋友',
+            '进入Chateau Le Marais，法式风格的私人豪宅庄园',
+            '包括带走园区特产（需符合条件）',
+            '可享受Thirdhome的任何度假计划一周（2人/次）',
+            '参加NGO Hub举办的商/政界活动，包括每年选美大赛的VIP席位'
         ]
     }
 ];
+
 
 
 const Membership = () => {
@@ -53,7 +57,7 @@ const Membership = () => {
                             <Card className="h-100 text-center shadow-sm membership-card">
                                 <Card.Body>
                                     <Card.Title className={`membership-title ${membership.level.toLowerCase()}`}>
-                                        {membership.level}
+                                        {membership.levelDisplay}
                                     </Card.Title>
                                     <Card.Subtitle className="mb-3 text-muted">{membership.price}</Card.Subtitle>
                                     <ul className="membership-benefits list-unstyled">
@@ -72,13 +76,13 @@ const Membership = () => {
 
             <div className="text-center membership-intro">
                 <p>
-                    Membership is granted through <b>invitation</b> or <b>review</b>. Members are welcomed from diverse backgrounds, including art, law, medicine, science, media, and business.
+                    会员资格通过<b>邀请</b>或<b>审核</b>授予。会员来自各行各业，包括艺术、法律、医学、科学、媒体和商业。
                 </p>
                 <p>
-                    Exceptional travel experiences and exclusive events form the heart of our club's activities. These encompass fine wine, automobiles, poetry, literature, current affairs, sports, and the arts.
+                    卓越的旅行体验和独家活动是我们俱乐部活动的核心。这些活动涵盖了美酒、汽车、诗歌、文学、时事、体育和艺术。
                 </p>
                 <p>
-                    This extraordinary club offers unique experiences for our members and their guests.
+                    这个非凡的俱乐部为我们的会员及其嘉宾提供了独特的体验。
                 </p>
             </div>
         </Container>

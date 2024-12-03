@@ -45,18 +45,18 @@ const ContactUs = () => {
             });
 
             if (response.ok) {
-                setResponseMessage('Your enquiry has been submitted successfully!');
+                setResponseMessage('已成功提交!感谢您的耐心');
                 setIsSubmitting(false);
                 setErrorMessage(null);
                 setFormData({ name: '', phoneNumber: '', email: '', subject: '', question: '' });
             } else {
-                setErrorMessage('There was a problem submitting your enquiry. Please try again later.');
+                setErrorMessage('哎呀，出问题了。请稍后再试或者通过电邮联系我们！');
                 setIsSubmitting(false);
                 setResponseMessage(null);
             }
         } catch (error) {
             setIsSubmitting(false);
-            setErrorMessage('An error occurred. Please try again later.');
+            setErrorMessage('哎呀，出问题了。请稍后再试或者通过电邮联系我们！');
             setResponseMessage(null);
             console.error('Error:', error);
         }
@@ -66,7 +66,7 @@ const ContactUs = () => {
         <Container className="page-body-1club">
             <div className="sticky-navbar-page-start-placeholder" />
             <br></br>
-            <h2>Submit your enquiry here. We'll reach back to you shortly.</h2>
+            <h2>随时恭候您的联系，请提交下表，我们将会尽快给予您答复！</h2>
             <Row>
                 <Col md={8}>
                     <Container className="my-5" style={{ maxWidth: '1000px' }}>
@@ -76,7 +76,7 @@ const ContactUs = () => {
 
                         <Form onSubmit={handleSubmit}>
                             <Form.Group controlId="name" className="mb-3">
-                                <Form.Label>Name *</Form.Label>
+                                <Form.Label>姓名*</Form.Label>
                                 <Form.Control
                                     type="text"
                                     value={formData.name}
@@ -86,7 +86,7 @@ const ContactUs = () => {
                             </Form.Group>
 
                             <Form.Group controlId="phoneNumber" className="mb-3">
-                                <Form.Label>Phone</Form.Label>
+                                <Form.Label>电话</Form.Label>
                                 <Form.Control
                                     type="tel"
                                     value={formData.phoneNumber}
@@ -95,7 +95,7 @@ const ContactUs = () => {
                             </Form.Group>
 
                             <Form.Group controlId="email" className="mb-3">
-                                <Form.Label>Email *</Form.Label>
+                                <Form.Label>电子邮箱*</Form.Label>
                                 <Form.Control
                                     type="email"
                                     value={formData.email}
@@ -105,7 +105,7 @@ const ContactUs = () => {
                             </Form.Group>
 
                             <Form.Group controlId="subject" className="mb-3">
-                                <Form.Label>Subject *</Form.Label>
+                                <Form.Label>咨询方向*</Form.Label>
                                 <Form.Control
                                     type="text"
                                     value={formData.subject}
@@ -115,7 +115,7 @@ const ContactUs = () => {
                             </Form.Group>
 
                             <Form.Group controlId="question" className="mb-3">
-                                <Form.Label>Question *</Form.Label>
+                                <Form.Label>咨询问题*</Form.Label>
                                 <Form.Control
                                     as="textarea"
                                     rows={3}
@@ -131,7 +131,7 @@ const ContactUs = () => {
                                         <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                     </>
                                 ) : (
-                                    "Submit"
+                                    "提交"
                                 )}
                             </Button>
                         </Form>
@@ -141,7 +141,7 @@ const ContactUs = () => {
                     <br/><br/>
                     <Row>
                         <p>
-                            <b>Melbourne Office</b> &#128188;
+                            <b>墨尔本办公室</b> &#128188;
                         </p>
                     </Row>
                     <Row>

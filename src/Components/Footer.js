@@ -19,11 +19,11 @@ const Footer = () => {
                 "email": email,
                 "source": "1 Club"
             });
-            setMessage("Successfully subscribed!");
+            setMessage("已成功订阅!");
             setEmail('');
             setError('');
         } catch (error) {
-            setError(`There's some problem subscribing ${email}. Please contact us for help.`);
+            setError(`在订阅 ${email}时出了点问题... 请通过电邮联系我们。`);
             setMessage('');
         }
     };
@@ -39,10 +39,10 @@ const Footer = () => {
                     </Row>
                     <Row className="justify-content-start">
                         <span className="footer-links-row">
-                            <a href="/membership" className="footer-quick-links footer-texts">Membership</a>
-                            <a href="/events" className="footer-quick-links footer-texts">Events</a>
-                            <a href="/about-us" className="footer-quick-links footer-texts">About us</a>
-                            <a href="/contact-us" className="footer-quick-links footer-texts">Contact us</a>
+                            <a href="/membership" className="footer-quick-links footer-texts">会员</a>
+                            <a href="/events" className="footer-quick-links footer-texts">活动</a>
+                            <a href="/about-us" className="footer-quick-links footer-texts">关于我们</a>
+                            <a href="/contact-us" className="footer-quick-links footer-texts">联系我们</a>
                         </span>
                     </Row>
                 </Col>
@@ -51,7 +51,7 @@ const Footer = () => {
                         {/* Text Section */}
                         <Col xs={12}>
                             <p className="footer-texts mb-2">
-                                Get the Latest Updates from 1# Club! <br />
+                                从 1# Club 获取最新资讯! <br />
                             </p>
                         </Col>
 
@@ -60,7 +60,8 @@ const Footer = () => {
                             <Form.Group controlId="formEmail" className="mb-0 me-2">
                                 <Form.Control
                                     type="email"
-                                    placeholder="Type your email..."
+                                    placeholder="请输入您的邮箱
+                                    "
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
@@ -73,7 +74,7 @@ const Footer = () => {
                                 onClick={subscribMe}
                                 className="rounded-end subscribe-button"
                             >
-                                Subscribe
+                                订阅
                             </Button>
                         </Col>
 

@@ -6,7 +6,14 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 const Navigation = () => {
     const location = useLocation();
   const [activeLink, setActiveLink] = useState(''); // Track the selected nav item
-  const navLinks = ['Prize', 'Events', 'About us', 'Membership'];
+  const navLinks = ['Prize', 'Events', 'About us', 'Contact us', 'Membership'];
+  const navDisplays = {
+    'Prize': '抽奖',
+    'Events': '会员活动',
+    'About us': '关于我们',
+    'Contact us': '联系我们',
+    'Membership': '会员'
+  };
 
   useEffect(() => {
     // Update active link based on the current pathname
@@ -23,7 +30,6 @@ const Navigation = () => {
             alt="Logo"
             className="me-2 nav-logo-1club"
           />
-          <span className="nav-brand-text">1 Club</span>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbar-nav" />
@@ -37,7 +43,7 @@ const Navigation = () => {
                 eventKey={item}
                 className= {`navigation-link-item ${activeLink === item ? 'active-nav-item' : ''}`}
               >
-                {item}
+                {navDisplays[item]}
               </Nav.Link>
             ))}
           </Nav>
@@ -50,7 +56,7 @@ const Navigation = () => {
             className="fw-bold"
           >
             <div className="nav-button-text">
-              Contact us
+              注册/登录
             </div>
           </Button>
         </Navbar.Collapse>
