@@ -44,12 +44,18 @@
 .membership-button-gold {
     background: linear-gradient(135deg, black, rgb(66, 56, 0), black);
 }
+.membership-button-gold:hover {
+    background: linear-gradient(135deg, black, rgb(102, 87, 0), black);
+}
 
 .membership-title.platinum {
     color: #e5e4e2;
 }
 .membership-button-platinum {
-    background: linear-gradient(135deg, black, #3f3f3e, black);
+    background: linear-gradient(135deg, black, #50504e, black);
+}
+.membership-button-platinum:hover {
+    background: linear-gradient(135deg, black, #747472, black);
 }
 
 .membership-title.diamond {
@@ -57,6 +63,9 @@
 }
 .membership-button-diamond {
     background: linear-gradient(135deg, black, #465b5f, black);
+}
+.membership-button-diamond:hover {
+    background: linear-gradient(135deg, black, #6d8d94, black);
 }
 
 .membership-benefits li {
