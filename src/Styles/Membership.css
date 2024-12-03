@@ -8,10 +8,10 @@
 }
 
 .membership-promote {
-    font-family: 'TitleFont', sans-serif;
+    font-family: 'TitleFont', Arial, sans-serif;
     text-align: center;
     font-size: small;
-    color: rgba(18, 22, 233, 0.87);
+    color: rgba(47, 129, 253, 0.87);
     margin-bottom: 20px !important;
 }
 
@@ -41,13 +41,22 @@
 .membership-title.gold {
     color: #f1d77f;
 }
+.membership-button-gold {
+    background: linear-gradient(135deg, black, rgb(66, 56, 0), black);
+}
 
 .membership-title.platinum {
     color: #e5e4e2;
 }
+.membership-button-platinum {
+    background: linear-gradient(135deg, black, #3f3f3e, black);
+}
 
 .membership-title.diamond {
     color: #b9f2ff;
+}
+.membership-button-diamond {
+    background: linear-gradient(135deg, black, #465b5f, black);
 }
 
 .membership-benefits li {

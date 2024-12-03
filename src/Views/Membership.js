@@ -58,7 +58,7 @@ const Membership = () => {
 
             {/* ===== Page Contents start here ===== */}
             <div className="membership-level-div">
-                <h1 className="text-center mb-4 membership-level-title">Membership Levels</h1>
+                <h1 className="text-center mb-4 membership-level-title">会员等级 - Membership Levels</h1>
                 <div className="membership-promote">首批会员招募，从速限时</div>
                 <Row>
                     {memberships.map((membership, index) => (
@@ -84,7 +84,7 @@ const Membership = () => {
                                         ))}
                                     </ul>
                                     <div className="mt-auto">
-                                        <Button variant='dark' href={membership.hrefURL} className="mt-3 membership-button">
+                                        <Button variant='dark' href={membership.hrefURL} className={`mt-3 membership-button-${membership.level.toLowerCase()}`}>
                                             加入{membership.levelDisplay}
                                         </Button>
                                     </div>
