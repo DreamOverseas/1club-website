@@ -7,6 +7,14 @@
     box-shadow: 5px;
 }
 
+.membership-promote {
+    font-family: 'TitleFont', sans-serif;
+    text-align: center;
+    font-size: small;
+    color: rgba(18, 22, 233, 0.87);
+    margin-bottom: 20px !important;
+}
+
 .membership-intro {
     margin: 10px;
 }
@@ -22,6 +30,7 @@
 
 .membership-level-title {
     font-family: 'TitleFont', sans-serif;
+    margin-bottom: 3px !important;
 }
 
 .text-with-shadow {

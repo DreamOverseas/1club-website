@@ -59,6 +59,7 @@ const Membership = () => {
             {/* ===== Page Contents start here ===== */}
             <div className="membership-level-div">
                 <h1 className="text-center mb-4 membership-level-title">Membership Levels</h1>
+                <div className="membership-promote">首批会员招募，从速限时</div>
                 <Row>
                     {memberships.map((membership, index) => (
                         <Col md={4} className="mb-4" key={index}>

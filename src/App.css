@@ -45,6 +45,6 @@
 
 @media (max-width: 768px) {
   .sticky-navbar-page-start-placeholder {
-      height: 0; /* Hide when in mobile views */
+      height: 80;
   }
 }
