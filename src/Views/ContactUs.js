@@ -46,18 +46,18 @@ const ContactUs = () => {
             });
 
             if (response.ok) {
-                setResponseMessage('已成功提交!感谢您的耐心');
+                setResponseMessage('已成功提交，感谢您的耐心！');
                 setIsSubmitting(false);
                 setErrorMessage(null);
                 setFormData({ name: '', phoneNumber: '', email: '', subject: '', question: '' });
             } else {
-                setErrorMessage('哎呀，出问题了。请稍后再试或者通过电邮联系我们！');
+                setErrorMessage('哎呀，出问题了..请稍后再试或者通过电邮联系我们！');
                 setIsSubmitting(false);
                 setResponseMessage(null);
             }
         } catch (error) {
             setIsSubmitting(false);
-            setErrorMessage('哎呀，出问题了。请稍后再试或者通过电邮联系我们！');
+            setErrorMessage('哎呀，出问题了..请稍后再试或者通过电邮联系我们！');
             setResponseMessage(null);
             console.error('Error:', error);
         }
@@ -74,7 +74,7 @@ const ContactUs = () => {
 
             <div className="sticky-navbar-page-start-placeholder" />
             <br></br>
-            <h2>随时恭候您的联系，请提交下表，我们将会尽快给予您答复！</h2>
+            <h2>恭候您的联系，请填写下表，我们将尽快给予您答复！</h2>
             <Row>
                 <Col md={8}>
                     <Container className="my-5" style={{ maxWidth: '1000px' }}>
