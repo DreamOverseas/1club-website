@@ -6,7 +6,7 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 const Navigation = () => {
     const location = useLocation();
   const [activeLink, setActiveLink] = useState(''); // Track the selected nav item
-  const navLinks = ['Prize', 'Events', 'About us', 'Contact us', 'Membership'];
+  const navLinks = [/*'Prize', 'Events',*/ 'About us', 'Contact us', 'Membership'];
   const navDisplays = {
     'Prize': '抽奖',
     'Events': '会员活动',

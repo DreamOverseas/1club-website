@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { useMediaQuery } from "react-responsive";
 import "../Styles/Home.css";
 import { Container, Row, Col, Image } from 'react-bootstrap';
@@ -10,6 +11,12 @@ const Home = () => {
 
     return (
         <>
+            <Helmet>
+                <title>1# Club Homepage</title>
+                <meta name="description" content="Homepage - 1# Club, the private club for high-end customers." />
+                <meta name="keywords" content="Private Club, High-end, Club, Membership, Holiday, Accomadation, Service, Landscape" />
+            </Helmet>
+
             <div className="landing-title-section">
                 <div className="home-title-container">
                     <h1 className="home-title">WELCOME  TO  1# CLUB</h1>

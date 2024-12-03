@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from "react-helmet";
 import { Form, Button, Container, Alert, Row, Col } from 'react-bootstrap';
 import "../Styles/ContactUs.css";
 
@@ -64,6 +65,13 @@ const ContactUs = () => {
 
     return (
         <Container className="page-body-1club">
+            <Helmet>
+                <title>Contact - 1# Club</title>
+                <meta name="description" content="Contact Us - 1# Club, the private club for high-end customers." />
+                <meta name="keywords" content="Private Club, High-end, Club, Membership, Holiday, Accomadation, Service, Landscape" />
+            </Helmet>
+
+
             <div className="sticky-navbar-page-start-placeholder" />
             <br></br>
             <h2>随时恭候您的联系，请提交下表，我们将会尽快给予您答复！</h2>
@@ -138,7 +146,7 @@ const ContactUs = () => {
                     </Container>
                 </Col>
                 <Col>
-                    <br/><br/>
+                    <br /><br />
                     <Row>
                         <p>
                             <b>墨尔本办公室</b> &#128188;

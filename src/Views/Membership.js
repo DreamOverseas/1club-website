@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import "../Styles/Membership.css";
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
@@ -14,7 +15,7 @@ const basicBenefits = [
 const memberships = [
     {
         level: 'Gold',
-        levelDisplay: '黄金会员',
+        levelDisplay: '1# Club 黄金会员',
         price: '$5,888 AUD / 5年',
         hrefURL: "https://do360.com/products/gold-club-membership",
         benefits: [
@@ -25,7 +26,7 @@ const memberships = [
     },
     {
         level: 'Platinum',
-        levelDisplay: '铂金会员',
+        levelDisplay: '1# Club 铂金会员',
         price: '$18,888 AUD / 5年',
         hrefURL: "https://do360.com/products/platinum-club-membership",
         benefits: [
@@ -37,7 +38,7 @@ const memberships = [
     },
     {
         level: 'Diamond',
-        levelDisplay: '钻石会员',
+        levelDisplay: 'Club Le Marais 钻石会员',
         price: '$58,888 AUD / 5年',
         hrefURL: "https://do360.com/products/diamond-club-membership",
         benefits: [
@@ -54,6 +55,12 @@ const Membership = () => {
 
     return (
         <Container className="page-body-1club">
+            <Helmet>
+                <title>1# Club Membership</title>
+                <meta name="description" content="Membership page for 1# Club." />
+                <meta name="keywords" content="Private Club, High-end, Club, Membership, Holiday, Accomadation, Service, Landscape" />
+            </Helmet>
+
             <div className="sticky-navbar-page-start-placeholder" />
 
             {/* ===== Page Contents start here ===== */}
@@ -85,7 +92,7 @@ const Membership = () => {
                                     </ul>
                                     <div className="mt-auto">
                                         <Button variant='dark' href={membership.hrefURL} className={`mt-3 membership-button-${membership.level.toLowerCase()}`}>
-                                            加入{membership.levelDisplay}
+                                            申请 {membership.levelDisplay}
                                         </Button>
                                     </div>
                                 </Card.Body>
@@ -105,7 +112,7 @@ const Membership = () => {
                 </p>
                 <p>
                     我们欢迎来自各行各业的会员及嘉宾，包括艺术、法律、医学、科学、媒体和商业等。
-                    </p><p>
+                </p><p>
                     卓越的旅行体验和独家活动是我们俱乐部活动的核心。这些活动涵盖了美酒、汽车、诗歌、文学、时事、体育和艺术等。
                 </p>
             </div>

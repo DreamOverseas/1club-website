@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import "../Styles/AboutUs.css";
 import { Container, Row, Col, Image } from 'react-bootstrap';
 
@@ -6,13 +7,19 @@ const AboutUs = () => {
 
     return (
         <Container className="page-body-1club">
+            <Helmet>
+                <title>About Us - 1# Club</title>
+                <meta name="description" content="About 1# Club, the private club for high-end customers." />
+                <meta name="keywords" content="Private Club, High-end, Club, Membership, Holiday, Accomadation, Service, Landscape" />
+            </Helmet>
+
             <div className="sticky-navbar-page-start-placeholder" />
 
             {/* ===== Page Contents start here ===== */}
             <Row className="mb-5">
                 <Col>
                     <br />
-                    <h1 className="text-center mb-4">1号俱乐部简介</h1>
+                    <h1 className="text-center mb-4">1号俱乐部 - 1# Club</h1>
                     <p className="about-us-intro">
                         <strong>构建全球精英社交平台</strong>
                         <div className="text-align-left">
