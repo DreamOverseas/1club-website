@@ -86,7 +86,7 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
             Referee: '',
             Occupation: '',
             MembershipClass: membershipClass || '',
-          }); 
+          });
         } else {
           alert("提交失败了。");
           console.log(response.data);
@@ -212,6 +212,10 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
               {errors.membershipClass}
             </Form.Control.Feedback>
           </Form.Group>
+
+          <Form.Text id="fill-all-notice" muted>
+            推荐所有项目全部填入内容，可以提高审核速度与通过率。
+          </Form.Text>
 
           <div className="text-end">
             <Button variant="dark" className='member-applic-submit-button' type="submit">
