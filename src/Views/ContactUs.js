@@ -155,7 +155,7 @@ const ContactUs = () => {
                     <Row>
                         <p>
                             <i class="bi bi-pin-angle"></i> &nbsp;
-                            Level 2, 171 La Trobe Street, Melbourne VIC 3000
+                            Level 2, 171 La Trobe Street <br />Melbourne VIC 3000<br />Opening Mon-Fri 9:30-17:30
                         </p>
                     </Row>
                     <Row>

@@ -39,8 +39,9 @@ const Footer = () => {
                     </Row>
                     <Row className="justify-content-start">
                         <span className="footer-links-row">
+                            <a href="/" className="footer-quick-links footer-texts">首页</a>
                             <a href="/membership" className="footer-quick-links footer-texts">会员</a>
-                            <a href="/events" className="footer-quick-links footer-texts">活动</a>
+                            {/* <a href="/events" className="footer-quick-links footer-texts">活动</a> */}
                             <a href="/about-us" className="footer-quick-links footer-texts">关于我们</a>
                             <a href="/contact-us" className="footer-quick-links footer-texts">联系我们</a>
                         </span>

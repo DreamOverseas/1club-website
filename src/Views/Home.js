@@ -12,7 +12,7 @@ const Home = () => {
     return (
         <>
             <Helmet>
-                <title>1# Club Homepage</title>
+                <title>1# Club - 1号俱乐部</title>
                 <meta name="description" content="Homepage - 1# Club, the private club for high-end customers." />
                 <meta name="keywords" content="Private Club, High-end, Club, Membership, Holiday, Accomadation, Service, Landscape" />
             </Helmet>
