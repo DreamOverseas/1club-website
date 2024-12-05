@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from 'react';
 import { Helmet } from "react-helmet";
 import "../Styles/Membership.css";
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import ApplicationFormModal from '../Components/ApplicationFormModal';
 
 const basicBenefits = [
     '在各奢侈品零售商处享受独家优惠、折扣和配套礼品包',
@@ -14,7 +15,7 @@ const basicBenefits = [
 
 const memberships = [
     {
-        level: 'Gold',
+        level: "Gold",
         levelDisplay: '1# Club 黄金会员',
         price: '$5,888 AUD / 5年',
         hrefURL: "https://do360.com/products/gold-club-membership",
@@ -25,7 +26,7 @@ const memberships = [
         ]
     },
     {
-        level: 'Platinum',
+        level: "Platinum",
         levelDisplay: '1# Club 铂金会员',
         price: '$18,888 AUD / 5年',
         hrefURL: "https://do360.com/products/platinum-club-membership",
@@ -37,7 +38,7 @@ const memberships = [
         ]
     },
     {
-        level: 'Diamond',
+        level: "Diamond",
         levelDisplay: 'Club Le Marais 钻石会员',
         price: '$58,888 AUD / 5年',
         hrefURL: "https://do360.com/products/diamond-club-membership",
@@ -50,8 +51,19 @@ const memberships = [
     }
 ];
 
-
 const Membership = () => {
+    const [isModalActive, setIsModalActive] = useState(false);
+    const [selectedMembership, setSelectedMembership] = useState(null);
+
+    const handleShowModal = (membershipLevel) => {
+        setSelectedMembership(membershipLevel);
+        setIsModalActive(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalActive(false);
+        setSelectedMembership(null);
+    };
 
     return (
         <Container className="page-body-1club">
@@ -63,7 +75,6 @@ const Membership = () => {
 
             <div className="sticky-navbar-page-start-placeholder" />
 
-            {/* ===== Page Contents start here ===== */}
             <div className="membership-level-div">
                 <h1 className="text-center mb-4 membership-level-title">会员等级 - Membership Levels</h1>
                 <div className="membership-promote">首批会员招募，从速限时</div>
@@ -91,7 +102,11 @@ const Membership = () => {
                                         ))}
                                     </ul>
                                     <div className="mt-auto">
-                                        <Button variant='dark' href={membership.hrefURL} className={`mt-3 membership-button-${membership.level.toLowerCase()}`}>
+                                        <Button
+                                            variant='dark'
+                                            onClick={() => handleShowModal(membership.level)}
+                                            className={`mt-3 membership-button-${membership.level.toLowerCase()}`}
+                                        >
                                             申请 {membership.levelDisplay}
                                         </Button>
                                     </div>
@@ -101,6 +116,12 @@ const Membership = () => {
                     ))}
                 </Row>
             </div>
+
+            <ApplicationFormModal
+                active={isModalActive}
+                membershipClass={selectedMembership}
+                onClose={handleCloseModal}
+            />
 
             <div className="text-center membership-intro">
                 <p>
