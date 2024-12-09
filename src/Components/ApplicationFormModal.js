@@ -6,6 +6,7 @@ import { Modal, Form, Button, Alert } from 'react-bootstrap';
 // Read Env
 const BACKEND_HOST = process.env.REACT_APP_CMS_API_ENPOINT;
 const API_KEY_1CLUB = process.env.REACT_APP_CMS_API_KEY;
+const MAIL_API = `${process.env.REACT_APP_EMAIL_API_ENPOINT}1club/membership-notify`;
 
 const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
   // Form State
@@ -77,6 +78,21 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
         console.log(response);
 
         if (response.status === 200 || response.status === 201) {
+          try {
+            await axios.post( MAIL_API,
+              { "Name": formData.Name,
+                "Email": formData.Email
+               },
+              {
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+              }
+            );
+          } catch (error) {
+            console.error('Error message:', error.message);
+            alert("提交申请成功，但是内部邮件系统正在维护中...请通过电话或电子邮件联系我们。");
+          }
           setShowSuccess(true);
           setFormData({
             Name: '',
@@ -108,6 +124,7 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
         setIsSubmitting(false);
       }
     } else {
+      setIsSubmitting(false);
       setErrors(validationErrors);
     }
   };
