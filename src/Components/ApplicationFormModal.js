@@ -60,9 +60,6 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
     setIsSubmitting(true);
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
-      console.log("Submitting:");
-      console.log({ data: formData });
-
       try {
         const response = await axios.post(
           `${BACKEND_HOST}api/one-club-memberships`,
@@ -74,8 +71,6 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
             },
           }
         );
-
-        console.log(response);
 
         if (response.status === 200 || response.status === 201) {
           try {
