@@ -33,7 +33,6 @@ const memberships = [
         benefits: [
             '享有所有黄金会员权益',
             '专属进入 Willis Island Château La Marais 法式城堡，享受岛屿私密度假服务',
-            '包括带走包括Chateau Le Marais在内的地方特色产品（需符合条件）',
             '每年可享受合作方提供的一周全球度假体验，涵盖奢华岛屿、文化胜地等'
         ]
     },
