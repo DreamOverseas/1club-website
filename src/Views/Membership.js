@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import "../Styles/Membership.css";
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import ApplicationFormModal from '../Components/ApplicationFormModal';
+import MemberCard from '../Components/MemberCard';
 
 const basicBenefits = [
     '在各奢侈品零售商处享受独家优惠、折扣和配套礼品包',
@@ -165,6 +166,7 @@ const Membership = () => {
                     • 若会员违反俱乐部条款或行为规范，俱乐部有权终止会员资格，费用不予退还。
                 </p>
             </div>
+            <MemberCard className="membership-card-display" />
         </Container>
     );
 };
