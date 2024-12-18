@@ -39,8 +39,8 @@ const CardObject = ({ frontImage, backImage }) => {
       onPointerOut={handlePointerUp}
     >
       <boxGeometry args={[0.05, 3.75, 6]} />
-      <meshBasicMaterial attach="material-0" map={frontImage} />
-      <meshBasicMaterial attach="material-1" map={backImage} />
+      <meshBasicMaterial attach="material-1" map={frontImage} />
+      <meshBasicMaterial attach="material-0" map={backImage} />
       <meshStandardMaterial attach="material-2" color="#fff" transparent={true} opacity={0} />
       <meshStandardMaterial attach="material-3" color="#fff" transparent={true} opacity={0} />
       <meshStandardMaterial attach="material-4" color="#fff" transparent={true} opacity={0} />

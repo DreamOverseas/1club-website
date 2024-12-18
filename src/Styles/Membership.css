@@ -86,5 +86,6 @@
 }
 
 .membership-card-display {
-    min-width: 40vw;
+    min-width: 20vw;
+    max-height: 40vh !important;
 }
