@@ -17,6 +17,7 @@
 
 .membership-intro {
     margin: 10px;
+    min-width: 40vw;
 }
 
 .membership-level-div {
@@ -86,6 +87,5 @@
 }
 
 .membership-card-display {
-    min-width: 20vw;
     max-height: 40vh !important;
 }

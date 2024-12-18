@@ -125,7 +125,7 @@ const Membership = () => {
 
             <Row>
                 <Col>
-                    <div className="text-start" >
+                    <div className="text-start membership-intro" >
                         <p>
                             会员资格通过<b>邀请</b>或<b>审核</b>授予，满足以下条件即可申请：<br />
                             - 年龄须满二十一岁，具备高净值人群背景或专业推荐 <br />
