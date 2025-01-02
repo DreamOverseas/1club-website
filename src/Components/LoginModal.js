@@ -111,6 +111,7 @@ const LoginModal = ({ show, onHide }) => {
       );
       Cookies.set('authToken', 'your-auth-token', { expires: 7 });
       navigate('/member-center'); // 跳转到会员中心
+      window.location.reload();
     } catch (err) {
       setError('更新失败，请稍后重试。');
     }
@@ -174,6 +175,7 @@ const LoginModal = ({ show, onHide }) => {
                 onChange={handleChange}
                 required
               />
+                <Form.Text muted>密码最低不少于8个字符，推荐数字与字母的结合</Form.Text>
             </Form.Group>
             <Form.Group controlId="formConfirmPassword" className="mb-3">
               <Form.Label>确认密码</Form.Label>

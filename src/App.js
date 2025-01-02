@@ -17,6 +17,7 @@ import Prize from "./Views/Prize";
 import AboutUs from "./Views/AboutUs";
 import Membership from "./Views/Membership";
 import ContactUs from "./Views/ContactUs";
+import MemberCenter from "./Views/MemberCenter";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path='/about-us' element={<AboutUs />} />
         <Route path='/membership' element={<Membership />} />
         <Route path='/contact-us' element={<ContactUs />} />
+        <Route path='/member-center' element={<MemberCenter />} />
       </Routes>
       <Footer />
     </div>

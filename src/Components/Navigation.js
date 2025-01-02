@@ -9,6 +9,7 @@ const Navigation = () => {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(''); // Track the selected nav item
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navLinks = [/*'Prize', 'Events',*/ 'About us', 'Contact us', 'Membership'];
   const navDisplays = {
     'Prize': '抽奖',
@@ -21,8 +22,6 @@ const Navigation = () => {
   const API_ENDPOINT = process.env.REACT_APP_CMS_API_ENDPOINT;
   const API_KEY = process.env.REACT_APP_CMS_API_KEY;
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   useEffect(() => {
     const token = Cookies.get('authToken'); // 检查登录状态
     setIsLoggedIn(!!token);
@@ -33,13 +32,6 @@ const Navigation = () => {
     const currentPath = location.pathname.split('/')[1] || '';
     setActiveLink(currentPath.charAt(0).toUpperCase() + currentPath.slice(1).replace(/-/g, ' '));
   }, [location]);
-
-  const handleLogout = () => {
-    Cookies.remove('authToken');
-    Cookies.remove('user');
-    setIsLoggedIn(false);
-    window.location.reload(); // 刷新以更新 UI
-  };
 
   return (
     <Navbar bg="white" expand="lg" fixed="top" className="shadow-sm">
