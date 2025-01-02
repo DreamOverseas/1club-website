@@ -1,0 +1,202 @@
+import React, { useState } from 'react';
+import { Modal, Form, Button, Alert } from 'react-bootstrap';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+
+const LoginModal = ({ show, onHide }) => {
+  const API_ENDPOINT = process.env.REACT_APP_CMS_API_ENDPOINT;
+  const API_KEY = process.env.REACT_APP_CMS_API_KEY;
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    membershipNumber: '',
+    password: '',
+    confirmPassword: '',
+    docId: '',
+  });
+  const [status, setStatus] = useState('');
+  const [error, setError] = useState('');
+  const [step, setStep] = useState(1); // 1: 输入信息, 2: 设置密码, 3: 登录
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setStatus('');
+
+    try {
+      const response = await axios.get(
+        `${API_ENDPOINT}/api/one-club-memberships?filters[MembershipNumber][$eq]=${formData.membershipNumber}`,
+        {
+          headers: { Authorization: `Bearer ${API_KEY}` },
+        }
+      );
+      console.log(`Requested for MN: ${formData.membershipNumber}, got`);
+      console.log(response.data.data[0]);
+
+      const memberData = response.data.data[0];
+
+      if (!memberData) {
+        setError('会员号不存在，请检查后重试！');
+        return;
+      }
+
+      switch (memberData.CurrentStatus) {
+        case 'Confirmed':
+            console.log("Conformed:");
+            console.log(`from strapi-${memberData.Email} | from form-${formData.email}`);
+            console.log(`from strapi-${memberData.Name} | from form-${formData.name}`);
+          if (
+            (!memberData.Email && formData.name === memberData.Name) ||
+            (memberData.Email === formData.email)
+          ) {
+            setFormData({ ...formData, docId: memberData.documentId });
+            setStep(2); // 进入设置密码阶段
+          } else {
+            setError('信息不匹配，请核对后重试。');
+          }
+          break;
+
+        case 'Active':
+          if (formData.password === memberData.Password) {
+            Cookies.set('authToken', 'your-auth-token', { expires: 7 });
+            Cookies.set('user', JSON.stringify(memberData), { expires: 7 });
+            navigate('/member-center'); // 跳转到会员中心
+          } else {
+            setError('密码错误，请重试。');
+          }
+          break;
+
+        case 'Applied':
+          setStatus('当前申请已提交，正在审核中，请您耐心等待...');
+          break;
+
+        default:
+          setStatus('会员已过期或已被注销，如有问题欢迎随时联系我们！');
+          break;
+      }
+    } catch (err) {
+      setError('请求失败，请稍后重试。');
+    }
+  };
+
+  const handleSetPassword = async () => {
+    if (formData.password !== formData.confirmPassword) {
+      setError('两次密码输入不一致，请重试。');
+      return;
+    }
+
+    try {
+      await axios.put(
+        `${API_ENDPOINT}/api/one-club-memberships/${formData.docId}`,
+        {
+          data: {
+            Email: formData.email,
+            Name: formData.name,
+            CurrentStatus: "Active",
+            Password: formData.password,
+          },
+        },
+        {
+          headers: { Authorization: `Bearer ${API_KEY}` },
+        }
+      );
+      Cookies.set('authToken', 'your-auth-token', { expires: 7 });
+      navigate('/member-center'); // 跳转到会员中心
+    } catch (err) {
+      setError('更新失败，请稍后重试。');
+    }
+  };
+
+  return (
+    <Modal show={show} onHide={onHide} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>注册/登录</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {status && <Alert variant="info">{status}</Alert>}
+        {error && <Alert variant="danger">{error}</Alert>}
+
+        {step === 1 && (
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formName" className="mb-3">
+              <Form.Label>姓名</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formEmail" className="mb-3">
+              <Form.Label>邮箱</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formMembershipNumber" className="mb-3">
+              <Form.Label>会员号</Form.Label>
+              <Form.Control
+                type="text"
+                name="membershipNumber"
+                value={formData.membershipNumber}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Button type="submit" variant="primary" className="w-100">
+              提交
+            </Button>
+          </Form>
+        )}
+
+        {step === 2 && (
+          <Form>
+            <Form.Group controlId="formPassword" className="mb-3">
+              <Form.Label>设置密码</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formConfirmPassword" className="mb-3">
+              <Form.Label>确认密码</Form.Label>
+              <Form.Control
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Button
+              onClick={handleSetPassword}
+              variant="primary"
+              className="w-100"
+            >
+              保存密码并登录
+            </Button>
+          </Form>
+        )}
+      </Modal.Body>
+    </Modal>
+  );
+};
+
+export default LoginModal;

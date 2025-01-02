@@ -4,9 +4,9 @@ import axios from 'axios';
 import { Modal, Form, Button, Alert } from 'react-bootstrap';
 
 // Read Env
-const BACKEND_HOST = process.env.REACT_APP_CMS_API_ENPOINT;
+const BACKEND_HOST = process.env.REACT_APP_CMS_API_ENDPOINT;
 const API_KEY_1CLUB = process.env.REACT_APP_CMS_API_KEY;
-const MAIL_API = `${process.env.REACT_APP_EMAIL_API_ENPOINT}1club/membership-notify`;
+const MAIL_API = `${process.env.REACT_APP_EMAIL_API_ENDPOINT}/1club/membership-notify`;
 
 const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
   // Form State
@@ -62,7 +62,7 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
     if (Object.keys(validationErrors).length === 0) {
       try {
         const response = await axios.post(
-          `${BACKEND_HOST}api/one-club-memberships`,
+          `${BACKEND_HOST}/api/one-club-memberships`,
           { data: formData }, // Request payload
           {
             headers: {
