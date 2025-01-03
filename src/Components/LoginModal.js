@@ -49,9 +49,6 @@ const LoginModal = ({ show, onHide }) => {
 
       switch (memberData.CurrentStatus) {
         case 'Confirmed':
-          console.log("Conformed:");
-          console.log(`from strapi-${memberData.Email} | from form-${formData.email}`);
-          console.log(`from strapi-${memberData.Name} | from form-${formData.name}`);
           if (
             (!memberData.Email && formData.name === memberData.Name) ||
             (memberData.Email === formData.email)
@@ -112,6 +109,7 @@ const LoginModal = ({ show, onHide }) => {
               setError('无法连接到服务器，请检查网络连接。');
             } else {
               setError('发生未知错误，请稍后重试。');
+              console.log(err);
             }
           }
           break;
@@ -134,6 +132,7 @@ const LoginModal = ({ show, onHide }) => {
       }
     } catch (err) {
       setError('请求失败，请稍后重试。');
+      console.log(err);
     }
   };
 
@@ -179,6 +178,7 @@ const LoginModal = ({ show, onHide }) => {
       window.location.reload();
     } catch (err) {
       setError('更新失败，请稍后重试。');
+      console.log(err);
     }
   };
 
