@@ -275,7 +275,7 @@ const LoginModal = ({ show, onHide }) => {
                 onChange={handleChange}
                 required
               />
-              <Form.Text muted>请输入您的密码 （注：不低于8个字符）</Form.Text>
+              <Form.Text muted>请输入您的密码 （注：不低于8个字符）, 完成后点击登录按钮登入会员中心。</Form.Text>
             </Form.Group>
             <Button
               onClick={handleSubmit}

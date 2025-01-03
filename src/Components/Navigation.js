@@ -20,7 +20,7 @@ const Navigation = () => {
   };
 
   useEffect(() => {
-    const token = Cookies.get('authToken'); // 检查登录状态
+    const token = Cookies.get('authToken');
     setIsLoggedIn(!!token);
   }, []);
 
@@ -60,8 +60,8 @@ const Navigation = () => {
           <div className="nav-delimiter"></div>
 
           {isLoggedIn ? (
-            <Button variant="dark" className="fw-bold" href="/member-center">
-              会员中心
+            <Button variant="dark" href="/member-center">
+              <div className="nav-button-text">会员中心</div>
             </Button>
           ) : (
             <Button
@@ -74,7 +74,7 @@ const Navigation = () => {
         </Navbar.Collapse>
         <LoginModal
           show={showLoginModal}
-          onHide={() => setShowLoginModal(false)} // 点击关闭按钮时隐藏 Modal
+          onHide={() => setShowLoginModal(false)}
         />
       </Container>
     </Navbar>
