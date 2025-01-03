@@ -1,0 +1,29 @@
+.member-center {
+    font-family: 'Inter', sans-serif;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.membership-class {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    color: rgb(0, 0, 0);
+}
+
+.gold-bg {
+    background: rgba(255, 215, 0, 0.7);
+    text-shadow: 2px;
+}
+
+.platinum-bg {
+    background: rgba(192, 192, 192, 0.7);
+    text-shadow: 2px;
+}
+
+.diamond-bg {
+    background: rgba(0, 255, 255, 0.7);
+    text-shadow: 2px;
+}

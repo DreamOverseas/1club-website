@@ -19,9 +19,6 @@ const Navigation = () => {
     'Membership': '会员'
   };
 
-  const API_ENDPOINT = process.env.REACT_APP_CMS_API_ENDPOINT;
-  const API_KEY = process.env.REACT_APP_CMS_API_KEY;
-
   useEffect(() => {
     const token = Cookies.get('authToken'); // 检查登录状态
     setIsLoggedIn(!!token);
@@ -69,10 +66,9 @@ const Navigation = () => {
           ) : (
             <Button
               variant="dark"
-              className="fw-bold"
               onClick={() => setShowLoginModal(true)}
             >
-              注册/登录
+              <div className="nav-button-text">注册/登录</div>
             </Button>
           )}
         </Navbar.Collapse>

@@ -88,7 +88,14 @@ const LoginModal = ({ show, onHide }) => {
 
             if (response.status === 200) {
               Cookies.set('authToken', 'your-auth-token', { expires: 7 });
-              Cookies.set('user', JSON.stringify(response.data.member), { expires: 7 });
+              Cookies.set('user', JSON.stringify({
+                "name": memberData.Name,
+                "number": memberData.MembershipNumber,
+                "email": memberData.Email,
+                "class": memberData.MembershipClass,
+                "exp": memberData.Expiry,
+                "points": memberData.Points,
+              }), { expires: 7 });
               navigate('/member-center');
               window.location.reload();
             }
@@ -151,7 +158,23 @@ const LoginModal = ({ show, onHide }) => {
           headers: { Authorization: `Bearer ${API_KEY}` },
         }
       );
+      const response = await axios.get(
+        `${API_ENDPOINT}/api/one-club-memberships?filters[MembershipNumber][$eq]=${formData.membershipNumber}`,
+        {
+          headers: { Authorization: `Bearer ${API_KEY}` },
+        }
+      );
+
+      const memberData = response.data.data[0];
       Cookies.set('authToken', 'your-auth-token', { expires: 7 });
+      Cookies.set('user', JSON.stringify({
+        "name": memberData.Name,
+        "number": memberData.MembershipNumber,
+        "email": memberData.Email,
+        "class": memberData.MembershipClass,
+        "exp": memberData.Expiry,
+        "points": memberData.Points,
+      }), { expires: 7 });
       navigate('/member-center');
       window.location.reload();
     } catch (err) {
