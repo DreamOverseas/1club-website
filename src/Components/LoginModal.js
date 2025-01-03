@@ -18,7 +18,7 @@ const LoginModal = ({ show, onHide }) => {
   });
   const [status, setStatus] = useState('');
   const [error, setError] = useState('');
-  const [step, setStep] = useState(1); // 1: 输入信息, 2: 设置密码, 3: 登录
+  const [step, setStep] = useState(1); // 1: Info Check, 2: Password Setup, 3: Login with pwd
 
   const navigate = useNavigate();
 
@@ -39,8 +39,6 @@ const LoginModal = ({ show, onHide }) => {
           headers: { Authorization: `Bearer ${API_KEY}` },
         }
       );
-      console.log(`Requested for MN: ${formData.membershipNumber}, got`);
-      console.log(response.data.data[0]);
 
       const memberData = response.data.data[0];
 
@@ -51,36 +49,80 @@ const LoginModal = ({ show, onHide }) => {
 
       switch (memberData.CurrentStatus) {
         case 'Confirmed':
-            console.log("Conformed:");
-            console.log(`from strapi-${memberData.Email} | from form-${formData.email}`);
-            console.log(`from strapi-${memberData.Name} | from form-${formData.name}`);
+          console.log("Conformed:");
+          console.log(`from strapi-${memberData.Email} | from form-${formData.email}`);
+          console.log(`from strapi-${memberData.Name} | from form-${formData.name}`);
           if (
             (!memberData.Email && formData.name === memberData.Name) ||
             (memberData.Email === formData.email)
           ) {
             setFormData({ ...formData, docId: memberData.documentId });
-            setStep(2); // 进入设置密码阶段
+            setStep(2);
           } else {
             setError('信息不匹配，请核对后重试。');
           }
           break;
 
         case 'Active':
-          if (formData.password === memberData.Password) {
-            Cookies.set('authToken', 'your-auth-token', { expires: 7 });
-            Cookies.set('user', JSON.stringify(memberData), { expires: 7 });
-            navigate('/member-center'); // 跳转到会员中心
-          } else {
-            setError('密码错误，请重试。');
+          if (formData.name !== memberData.Name || memberData.Email !== formData.email) {
+            setError('会员信息不匹配，请核对后重试。');
+            break;
+          }
+
+          if (step !== 3) {
+            setStep(3);
+            break;
+          }
+
+          try {
+            const response = await axios.post(
+              `${API_ENDPOINT}/api/one-club-memberships/verify-password`,
+              {
+                membershipNumber: formData.membershipNumber,
+                password: formData.password,
+              },
+              {
+                headers: { Authorization: `Bearer ${API_KEY}` },
+              }
+            );
+
+            if (response.status === 200) {
+              Cookies.set('authToken', 'your-auth-token', { expires: 7 });
+              Cookies.set('user', JSON.stringify(response.data.member), { expires: 7 });
+              navigate('/member-center');
+              window.location.reload();
+            }
+          } catch (err) {
+            if (err.response) {
+              if (err.response.status === 401) {
+                setError('密码错误，请重试。');
+              } else if (err.response.status === 404) {
+                setError('会员号不存在，请核对后重试。');
+              } else {
+                setError(err.response.data.message || '发生未知错误，请稍后重试。');
+              }
+            } else if (err.request) {
+              setError('无法连接到服务器，请检查网络连接。');
+            } else {
+              setError('发生未知错误，请稍后重试。');
+            }
           }
           break;
 
         case 'Applied':
-          setStatus('当前申请已提交，正在审核中，请您耐心等待...');
+          setStatus('会员资格仍正在审核中，请您耐心等待...');
+          break;
+
+        case 'Suspended':
+          if (formData.name !== memberData.Name || memberData.Email !== formData.email) {
+            setError('会员信息不匹配，请核对后重试。');
+            break;
+          }
+          setStatus('会员已过期或已被注销，如有问题欢迎随时联系我们！');
           break;
 
         default:
-          setStatus('会员已过期或已被注销，如有问题欢迎随时联系我们！');
+          setStatus('未找到会员或申请正在审核中，如有问题欢迎随时联系我们！');
           break;
       }
     } catch (err) {
@@ -110,7 +152,7 @@ const LoginModal = ({ show, onHide }) => {
         }
       );
       Cookies.set('authToken', 'your-auth-token', { expires: 7 });
-      navigate('/member-center'); // 跳转到会员中心
+      navigate('/member-center');
       window.location.reload();
     } catch (err) {
       setError('更新失败，请稍后重试。');
@@ -158,7 +200,7 @@ const LoginModal = ({ show, onHide }) => {
                 required
               />
             </Form.Group>
-            <Button type="submit" variant="primary" className="w-100">
+            <Button type="submit" variant="dark" className="w-100">
               提交
             </Button>
           </Form>
@@ -166,6 +208,7 @@ const LoginModal = ({ show, onHide }) => {
 
         {step === 2 && (
           <Form>
+            <h5 className='text-center'>欢迎您首次登录/激活</h5>
             <Form.Group controlId="formPassword" className="mb-3">
               <Form.Label>设置密码</Form.Label>
               <Form.Control
@@ -175,7 +218,7 @@ const LoginModal = ({ show, onHide }) => {
                 onChange={handleChange}
                 required
               />
-                <Form.Text muted>密码最低不少于8个字符，推荐数字与字母的结合</Form.Text>
+              <Form.Text muted>密码最低不少于8个字符，推荐数字与字母的结合</Form.Text>
             </Form.Group>
             <Form.Group controlId="formConfirmPassword" className="mb-3">
               <Form.Label>确认密码</Form.Label>
@@ -189,10 +232,34 @@ const LoginModal = ({ show, onHide }) => {
             </Form.Group>
             <Button
               onClick={handleSetPassword}
-              variant="primary"
+              variant="dark"
               className="w-100"
             >
               保存密码并登录
+            </Button>
+          </Form>
+        )}
+
+        {step === 3 && (
+          <Form>
+            <h5 className='text-center'>欢迎回来</h5>
+            <Form.Group controlId="formPassword" className="mb-3">
+              <Form.Label>输入密码</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <Form.Text muted>请输入您的密码 （注：不低于8个字符）</Form.Text>
+            </Form.Group>
+            <Button
+              onClick={handleSubmit}
+              variant="dark"
+              className="w-100"
+            >
+              登录
             </Button>
           </Form>
         )}
