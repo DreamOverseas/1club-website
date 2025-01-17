@@ -4,6 +4,7 @@ import "../Styles/Membership.css";
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import ApplicationFormModal from '../Components/ApplicationFormModal';
 import MemberCard from '../Components/MemberCard';
+import Cookies from 'js-cookie';
 
 const basicBenefits = [
     '在各奢侈品零售商处享受独家优惠、折扣和配套礼品包',
@@ -55,6 +56,8 @@ const Membership = () => {
     const [isModalActive, setIsModalActive] = useState(false);
     const [selectedMembership, setSelectedMembership] = useState(null);
 
+    const userInfo = Cookies.get('user');
+
     const handleShowModal = (membershipLevel) => {
         setSelectedMembership(membershipLevel);
         setIsModalActive(true);
@@ -102,13 +105,22 @@ const Membership = () => {
                                         ))}
                                     </ul>
                                     <div className="mt-auto">
-                                        <Button
-                                            variant='dark'
-                                            onClick={() => handleShowModal(membership.level)}
-                                            className={`mt-3 membership-button-${membership.level.toLowerCase()}`}
-                                        >
-                                            申请 {membership.levelDisplay}
-                                        </Button>
+                                        {JSON.parse(decodeURIComponent(userInfo)).class === membership.level ?
+                                            <Button
+                                                variant='dark'
+                                                className={`mt-3 membership-button-${membership.level.toLowerCase()}`}
+                                            >
+                                                您的当前等级
+                                            </Button>
+                                            :
+                                            <Button
+                                                variant='dark'
+                                                onClick={() => handleShowModal(membership.level)}
+                                                className={`mt-3 membership-button-${membership.level.toLowerCase()}`}
+                                            >
+                                                申请 {membership.levelDisplay}
+                                            </Button>
+                                        }
                                     </div>
                                 </Card.Body>
                             </Card>
