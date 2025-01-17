@@ -148,31 +148,59 @@ const Membership = () => {
 
             <div className="text-center membership-intro">
                 <p>
-                    <b>会员条款与条件（Terms & Conditions）</b><br />
-                    <b>1. 会员资格</b><br />
-                    • 年龄须满二十一岁，具备高净值人群背景或专业推荐。<br />
-                    • 入会需经现有会员推荐，并通过俱乐部审核。<br />
+                    <h5>一号俱乐部会员规则</h5><br />
+                    <b>1. 会员推荐制</b><br />
+                    一号俱乐部为私人俱乐部，仅接受现有会员推荐入会，除非获得特别许可。<br />
+                    会员需通过推荐人认证后，方可享受会员资格。<br />
 
-                    <b>2. 费用与有效期</b><br />
-                    • 会员等级分为黄金、铂金、钻石，费用一经支付，不可退还。<br />
-                    • 会员权益有效期为五年，期满后需重新申请。<br />
+                    <b>2. 会员信息保密</b><br />
+                    发卡方将严格保护会员的个人信息，未经会员授权，不会将其信息泄露给第三方。<br />
 
-                    <b>3. 活动参与</b><br />
-                    • 会员可邀请亲友参与指定活动，但需提前申请并获得批准。<br />
-                    • 部分高端活动仅限会员本人参加。<br />
+                    <b>3. 规则变更权</b><br />
+                    发卡方保留随时调整会员规则的权利。<br />
+                    所有变更将通过官方网站发布(即本页面)，会员需及时关注以了解最新规则。<br />
 
-                    <b>4. 隐私与行为规范</b><br />
-                    • 会员个人信息将严格保密，不会外泄。<br />
-                    • 在参与俱乐部活动时，需遵守俱乐部礼仪及行为规范，禁止任何不符合俱乐部价值观的行为。<br />
+                    <b>4. 会员行为规范</b><br />
+                    会员需遵守俱乐部礼仪与行为规范。<br />
+                    在任何活动中，禁止任何违反俱乐部价值观的行为。<br />
+                    违反规则的会员可能会被取消资格，且已支付费用不予退还。<br />
 
-                    <b>5. 专属权益</b><br />
-                    • 会员权益因等级而异，具体内容详见各等级权益说明。<br />
-                    • 所有资源的使用需提前预约，以确保服务品质。<br />
+                    <b>5. 资源与服务使用</b><br />
+                    会员使用俱乐部的资源和服务需提前预约，以确保服务品质和公平性。<br />
+                    具体预约规则详见官网。<br />
 
-                    <b>6. 终止会员资格</b><br />
-                    • 若会员违反俱乐部条款或行为规范，俱乐部有权终止会员资格，费用不予退还。
+                    <b>6. 会员资格解释权</b><br />
+                    会员资格的最终解释权归一号俱乐部所有。<br />
+                    如有争议，以俱乐部最终决定为准。<br /><br /><br />
+
+                    <h5>1Club Membership Rules</h5><br />
+                    <b>1. Membership by Recommendation</b><br />
+                    1Club is a private club. Membership is granted by recommendation from an existing member unless special permission is provided.<br />
+                    New members must be approved through the referral process before accessing membership benefits.<br />
+
+                    <b>2. Confidentiality of Member Information</b><br />
+                    The issuer strictly protects members’ personal information.<br />
+                    It will not be shared with third parties without the member’s explicit consent.<br />
+
+                    <b>3. Right to Update Rules</b><br />
+                    The issuer reserves the right to modify membership rules at any time.<br />
+                    Updates will be published here, and members are encouraged to check for updates regularly.<br />
+
+                    <b>4. Member Conduct Guidelines</b><br />
+                    Members must follow club etiquette and behavior guidelines.<br />
+                    Any actions contrary to the club’s values are prohibited.<br />
+                    Violators may have their membership revoked, with no refund of any fees paid.<br />
+
+                    <b>5. Use of Resources and Services</b><br />
+                    All club resources and services must be booked in advance to ensure quality and fairness.<br />
+                    Please refer to the website for detailed booking policies.<br />
+
+                    <b>6. Interpretation of Membership Qualifications</b><br />
+                    The final interpretation of membership qualifications rests with 1Club.<br />
+                    In the event of any disputes, the club’s decision will be final.<br />
                 </p>
             </div>
+
         </Container>
     );
 };
