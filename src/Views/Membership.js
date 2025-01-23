@@ -105,7 +105,8 @@ const Membership = () => {
                                         ))}
                                     </ul>
                                     <div className="mt-auto">
-                                        {JSON.parse(decodeURIComponent(userInfo)).class === membership.level ?
+                                        {userInfo &&
+                                            JSON.parse(decodeURIComponent(userInfo)).class === membership.level ?
                                             <Button
                                                 variant='dark'
                                                 className={`mt-3 membership-button-${membership.level.toLowerCase()}`}

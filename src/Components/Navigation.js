@@ -68,7 +68,7 @@ const Navigation = () => {
               variant="dark"
               onClick={() => setShowLoginModal(true)}
             >
-              <div className="nav-button-text">注册/登录</div>
+              <div className="nav-button-text">激活/登录</div>
             </Button>
           )}
         </Navbar.Collapse>
