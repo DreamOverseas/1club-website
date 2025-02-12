@@ -18,6 +18,7 @@ import AboutUs from "./Views/AboutUs";
 import Membership from "./Views/Membership";
 import ContactUs from "./Views/ContactUs";
 import MemberCenter from "./Views/MemberCenter";
+import MemberManagement from "./Views/MemberManagement";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path='/membership' element={<Membership />} />
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/member-center' element={<MemberCenter />} />
+        <Route path='/member-management-page' element={<MemberManagement />} />
       </Routes>
       <Footer />
     </div>
