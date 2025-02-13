@@ -4,12 +4,10 @@ import QRCode from 'qrcode';
 import CryptoJS from "crypto-js";
 
 const MemberManagement = () => {
-    // 登录相关状态
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [inputPassword, setInputPassword] = useState('');
     const [loginError, setLoginError] = useState('');
 
-    // 会员数据和搜索状态
     const [memberships, setMemberships] = useState([]);
     const [filteredMemberships, setFilteredMemberships] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -20,7 +18,6 @@ const MemberManagement = () => {
     const adminPwd = process.env.REACT_APP_ADMIN_PWD;
     const commonSecret = process.env.REACT_APP_COMMON_SECRET;
 
-    // 登录表单提交事件
     const handleLogin = (e) => {
         e.preventDefault();
         if (inputPassword === adminPwd) {
@@ -31,13 +28,11 @@ const MemberManagement = () => {
         }
     };
 
-    // 登录成功后，向 Strapi 后台获取 OneClubMembership 数据
     useEffect(() => {
         if (!isAuthenticated) return;
 
         const fetchMemberships = async () => {
             try {
-                // 假设 Strapi 的 API 路径为 /api/oneclubmemberships，必要时可增加 ?populate=*
                 const response = await fetch(`${cmsApiEndpoint}/api/one-club-memberships`, {
                     headers: {
                         Authorization: `Bearer ${cmsApiKey}`,
@@ -48,8 +43,6 @@ const MemberManagement = () => {
                     throw new Error('网络错误');
                 }
                 const data = await response.json();
-
-                console.log(data);
 
                 const membershipsData = data.data.map(item => ({
                     id: item.id,
@@ -66,7 +59,6 @@ const MemberManagement = () => {
         fetchMemberships();
     }, [isAuthenticated, cmsApiEndpoint, cmsApiKey]);
 
-    // 处理搜索：当 searchQuery 或 memberships 变化时进行过滤
     useEffect(() => {
         const query = searchQuery.toLowerCase();
         const filtered = memberships.filter(m =>
@@ -76,13 +68,11 @@ const MemberManagement = () => {
         setFilteredMemberships(filtered);
     }, [searchQuery, memberships]);
 
-    // 生成签名
     const generateSignature = (name, membershipNumber) => {
         const message = `${name}${membershipNumber}${commonSecret}`;
         return CryptoJS.SHA256(message).toString();
     };
 
-    // 生成二维码数据
     const generateQRData = (name, membershipNumber) => {
         const signature = generateSignature(name, membershipNumber);
         return JSON.stringify({
@@ -92,7 +82,6 @@ const MemberManagement = () => {
         });
     };
 
-    // Handle QR Code download
     const handleDownloadQR = async (name, serial) => {
         try {
             const qrCodeDataURL = await QRCode.toDataURL(generateQRData(name, serial));
@@ -105,7 +94,6 @@ const MemberManagement = () => {
         }
     };
 
-    // 未登录时显示登录页面
     if (!isAuthenticated) {
         return (
             <Container fluid className="d-flex align-items-center justify-content-center vh-100">
@@ -128,12 +116,10 @@ const MemberManagement = () => {
         );
     }
 
-    // 登录成功后显示会员列表和搜索框
     return (
         <Container className="mt-4">
             <div className="sticky-navbar-page-start-placeholder" />
 
-            {/* 搜索框 */}
             <Row className="mb-3">
                 <Col>
                     <Form.Control
@@ -145,7 +131,6 @@ const MemberManagement = () => {
                 </Col>
             </Row>
 
-            {/* 会员卡列表 */}
             <Row>
                 {filteredMemberships.map(membership => (
                     <Col key={membership.id} xs={12} md={4} className="mb-3">
