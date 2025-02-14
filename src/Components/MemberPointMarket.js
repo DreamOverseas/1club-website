@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 import { Container, Row, Col, Card, Button, Modal, Form } from 'react-bootstrap';
 
 const MemberPointMarket = () => {
@@ -6,6 +7,9 @@ const MemberPointMarket = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showModal, setShowModal] = useState(false);
+
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [redeemProduct, setRedeemProduct] = useState(null);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -50,6 +54,15 @@ const MemberPointMarket = () => {
     const handleModalClose = () => {
         setShowModal(false);
         setSelectedProduct(null);
+    };
+
+    const handleRedeemClick = (product, e) => {
+        e.stopPropagation();
+        // 关闭详情 Modal（如果已打开）
+        setShowModal(false);
+        // 设置当前兑换的商品，并显示确认兑换 Modal
+        setRedeemProduct(product);
+        setShowConfirmModal(true);
     };
 
     return (
@@ -112,10 +125,7 @@ const MemberPointMarket = () => {
                                     <Button
                                         variant="dark"
                                         className="w-100"
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            // 兑换按钮点击事件（具体功能待讨论）
-                                        }}
+                                        onClick={(e) => handleRedeemClick(product, e)}
                                     >
                                         现在兑换
                                     </Button>
@@ -126,7 +136,7 @@ const MemberPointMarket = () => {
                 })}
             </Row>
 
-            {/* Modal 显示选中商品的详细信息 */}
+            {/* Modal - 商品详细信息 */}
             {selectedProduct && (
                 <Modal show={showModal} onHide={handleModalClose}>
                     <Modal.Header closeButton>
@@ -163,19 +173,69 @@ const MemberPointMarket = () => {
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
-                        {/* Modal 底部的兑换按钮 */}
                         <Button
                             variant="dark"
                             className="w-100"
-                            onClick={() => {
-                                // Modal 内兑换按钮点击事件（具体功能待讨论）
-                            }}
+                            onClick={(e) => handleRedeemClick(selectedProduct, e)}
                         >
                             现在兑换
                         </Button>
                     </Modal.Footer>
                 </Modal>
             )}
+
+            {/* Modal - 确认兑换 */}
+            {redeemProduct && (
+                <Modal
+                    show={showConfirmModal}
+                    onHide={() => {
+                        setShowConfirmModal(false);
+                        setRedeemProduct(null);
+                    }}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>确认兑换</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>商品：{redeemProduct.Name}</p>
+                        {(() => {
+                            // 从 cookie 中读取点数和积分
+                            const userData = JSON.parse(Cookies.get('user'));
+                            const cookiePoints = userData.points || 0;
+                            const cookieLoyalty = userData.loyalty || 0;
+                            return (
+                                <>
+                                    <p>
+                                        会员点数：{cookiePoints} → {cookiePoints - redeemProduct.Price}
+                                    </p>
+                                    <p>
+                                        积分：{cookieLoyalty} → {cookieLoyalty + redeemProduct.LoyaltyGain}
+                                    </p>
+                                </>
+                            );
+                        })()}
+                    </Modal.Body>
+                    <Modal.Footer>
+                        {(() => {
+                            const cookiePoints = JSON.parse(Cookies.get('user')).points || 0;
+                            const sufficient = cookiePoints >= redeemProduct.Price;
+                            return (
+                                <Button
+                                    variant={sufficient ? "dark" : "secondary"}
+                                    className="w-100"
+                                    disabled={!sufficient}
+                                    onClick={() => {
+                                        // 兑换操作的逻辑，TODO: //
+                                    }}
+                                >
+                                    {sufficient ? "兑换" : "积分不足"}
+                                </Button>
+                            );
+                        })()}
+                    </Modal.Footer>
+                </Modal>
+            )}
+
         </Container>
     );
 };
