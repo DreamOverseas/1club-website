@@ -8,6 +8,8 @@ const MemberPointMarket = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showModal, setShowModal] = useState(false);
 
+    const [loadingRedeem, setLoadingRedeem] = useState(false);
+
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [redeemProduct, setRedeemProduct] = useState(null);
 
@@ -65,6 +67,133 @@ const MemberPointMarket = () => {
         setShowConfirmModal(true);
     };
 
+    // Used for update user points (function break-up)
+    const updateUserPoints = async () => {
+        const endpoint = process.env.REACT_APP_CMS_API_ENDPOINT;
+        const apiKey = process.env.REACT_APP_CMS_API_KEY;
+
+        // 从 Cookie 中读取当前用户信息（假设存储在 "user.number" 和 "user.email" 中）
+        const currUser = Cookies.get('user');
+
+        // 构造查询 URL，通过 filter 和 [eq] 筛选对应用户（MembershipNumber 与 Email）
+        const userQueryUrl = `${endpoint}/users?filters[MembershipNumber][$eq]=${currUser.number}&filters[Email][$eq]=${currUser.email}`;
+
+        try {
+            const userResponse = await fetch(userQueryUrl, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${apiKey}`
+                }
+            });
+            const userData = await userResponse.json();
+
+            if (userResponse.ok && userData.data && userData.data.length > 0) {
+                // 取查询到的第一个用户记录
+                const userRecord = userData.data[0];
+                const documentId = userRecord.id; // Strapi 后台用户的 documentId
+                const oldPoints = userRecord.Points;
+                const oldLoyalty = userRecord.Loyalty;
+
+                // 计算新的积分和积分值
+                const newPoints = oldPoints - redeemProduct.Price;
+                const newLoyalty = oldLoyalty + redeemProduct.LoyaltyGain;
+
+                // 构造更新数据的 payload
+                const updatePayload = {
+                    data: {
+                        Points: newPoints,
+                        Loyalty: newLoyalty
+                    }
+                };
+
+                // 通过 PUT 方法更新用户信息
+                const updateResponse = await fetch(`${endpoint}/users/${documentId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify(updatePayload)
+                });
+
+                if (updateResponse.ok) {
+                    console.log("User info updated successfully");
+                } else {
+                    const updateError = await updateResponse.json();
+                    console.log("Error updating user info:", updateError.message);
+                }
+            } else {
+                console.log("User not found or error fetching user data");
+            }
+        } catch (error) {
+            console.log("Error updating user info:", error);
+        }
+    }
+
+    const comfirmRedeemNow = async () => {
+        setLoadingRedeem(true);
+        const currUser = Cookies.get('user');
+        const couponSysEndpoint = process.env.REACT_APP_COUPON_SYS_ENDPOINT;
+        const expiryDate = new Date();
+        expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+
+        console.log(redeemProduct);  //TODO: Del line
+
+        const couponPayload = {
+            title: redeemProduct.Name,
+            description: redeemProduct.Description,
+            expiry: expiryDate.toISOString(),
+            assigned_from: redeemProduct.Provider,
+            assigned_to: currUser.name
+        };
+
+        try {
+            const couponResponse = await fetch(`${couponSysEndpoint}/create-active-coupon`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(couponPayload)
+            });
+            const couponData = await couponResponse.json();
+
+            if (couponResponse.ok && couponData.couponStatus === "active") {
+                const QRdata = couponData.QRdata;
+
+                // Step 2: 调用 Email API 发送兑换信息
+                const emailApiEndpoint = process.env.REACT_APP_EMAIL_API_ENDPOINT;
+                const emailPayload = {
+                    name: currUser.name,
+                    email: currUser.email,
+                    data: QRdata,
+                    title: redeemProduct.Name
+                };
+
+                const emailResponse = await fetch(`${emailApiEndpoint}/1club/coupon_distribute`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(emailPayload)
+                });
+
+                if (emailResponse.ok) {
+                    console.log("兑换成功!");
+                    updateUserPoints();
+                    setLoadingRedeem(false);
+                    // TODO: 这里加入后续成功后的处理逻辑，比如更新状态、提示用户等
+                } else {
+                    const emailError = await emailResponse.json();
+                    console.log("Email API error:", emailError.message);
+                    setLoadingRedeem(false);
+                }
+            } else {
+                console.log("Coupon system error:", couponData.message);
+                setLoadingRedeem(false);
+            }
+        } catch (error) {
+            console.log("Error in comfirmRedeemNow:", error);
+            setLoadingRedeem(false);
+        }
+    };
+
+
     return (
         <Container className="my-4">
             <Row>
@@ -85,7 +214,7 @@ const MemberPointMarket = () => {
 
             <Row>
                 {filteredProducts.map((product) => {
-                    const { Name, Icon, Price, LoyaltyGain } = product;
+                    const { Name, Icon, Price, LoyaltyGain, Provider } = product;
                     const iconUrl =
                         Icon?.url
                             ? `${process.env.REACT_APP_CMS_API_ENDPOINT}${Icon.url}`
@@ -224,11 +353,9 @@ const MemberPointMarket = () => {
                                     variant={sufficient ? "dark" : "secondary"}
                                     className="w-100"
                                     disabled={!sufficient}
-                                    onClick={() => {
-                                        // 兑换操作的逻辑，TODO: //
-                                    }}
+                                    onClick={comfirmRedeemNow}
                                 >
-                                    {sufficient ? "兑换" : "积分不足"}
+                                    {sufficient ? (loadingRedeem ? "正在为您兑换.." : "兑换") : "积分不足"}
                                 </Button>
                             );
                         })()}
