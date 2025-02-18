@@ -151,7 +151,9 @@ const MemberPointMarket = () => {
             const couponResponse = await fetch(`${couponSysEndpoint}/create-active-coupon`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(couponPayload)
+                body: JSON.stringify(couponPayload),
+                mode: 'cors', 
+                credentials: 'include'
             });
             const couponData = await couponResponse.json();
 
@@ -170,7 +172,9 @@ const MemberPointMarket = () => {
                 const emailResponse = await fetch(`${emailApiEndpoint}/1club/coupon_distribute`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(emailPayload)
+                    body: JSON.stringify(emailPayload),
+                    mode: 'cors', 
+                    credentials: 'include'
                 });
 
                 if (emailResponse.ok) {
