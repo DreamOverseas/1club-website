@@ -124,7 +124,7 @@ const MemberPointMarket = () => {
                 });
 
                 if (updateResponse.ok) {
-                    console.log("User info updated successfully");
+                    console.log("Updated successfully");
                 } else {
                     const updateError = await updateResponse.json();
                     console.log("Error updating user info:", updateError.message);
@@ -195,7 +195,7 @@ const MemberPointMarket = () => {
 
                 if (emailResponse.ok) {
                     updateUserPoints();
-                    console.log("兑换成功!");
+                    console.log("Redeemed.");
                     setLoadingRedeem(false);
                     setShowConfirmModal(false);
                     setShowSuccessModal(true);
