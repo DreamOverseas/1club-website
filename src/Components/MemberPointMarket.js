@@ -13,6 +13,8 @@ const MemberPointMarket = () => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [redeemProduct, setRedeemProduct] = useState(null);
 
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+
     useEffect(() => {
         const fetchProducts = async () => {
             const endpoint = process.env.REACT_APP_CMS_API_ENDPOINT;
@@ -65,6 +67,11 @@ const MemberPointMarket = () => {
         // 设置当前兑换的商品，并显示确认兑换 Modal
         setRedeemProduct(product);
         setShowConfirmModal(true);
+    };
+
+    const closeSuccessModal = () => { //TODO:
+        setShowSuccessModal(false);
+        window.location.reload();
     };
 
     // Used for update user points (function break-up)
@@ -122,6 +129,17 @@ const MemberPointMarket = () => {
                     const updateError = await updateResponse.json();
                     console.log("Error updating user info:", updateError.message);
                 }
+
+                // Update Cookie
+                Cookies.set('user', JSON.stringify({
+                    "name": currUser.name,
+                    "number": currUser.number,
+                    "email": currUser.email,
+                    "class": currUser.class,
+                    "exp": currUser.exp,
+                    "points": newPoints,
+                    "loyalty": newLoyalty,
+                }), { expires: 7 });
             } else {
                 console.log("User not found or error fetching user data");
             }
@@ -150,7 +168,7 @@ const MemberPointMarket = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(couponPayload),
-                mode: 'cors', 
+                mode: 'cors',
                 credentials: 'include'
             });
             const couponData = await couponResponse.json();
@@ -171,7 +189,7 @@ const MemberPointMarket = () => {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(emailPayload),
-                    mode: 'cors', 
+                    mode: 'cors',
                     credentials: 'include'
                 });
 
@@ -179,7 +197,8 @@ const MemberPointMarket = () => {
                     updateUserPoints();
                     console.log("兑换成功!");
                     setLoadingRedeem(false);
-                    // TODO: 这里加入后续成功后的处理逻辑，比如更新状态、提示用户等
+                    setShowConfirmModal(false);
+                    setShowSuccessModal(true);
                 } else {
                     const emailError = await emailResponse.json();
                     console.log("Email API error:", emailError.message);
@@ -364,6 +383,32 @@ const MemberPointMarket = () => {
                     </Modal.Footer>
                 </Modal>
             )}
+
+            {redeemProduct && showSuccessModal && (
+                <Modal
+                    show={showSuccessModal}
+                    onHide={() => closeSuccessModal()}
+                    centered
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>{redeemProduct.Name}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="text-center">
+                        <i className="bi bi-check-circle" style={{ fontSize: '3rem', color: 'green' }}></i>
+                        <p className="mt-3">兑换成功，我们已将优惠券发送至您的邮箱。</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button
+                            variant="dark"
+                            className="w-100"
+                            onClick={() => closeSuccessModal()}
+                        >
+                            确定
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            )}
+
 
         </Container>
     );
