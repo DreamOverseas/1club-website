@@ -73,10 +73,12 @@ const MemberPointMarket = () => {
         const apiKey = process.env.REACT_APP_CMS_API_KEY;
 
         // 从 Cookie 中读取当前用户信息（假设存储在 "user.number" 和 "user.email" 中）
-        const currUser = Cookies.get('user');
+        const currUser = JSON.parse(Cookies.get('user'));
 
         // 构造查询 URL，通过 filter 和 [eq] 筛选对应用户（MembershipNumber 与 Email）
-        const userQueryUrl = `${endpoint}/users?filters[MembershipNumber][$eq]=${currUser.number}&filters[Email][$eq]=${currUser.email}`;
+        const userQueryUrl = `${endpoint}/api/one-club-memberships?filters[MembershipNumber][$eq]=${currUser.number}&filters[Email][$eq]=${currUser.email}`;
+
+        console.log("query url:", userQueryUrl); //TODO: del
 
         try {
             const userResponse = await fetch(userQueryUrl, {
@@ -90,7 +92,7 @@ const MemberPointMarket = () => {
             if (userResponse.ok && userData.data && userData.data.length > 0) {
                 // 取查询到的第一个用户记录
                 const userRecord = userData.data[0];
-                const documentId = userRecord.id; // Strapi 后台用户的 documentId
+                const documentId = userRecord.documentId; // Strapi 后台用户的 documentId
                 const oldPoints = userRecord.Points;
                 const oldLoyalty = userRecord.Loyalty;
 
@@ -107,7 +109,7 @@ const MemberPointMarket = () => {
                 };
 
                 // 通过 PUT 方法更新用户信息
-                const updateResponse = await fetch(`${endpoint}/users/${documentId}`, {
+                const updateResponse = await fetch(`${endpoint}/api/one-club-memberships/${documentId}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -132,19 +134,17 @@ const MemberPointMarket = () => {
 
     const comfirmRedeemNow = async () => {
         setLoadingRedeem(true);
-        const currUser = Cookies.get('user');
+        const currUser = JSON.parse(Cookies.get('user'));
         const couponSysEndpoint = process.env.REACT_APP_COUPON_SYS_ENDPOINT;
         const expiryDate = new Date();
         expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-
-        console.log(redeemProduct);  //TODO: Del line
 
         const couponPayload = {
             title: redeemProduct.Name,
             description: redeemProduct.Description,
             expiry: expiryDate.toISOString(),
             assigned_from: redeemProduct.Provider,
-            assigned_to: currUser.name
+            assigned_to: currUser.name,
         };
 
         try {
@@ -159,6 +159,8 @@ const MemberPointMarket = () => {
 
             if (couponResponse.ok && couponData.couponStatus === "active") {
                 const QRdata = couponData.QRdata;
+
+                console.log("QR data:", QRdata); //TODO: del
 
                 // Step 2: 调用 Email API 发送兑换信息
                 const emailApiEndpoint = process.env.REACT_APP_EMAIL_API_ENDPOINT;
@@ -177,9 +179,11 @@ const MemberPointMarket = () => {
                     credentials: 'include'
                 });
 
+                console.log("Email payload:", emailPayload); //TODO: del
+
                 if (emailResponse.ok) {
-                    console.log("兑换成功!");
                     updateUserPoints();
+                    console.log("兑换成功!");
                     setLoadingRedeem(false);
                     // TODO: 这里加入后续成功后的处理逻辑，比如更新状态、提示用户等
                 } else {
@@ -218,7 +222,7 @@ const MemberPointMarket = () => {
 
             <Row>
                 {filteredProducts.map((product) => {
-                    const { Name, Icon, Price, LoyaltyGain, Provider } = product;
+                    const { Name, Icon, Price, LoyaltyGain } = product;
                     const iconUrl =
                         Icon?.url
                             ? `${process.env.REACT_APP_CMS_API_ENDPOINT}${Icon.url}`
