@@ -78,8 +78,6 @@ const MemberPointMarket = () => {
         // 构造查询 URL，通过 filter 和 [eq] 筛选对应用户（MembershipNumber 与 Email）
         const userQueryUrl = `${endpoint}/api/one-club-memberships?filters[MembershipNumber][$eq]=${currUser.number}&filters[Email][$eq]=${currUser.email}`;
 
-        console.log("query url:", userQueryUrl); //TODO: del
-
         try {
             const userResponse = await fetch(userQueryUrl, {
                 headers: {
@@ -160,8 +158,6 @@ const MemberPointMarket = () => {
             if (couponResponse.ok && couponData.couponStatus === "active") {
                 const QRdata = couponData.QRdata;
 
-                console.log("QR data:", QRdata); //TODO: del
-
                 // Step 2: 调用 Email API 发送兑换信息
                 const emailApiEndpoint = process.env.REACT_APP_EMAIL_API_ENDPOINT;
                 const emailPayload = {
@@ -178,8 +174,6 @@ const MemberPointMarket = () => {
                     mode: 'cors', 
                     credentials: 'include'
                 });
-
-                console.log("Email payload:", emailPayload); //TODO: del
 
                 if (emailResponse.ok) {
                     updateUserPoints();
