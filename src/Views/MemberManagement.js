@@ -84,7 +84,9 @@ const MemberManagement = () => {
 
     const handleDownloadQR = async (name, serial) => {
         try {
-            const qrCodeDataURL = await QRCode.toDataURL(generateQRData(name, serial));
+            const currQRData = generateQRData(name, serial);
+            console.log(`Name: ${name}, QR Data: ${currQRData}.`);
+            const qrCodeDataURL = await QRCode.toDataURL(currQRData);
             const link = document.createElement('a');
             link.href = qrCodeDataURL;
             link.download = `${serial}-${name}.png`;
