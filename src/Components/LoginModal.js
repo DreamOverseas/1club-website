@@ -174,6 +174,7 @@ const LoginModal = ({ show, onHide }) => {
         "class": memberData.MembershipClass,
         "exp": memberData.Expiry,
         "points": memberData.Points,
+        "loyalty": memberData.Loyalty,
       }), { expires: 7 });
       navigate('/member-center');
       window.location.reload();
