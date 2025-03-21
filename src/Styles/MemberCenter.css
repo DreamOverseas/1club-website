@@ -28,6 +28,7 @@
 }
 
 .deduction-range {
+    margin-top: 10px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;

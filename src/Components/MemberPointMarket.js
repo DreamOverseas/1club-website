@@ -357,19 +357,19 @@ const MemberPointMarket = () => {
                             return (
                                 <>
                                     <p>
-                                        会员点数：{cookiePoints} → {cookiePoints - redeemProduct.Price + currDeduction}
+                                        会员点数：{cookiePoints} → <b>{cookiePoints - redeemProduct.Price + currDeduction}</b>
                                     </p>
                                     <p>
-                                        积分：{cookieLoyalty} → {cookieLoyalty - currDeduction + redeemProduct.LoyaltyGain}
+                                        积分：{cookieLoyalty} → <b>{cookieLoyalty - currDeduction}</b> <b style={{ color: 'skyblue' }}> + {redeemProduct.LoyaltyGain} </b>
                                     </p>
                                     <hr />
                                     {maxDeduction > 0 ?
                                         (<Form.Group>
                                             <Row className='d-flex'>
-                                                <Col md={8}>
+                                                <Col md={7}>
                                                     <Form.Label>抵扣点数 ({currDeduction}/{maxDeduction})</Form.Label>
                                                 </Col>
-                                                <Col md={4}>
+                                                <Col md={5}>
                                                     <Row>
                                                         <InputGroup>
                                                             <Form.Control
