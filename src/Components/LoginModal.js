@@ -232,7 +232,7 @@ const LoginModal = ({ show, onHide }) => {
         )}
 
         {step === 2 && (
-          <Form>
+          <Form onSubmit={handleSetPassword}>
             <h5 className='text-center'>欢迎您首次登录/激活</h5>
             <Form.Group controlId="formPassword" className="mb-3">
               <Form.Label>设置密码</Form.Label>
@@ -255,8 +255,8 @@ const LoginModal = ({ show, onHide }) => {
                 required
               />
             </Form.Group>
-            <Button
-              onClick={handleSetPassword}
+            <Button 
+              type="submit"
               variant="dark"
               className="w-100"
             >
@@ -266,7 +266,7 @@ const LoginModal = ({ show, onHide }) => {
         )}
 
         {step === 3 && (
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <h5 className='text-center'>欢迎回来</h5>
             <Form.Group controlId="formPassword" className="mb-3">
               <Form.Label>输入密码</Form.Label>
@@ -280,7 +280,7 @@ const LoginModal = ({ show, onHide }) => {
               <Form.Text muted>请输入您的密码 （注：不低于8个字符）, 完成后点击登录按钮登入会员中心。</Form.Text>
             </Form.Group>
             <Button
-              onClick={handleSubmit}
+              type='submit'
               variant="dark"
               className="w-100"
             >
