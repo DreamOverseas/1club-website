@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Cookies from 'js-cookie';
-import { Container, Row, Col, Card, Button, Modal, Form } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Modal, Form, InputGroup } from 'react-bootstrap';
+import '../Styles/MemberCenter.css';
 
 const MemberPointMarket = () => {
     const [products, setProducts] = useState([]);
@@ -8,10 +9,14 @@ const MemberPointMarket = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showModal, setShowModal] = useState(false);
 
+    const [currDeduction, setCurrDeduction] = useState(0);
     const [loadingRedeem, setLoadingRedeem] = useState(false);
 
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [redeemProduct, setRedeemProduct] = useState(null);
+    const maxDeduction = useMemo(() => {
+        return redeemProduct ? Math.min(redeemProduct.MaxDeduction, redeemProduct.Price) : 0;
+    }, [redeemProduct]); // Update based on existance of object redeemProduct
 
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
@@ -43,18 +48,15 @@ const MemberPointMarket = () => {
         fetchProducts();
     }, []);
 
-    // 根据搜索关键字过滤商品（不区分大小写）
     const filteredProducts = products.filter((product) =>
         product.Name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // 点击 Card（除兑换按钮）时调用，设置选中商品并显示 Modal
     const handleCardClick = (product) => {
         setSelectedProduct(product);
         setShowModal(true);
     };
 
-    // 关闭 Modal 时清空选中商品状态
     const handleModalClose = () => {
         setShowModal(false);
         setSelectedProduct(null);
@@ -62,11 +64,19 @@ const MemberPointMarket = () => {
 
     const handleRedeemClick = (product, e) => {
         e.stopPropagation();
-        // 关闭详情 Modal（如果已打开）
         setShowModal(false);
-        // 设置当前兑换的商品，并显示确认兑换 Modal
         setRedeemProduct(product);
         setShowConfirmModal(true);
+    };
+
+    const handleDeductionChange = (value) => {
+        let newValue = Number(value);
+        if (newValue > maxDeduction) {
+            alert(`最大抵扣 ${maxDeduction}`);
+            newValue = maxDeduction;
+        }
+        if (newValue < 0) newValue = 0;
+        setCurrDeduction(newValue);
     };
 
     const closeSuccessModal = () => { //TODO:
@@ -79,10 +89,8 @@ const MemberPointMarket = () => {
         const endpoint = process.env.REACT_APP_CMS_API_ENDPOINT;
         const apiKey = process.env.REACT_APP_CMS_API_KEY;
 
-        // 从 Cookie 中读取当前用户信息（假设存储在 "user.number" 和 "user.email" 中）
         const currUser = JSON.parse(Cookies.get('user'));
 
-        // 构造查询 URL，通过 filter 和 [eq] 筛选对应用户（MembershipNumber 与 Email）
         const userQueryUrl = `${endpoint}/api/one-club-memberships?filters[MembershipNumber][$eq]=${currUser.number}&filters[Email][$eq]=${currUser.email}`;
 
         try {
@@ -95,17 +103,14 @@ const MemberPointMarket = () => {
             const userData = await userResponse.json();
 
             if (userResponse.ok && userData.data && userData.data.length > 0) {
-                // 取查询到的第一个用户记录
                 const userRecord = userData.data[0];
-                const documentId = userRecord.documentId; // Strapi 后台用户的 documentId
+                const documentId = userRecord.documentId;
                 const oldPoints = userRecord.Points;
                 const oldLoyalty = userRecord.Loyalty;
 
-                // 计算新的积分和积分值
-                const newPoints = oldPoints - redeemProduct.Price;
-                const newLoyalty = oldLoyalty + redeemProduct.LoyaltyGain;
+                const newPoints = oldPoints - (redeemProduct.Price - currDeduction);
+                const newLoyalty = oldLoyalty - currDeduction + redeemProduct.LoyaltyGain;
 
-                // 构造更新数据的 payload
                 const updatePayload = {
                     data: {
                         Points: newPoints,
@@ -113,7 +118,6 @@ const MemberPointMarket = () => {
                     }
                 };
 
-                // 通过 PUT 方法更新用户信息
                 const updateResponse = await fetch(`${endpoint}/api/one-club-memberships/${documentId}`, {
                     method: "PUT",
                     headers: {
@@ -175,8 +179,6 @@ const MemberPointMarket = () => {
 
             if (couponResponse.ok && couponData.couponStatus === "active") {
                 const QRdata = couponData.QRdata;
-
-                // Step 2: 调用 Email API 发送兑换信息
                 const emailApiEndpoint = process.env.REACT_APP_EMAIL_API_ENDPOINT;
                 const emailPayload = {
                     name: currUser.name,
@@ -197,20 +199,24 @@ const MemberPointMarket = () => {
                     updateUserPoints();
                     console.log("Redeemed.");
                     setLoadingRedeem(false);
+                    setCurrDeduction(0);
                     setShowConfirmModal(false);
                     setShowSuccessModal(true);
                 } else {
                     const emailError = await emailResponse.json();
                     console.log("Email API error:", emailError.message);
                     setLoadingRedeem(false);
+                    setCurrDeduction(0);
                 }
             } else {
                 console.log("Coupon system error:", couponData.message);
                 setLoadingRedeem(false);
+                setCurrDeduction(0);
             }
         } catch (error) {
-            console.log("Error in comfirmRedeemNow:", error);
+            console.log("Error in comfirmRedeemNow():", error);
             setLoadingRedeem(false);
+            setCurrDeduction(0);
         }
     };
 
@@ -286,14 +292,12 @@ const MemberPointMarket = () => {
                 })}
             </Row>
 
-            {/* Modal - 商品详细信息 */}
             {selectedProduct && (
                 <Modal show={showModal} onHide={handleModalClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>{selectedProduct.Name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {/* 商品图片 */}
                         {selectedProduct.Icon &&
                             selectedProduct.Icon &&
                             selectedProduct.Icon && (
@@ -303,9 +307,7 @@ const MemberPointMarket = () => {
                                     className="img-fluid mb-3"
                                 />
                             )}
-                        {/* 商品描述 */}
                         <p>{selectedProduct.Description}</p>
-                        {/* 底部两列展示：左侧显示 “积分+” 与 LoyaltyGain，右侧显示 Price 与 “会员点” */}
                         <Row className="text-center">
                             <Col>
                                 <div>积分<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flower2" viewBox="0 0 16 16">
@@ -334,13 +336,13 @@ const MemberPointMarket = () => {
                 </Modal>
             )}
 
-            {/* Modal - 确认兑换 */}
             {redeemProduct && (
                 <Modal
                     show={showConfirmModal}
                     onHide={() => {
                         setShowConfirmModal(false);
                         setRedeemProduct(null);
+                        setCurrDeduction(0);
                     }}
                 >
                     <Modal.Header closeButton>
@@ -349,18 +351,53 @@ const MemberPointMarket = () => {
                     <Modal.Body>
                         <p>商品：{redeemProduct.Name}</p>
                         {(() => {
-                            // 从 cookie 中读取点数和积分
                             const userData = JSON.parse(Cookies.get('user'));
                             const cookiePoints = userData.points || 0;
                             const cookieLoyalty = userData.loyalty || 0;
                             return (
                                 <>
                                     <p>
-                                        会员点数：{cookiePoints} → {cookiePoints - redeemProduct.Price}
+                                        会员点数：{cookiePoints} → {cookiePoints - redeemProduct.Price + currDeduction}
                                     </p>
                                     <p>
-                                        积分：{cookieLoyalty} → {cookieLoyalty + redeemProduct.LoyaltyGain}
+                                        积分：{cookieLoyalty} → {cookieLoyalty - currDeduction + redeemProduct.LoyaltyGain}
                                     </p>
+                                    <hr />
+                                    {maxDeduction > 0 ?
+                                        (<Form.Group>
+                                            <Row className='d-flex'>
+                                                <Col md={8}>
+                                                    <Form.Label>抵扣点数 ({currDeduction}/{maxDeduction})</Form.Label>
+                                                </Col>
+                                                <Col md={4}>
+                                                    <Row>
+                                                        <InputGroup>
+                                                            <Form.Control
+                                                                type="number"
+                                                                value={currDeduction}
+                                                                onChange={(e) => handleDeductionChange(e.target.value)}
+                                                            />
+                                                            <Button
+                                                                variant="dark"
+                                                                onClick={() => handleDeductionChange(Math.min(maxDeduction, cookieLoyalty))}
+                                                            >
+                                                                Max
+                                                            </Button>
+                                                        </InputGroup>
+                                                    </Row>
+                                                </Col>
+                                            </Row>
+                                            <Form.Control
+                                                type="range"
+                                                min="0"
+                                                max={maxDeduction}
+                                                value={currDeduction}
+                                                onChange={(e) => handleDeductionChange(e.target.value)}
+                                                className="deduction-range"
+                                            />
+                                        </Form.Group>)
+                                        : (<></>)
+                                    }
                                 </>
                             );
                         })()}
@@ -368,15 +405,20 @@ const MemberPointMarket = () => {
                     <Modal.Footer>
                         {(() => {
                             const cookiePoints = JSON.parse(Cookies.get('user')).points || 0;
-                            const sufficient = cookiePoints >= redeemProduct.Price;
+                            const cookieLoyalty = JSON.parse(Cookies.get('user')).loyalty || 0;
+                            const sufficientPoints = cookiePoints >= (redeemProduct.Price - currDeduction);
+                            const sufficientLoyalty = (cookieLoyalty - currDeduction) >= 0;
                             return (
                                 <Button
-                                    variant={sufficient ? "dark" : "secondary"}
+                                    variant={(sufficientPoints && sufficientLoyalty) ? "dark" : "secondary"}
                                     className="w-100"
-                                    disabled={!sufficient}
+                                    disabled={!(sufficientPoints && sufficientLoyalty)}
                                     onClick={comfirmRedeemNow}
                                 >
-                                    {sufficient ? (loadingRedeem ? "正在为您兑换.." : "兑换") : "积分不足"}
+                                    {(sufficientPoints && sufficientLoyalty) ? 
+                                        (loadingRedeem ? "正在为您兑换.." : "兑换") 
+                                        : 
+                                        (sufficientPoints ? "积分不足" : "会员点不足")}
                                 </Button>
                             );
                         })()}
@@ -408,7 +450,6 @@ const MemberPointMarket = () => {
                     </Modal.Footer>
                 </Modal>
             )}
-
 
         </Container>
     );
