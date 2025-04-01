@@ -7,7 +7,7 @@ import { Container, Row, Col, Image } from 'react-bootstrap';
 const Home = () => {
     const onDesktop = useMediaQuery({ query: "(min-width: 768px)" });
 
-    const collabs = ["Chateau", "Thirdhome", "Airpay", "36OMedia", "NGOhub", "MI", "DO"];
+    const collabs = ["Chateau", "Thirdhome", "Airpay", "36OMedia", "WCO", "MI", "DO"];
 
     return (
         <>
