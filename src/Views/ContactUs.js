@@ -161,7 +161,7 @@ const ContactUs = () => {
                     <Row>
                         <p>
                             <i class="bi bi-telephone-inbound"></i> &nbsp;
-                            +61 (04)13 168 533
+                            +61 (0)413 168 533
                         </p>
                     </Row>
                     <Row>
