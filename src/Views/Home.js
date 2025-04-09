@@ -7,7 +7,13 @@ import { Container, Row, Col, Image } from 'react-bootstrap';
 const Home = () => {
     const onDesktop = useMediaQuery({ query: "(min-width: 768px)" });
 
-    const collabs = ["Chateau", "Thirdhome", "Airpay", "36OMedia", "WCO", "MI", "DO"];
+    const collabs = [{name:"Chateau", url: "https://chateaulemarais.au/"}, 
+                    {name:"Thirdhome", url: "https://www.thirdhome.com/"}, 
+                    {name:"Airpay", url: "https://www.airpayfintech.com/"}, 
+                    {name:"36OMedia", url: "https://do360.com/"}, 
+                    {name:"WCO", url: "https://world-cooperation.org/"}, 
+                    {name:"MI", url: "https://missinternational.world/"}, 
+                    {name:"DO", url: "https://do360.com/"}];
 
     return (
         <>
@@ -69,8 +75,8 @@ const Home = () => {
                 <Row className="home-section justify-content-between">
                     <h1>荣誉合作</h1> <br />
                     {collabs.map((collab) => (
-                        <a className="home-collab-icon-container" href="/">
-                            <Image className="home-collab-icons" src={`/collab/${collab}.png`} alt={`${collab}`} />
+                        <a className="home-collab-icon-container" href={collab.url} rel="noopener noreferrer" target="_blank">
+                            <Image className="home-collab-icons" src={`/collab/${collab.name}.png`} alt={`${collab.name}`} />
                         </a>
                     ))}
                 </Row>
