@@ -84,7 +84,7 @@ const LoginModal = ({ show, onHide }) => {
             );
 
             if (response.status === 200) {
-              Cookies.set('authToken', 'your-auth-token', { expires: 7 });
+              Cookies.set('authToken', '1club-auth-token', { expires: 7 });
               Cookies.set('user', JSON.stringify({
                 "name": memberData.Name,
                 "number": memberData.MembershipNumber,
