@@ -25,7 +25,7 @@ const MemberPointMarket = () => {
         const fetchProducts = async () => {
             const endpoint = process.env.REACT_APP_CMS_API_ENDPOINT;
             const apiKey = process.env.REACT_APP_CMS_API_KEY;
-            const url = `${endpoint}/api/one-club-products?populate=Icon`;
+            const url = `${endpoint}/api/one-club-products?filters[ForOneClub][$eq]=True&populate=Icon`;
 
             try {
                 const response = await fetch(url, {
