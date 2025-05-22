@@ -252,7 +252,7 @@ const MemberPointMarket = () => {
                         <Col md={4} key={product.id} className="mb-4">
                             <Card>
                                 <Card.Body onClick={() => handleCardClick(product)} style={{ cursor: 'pointer' }}>
-                                    <Card.Title>{Name}</Card.Title>
+                                    <Card.Title className='product-card-title'>{Name}</Card.Title>
                                     {iconUrl && (
                                         <Card.Img
                                             variant="top"

@@ -90,3 +90,7 @@
     border: none;
     border-radius: 50%;
 }
+
+.product-card-title {
+    min-height: 3rem;
+}

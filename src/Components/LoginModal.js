@@ -40,7 +40,6 @@ const LoginModal = ({ show, onHide }) => {
         }
       );
 
-      console.log(response); // TODO: Delete
       const memberData = response.data?.data[0];
 
       if (!memberData) {
