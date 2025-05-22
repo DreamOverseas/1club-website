@@ -40,7 +40,8 @@ const LoginModal = ({ show, onHide }) => {
         }
       );
 
-      const memberData = response.data.data[0];
+      console.log(response); // TODO: Delete
+      const memberData = response.data?.data[0];
 
       if (!memberData) {
         setError('会员号不存在，请检查后重试！');
