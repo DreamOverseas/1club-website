@@ -90,9 +90,9 @@ const LoginModal = ({ show, onHide }) => {
                 "number": memberData.MembershipNumber,
                 "email": memberData.Email,
                 "class": memberData.MembershipClass,
-                "exp": memberData.Expiry,
-                "points": memberData.Points,
-                "loyalty": memberData.Loyalty,
+                "exp": memberData.ExpiryDate,
+                "points": memberData.Point,
+                "discount_point": memberData.DiscountPoint,
               }), { expires: 7 });
               navigate('/member-center');
               window.location.reload();
@@ -172,9 +172,9 @@ const LoginModal = ({ show, onHide }) => {
         "number": memberData.MembershipNumber,
         "email": memberData.Email,
         "class": memberData.MembershipClass,
-        "exp": memberData.Expiry,
-        "points": memberData.Points,
-        "loyalty": memberData.Loyalty,
+        "exp": memberData.ExpiryDate,
+        "points": memberData.Point,
+        "discount_point": memberData.DiscountPoint,
       }), { expires: 7 });
       navigate('/member-center');
       window.location.reload();

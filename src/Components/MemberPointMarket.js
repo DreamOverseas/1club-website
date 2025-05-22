@@ -86,7 +86,7 @@ const MemberPointMarket = () => {
     };
 
     // Used for update user points (function break-up)
-    const updateUserPoints = async () => {
+    const updateUserPoint = async () => {
         const endpoint = process.env.REACT_APP_CMS_API_ENDPOINT;
         const apiKey = process.env.REACT_APP_CMS_API_KEY;
 
@@ -106,16 +106,16 @@ const MemberPointMarket = () => {
             if (userResponse.ok && userData.data && userData.data.length > 0) {
                 const userRecord = userData.data[0];
                 const documentId = userRecord.documentId;
-                const oldPoints = userRecord.Points;
-                const oldLoyalty = userRecord.Loyalty;
+                const oldPoint = userRecord.Point;
+                const oldDiscountPoint = userRecord.DiscountPoint;
 
-                const newPoints = oldPoints - (redeemProduct.Price - currDeduction);
-                const newLoyalty = oldLoyalty - currDeduction + redeemProduct.LoyaltyGain;
+                const newPoint = oldPoint - (redeemProduct.Price - currDeduction);
+                const newDiscountPoint = oldDiscountPoint - currDeduction;
 
                 const updatePayload = {
                     data: {
-                        Points: newPoints,
-                        Loyalty: newLoyalty
+                        Point: newPoint,
+                        DiscountPoint: newDiscountPoint
                     }
                 };
 
@@ -142,8 +142,8 @@ const MemberPointMarket = () => {
                     "email": currUser.email,
                     "class": currUser.class,
                     "exp": currUser.exp,
-                    "points": newPoints,
-                    "loyalty": newLoyalty,
+                    "points": newPoint,
+                    "discount_point": newDiscountPoint,
                 }), { expires: 7 });
             } else {
                 console.log("User not found or error fetching user data");
@@ -197,7 +197,7 @@ const MemberPointMarket = () => {
                 });
 
                 if (emailResponse.ok) {
-                    updateUserPoints();
+                    updateUserPoint();
                     console.log("Redeemed.");
                     setLoadingRedeem(false);
                     setCurrDeduction(0);
@@ -242,7 +242,7 @@ const MemberPointMarket = () => {
 
             <Row>
                 {filteredProducts.map((product) => {
-                    const { Name, Icon, Price, LoyaltyGain, MaxDeduction } = product;
+                    const { Name, Icon, Price, MaxDeduction } = product;
                     const iconUrl =
                         Icon?.url
                             ? `${process.env.REACT_APP_CMS_API_ENDPOINT}${Icon.url}`
@@ -263,15 +263,7 @@ const MemberPointMarket = () => {
                                         />
                                     )}
                                     <Row className="text-center d-flex">
-                                        <Col md={5}>
-                                            <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flower2" viewBox="0 0 16 16">
-                                                <path d="M8 16a4 4 0 0 0 4-4 4 4 0 0 0 0-8 4 4 0 0 0-8 0 4 4 0 1 0 0 8 4 4 0 0 0 4 4m3-12q0 .11-.03.247c-.544.241-1.091.638-1.598 1.084A3 3 0 0 0 8 5c-.494 0-.96.12-1.372.331-.507-.446-1.054-.843-1.597-1.084A1 1 0 0 1 5 4a3 3 0 0 1 6 0m-.812 6.052A3 3 0 0 0 11 8a3 3 0 0 0-.812-2.052c.215-.18.432-.346.647-.487C11.34 5.131 11.732 5 12 5a3 3 0 1 1 0 6c-.268 0-.66-.13-1.165-.461a7 7 0 0 1-.647-.487m-3.56.617a3 3 0 0 0 2.744 0c.507.446 1.054.842 1.598 1.084q.03.137.03.247a3 3 0 1 1-6 0q0-.11.03-.247c.544-.242 1.091-.638 1.598-1.084m-.816-4.721A3 3 0 0 0 5 8c0 .794.308 1.516.812 2.052a7 7 0 0 1-.647.487C4.66 10.869 4.268 11 4 11a3 3 0 0 1 0-6c.268 0 .66.13 1.165.461.215.141.432.306.647.487M8 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
-                                            </svg>+{LoyaltyGain}</div>
-                                        </Col>
-                                        <Col md={1}>
-                                            <div>|</div>
-                                        </Col>
-                                        <Col md={6}>
+                                        <Col>
                                             <AlternatingText
                                                 text1={`${Price} 会员点`}
                                                 text2={`积分最高抵扣${Math.min(Price, MaxDeduction)}！`}
@@ -313,14 +305,6 @@ const MemberPointMarket = () => {
                         <p>{selectedProduct.Description}</p>
                         <Row className="text-center">
                             <Col>
-                                <div>积分<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flower2" viewBox="0 0 16 16">
-                                    <path d="M8 16a4 4 0 0 0 4-4 4 4 0 0 0 0-8 4 4 0 0 0-8 0 4 4 0 1 0 0 8 4 4 0 0 0 4 4m3-12q0 .11-.03.247c-.544.241-1.091.638-1.598 1.084A3 3 0 0 0 8 5c-.494 0-.96.12-1.372.331-.507-.446-1.054-.843-1.597-1.084A1 1 0 0 1 5 4a3 3 0 0 1 6 0m-.812 6.052A3 3 0 0 0 11 8a3 3 0 0 0-.812-2.052c.215-.18.432-.346.647-.487C11.34 5.131 11.732 5 12 5a3 3 0 1 1 0 6c-.268 0-.66-.13-1.165-.461a7 7 0 0 1-.647-.487m-3.56.617a3 3 0 0 0 2.744 0c.507.446 1.054.842 1.598 1.084q.03.137.03.247a3 3 0 1 1-6 0q0-.11.03-.247c.544-.242 1.091-.638 1.598-1.084m-.816-4.721A3 3 0 0 0 5 8c0 .794.308 1.516.812 2.052a7 7 0 0 1-.647.487C4.66 10.869 4.268 11 4 11a3 3 0 0 1 0-6c.268 0 .66.13 1.165.461.215.141.432.306.647.487M8 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
-                                </svg>+{selectedProduct.LoyaltyGain}</div>
-                            </Col>
-                            <Col>
-                                <div>|</div>
-                            </Col>
-                            <Col>
                                 <div>
                                     {selectedProduct.Price} 会员点
                                 </div>
@@ -355,15 +339,15 @@ const MemberPointMarket = () => {
                         <p>商品：{redeemProduct.Name}</p>
                         {(() => {
                             const userData = JSON.parse(Cookies.get('user'));
-                            const cookiePoints = userData.points || 0;
-                            const cookieLoyalty = userData.loyalty || 0;
+                            const cookiePoint = userData.points || 0;
+                            const cookieDiscountPoint = userData.discount_point || 0;
                             return (
                                 <>
                                     <p>
-                                        会员点数：{cookiePoints} → <b>{cookiePoints - redeemProduct.Price + currDeduction}</b>
+                                        会员点数：{cookiePoint} → <b>{cookiePoint - redeemProduct.Price + currDeduction}</b>
                                     </p>
                                     <p>
-                                        积分：{cookieLoyalty} → <b>{cookieLoyalty - currDeduction}</b> <b style={{ color: 'SlateBlue' }}> + {redeemProduct.LoyaltyGain} </b>
+                                        积分：{cookieDiscountPoint} → <b>{cookieDiscountPoint - currDeduction}</b> <b style={{ color: 'SlateBlue' }}> </b>
                                     </p>
                                     <hr />
                                     {maxDeduction > 0 ?
@@ -382,7 +366,7 @@ const MemberPointMarket = () => {
                                                             />
                                                             <Button
                                                                 variant="dark"
-                                                                onClick={() => handleDeductionChange(Math.min(maxDeduction, cookieLoyalty))}
+                                                                onClick={() => handleDeductionChange(Math.min(maxDeduction, cookieDiscountPoint))}
                                                             >
                                                                 Max
                                                             </Button>
@@ -407,21 +391,21 @@ const MemberPointMarket = () => {
                     </Modal.Body>
                     <Modal.Footer>
                         {(() => {
-                            const cookiePoints = JSON.parse(Cookies.get('user')).points || 0;
-                            const cookieLoyalty = JSON.parse(Cookies.get('user')).loyalty || 0;
-                            const sufficientPoints = cookiePoints >= (redeemProduct.Price - currDeduction);
-                            const sufficientLoyalty = (cookieLoyalty - currDeduction) >= 0;
+                            const cookiePoint = JSON.parse(Cookies.get('user')).points || 0;
+                            const cookieDiscountPoint = JSON.parse(Cookies.get('user')).discount_point || 0;
+                            const sufficientPoint = cookiePoint >= (redeemProduct.Price - currDeduction);
+                            const sufficientDiscountPoint = (cookieDiscountPoint - currDeduction) >= 0;
                             return (
                                 <Button
-                                    variant={(sufficientPoints && sufficientLoyalty) ? "dark" : "secondary"}
+                                    variant={(sufficientPoint && sufficientDiscountPoint) ? "dark" : "secondary"}
                                     className="w-100"
-                                    disabled={!(sufficientPoints && sufficientLoyalty)}
+                                    disabled={!(sufficientPoint && sufficientDiscountPoint)}
                                     onClick={comfirmRedeemNow}
                                 >
-                                    {(sufficientPoints && sufficientLoyalty) ?
+                                    {(sufficientPoint && sufficientDiscountPoint) ?
                                         (loadingRedeem ? "正在为您兑换.." : "兑换")
                                         :
-                                        (sufficientPoints ? "积分不足" : "会员点不足")}
+                                        (sufficientPoint ? "积分不足" : "会员点不足")}
                                 </Button>
                             );
                         })()}
