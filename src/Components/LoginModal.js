@@ -137,23 +137,37 @@ const LoginModal = ({ show, onHide }) => {
     }
   };
 
-  const handleSetPassword = async () => {
+  const handleSetPassword = async (e) => {
+    e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       setError('两次密码输入不一致，请重试。');
       return;
     }
 
     try {
-      await axios.put(
+      const member_res =await axios.get(
         `${API_ENDPOINT}/api/one-club-memberships/${formData.docId}`,
         {
+          headers: { Authorization: `Bearer ${API_KEY}` },
+        }
+      );
+      // console.log("Found: ", member_res);
+      const curr_data = member_res.data.data;
+      // console.log("Data: ", curr_data);
+      const { id, ...cleaned_data } = curr_data; // Currently no use?
+      // console.log("Cleaned: ", cleaned_data);
+      const payload_data = {
           data: {
             Email: formData.email,
             Name: formData.name,
             CurrentStatus: "Active",
-            Password: formData.password,
+            Password: formData.password
           },
-        },
+        };
+      console.log("Payload: ", payload_data);
+      await axios.put(
+        `${API_ENDPOINT}/api/one-club-memberships/${curr_data.documentId}`,
+        payload_data,
         {
           headers: { Authorization: `Bearer ${API_KEY}` },
         }
@@ -172,6 +186,7 @@ const LoginModal = ({ show, onHide }) => {
         "number": memberData.MembershipNumber,
         "email": memberData.Email,
         "class": memberData.MembershipClass,
+        "address": memberData.Address,
         "exp": memberData.ExpiryDate,
         "points": memberData.Point,
         "discount_point": memberData.DiscountPoint,
@@ -179,6 +194,7 @@ const LoginModal = ({ show, onHide }) => {
       navigate('/member-center');
       window.location.reload();
     } catch (err) {
+      window.alert(error);
       setError('更新失败，请稍后重试。');
       console.log(err);
     }
