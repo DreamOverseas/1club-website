@@ -203,16 +203,16 @@ const DetailUpdateBtn = () => {
   return (
     <>
       <Button onClick={handleOpenPwd} variant="warning">
-        Update Password
+        更新密码
       </Button>
       &nbsp;
       <Button onClick={handleOpen} variant="primary">
-        Update Phone Number
+        更新电话
       </Button>
 
       <Modal show={showPwdModal} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Update Your Password</Modal.Title>
+          <Modal.Title>更新密码</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {passwordInput("Old Password", oldPassword, setOldPassword, showOld, setShowOld)}
@@ -232,7 +232,7 @@ const DetailUpdateBtn = () => {
 
       <Modal show={showModal} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Update Phone Number</Modal.Title>
+          <Modal.Title>更新电话</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {error && <div className="text-danger small mb-3">{error}</div>}
