@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/MemberCenter.css';
 import MemberPointMarket from '../Components/MemberPointMarket';
+import DetailUpdateBtn from '../Components/DetailUpdateBtn';
 
 const MemberCenter = () => {
     const [user, setUser] = useState(null);
@@ -83,6 +84,8 @@ const MemberCenter = () => {
                         <Button variant="danger" onClick={handleLogout}>
                             登出
                         </Button>
+                        &nbsp;
+                        <DetailUpdateBtn />
                     </div>
                 </Card.Body>
             </Card>
