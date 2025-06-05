@@ -388,6 +388,7 @@ const MemberPointMarket = () => {
                                 </>
                             );
                         })()}
+                        <p>注：兑换成功后的核销券有效期为一年，请注意哦！</p>
                     </Modal.Body>
                     <Modal.Footer>
                         {(() => {

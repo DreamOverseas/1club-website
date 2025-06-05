@@ -20,8 +20,12 @@ const Navigation = () => {
   };
 
   useEffect(() => {
-    const token = Cookies.get('authToken');
-    setIsLoggedIn(!!token);
+    const userCookie = Cookies.get('user');
+    if (userCookie) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
   }, []);
 
   useEffect(() => {

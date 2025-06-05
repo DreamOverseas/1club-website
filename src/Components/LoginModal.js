@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Form, Button, Alert } from 'react-bootstrap';
+import { Modal, Form, Button, Alert, InputGroup } from 'react-bootstrap';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,14 @@ import { useNavigate } from 'react-router-dom';
 const LoginModal = ({ show, onHide }) => {
   const API_ENDPOINT = process.env.REACT_APP_CMS_API_ENDPOINT;
   const API_KEY = process.env.REACT_APP_CMS_API_KEY;
+
+  // Managing Password showing
+  const [showPassword1, setShowPassword1] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const [showPassword3, setShowPassword3] = useState(false);
+  const toggleShowPassword1 = () => setShowPassword1((prev) => !prev);
+  const toggleShowPassword2 = () => setShowPassword2((prev) => !prev);
+  const toggleShowPassword3 = () => setShowPassword3((prev) => !prev);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -249,33 +257,54 @@ const LoginModal = ({ show, onHide }) => {
 
         {step === 2 && (
           <Form onSubmit={handleSetPassword}>
-            <h5 className='text-center'>欢迎您首次登录/激活</h5>
+            <h5 className="text-center">欢迎您首次登录/激活</h5>
+
             <Form.Group controlId="formPassword" className="mb-3">
               <Form.Label>设置密码</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-              <Form.Text muted>密码最低不少于8个字符，推荐数字与字母的结合</Form.Text>
+              <InputGroup>
+                <Form.Control
+                  // 当 showPassword1 为 true 时，type 是 "text"（明文），否则是 "password"（密文）
+                  type={showPassword1 ? 'text' : 'password'}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+                <InputGroup.Text
+                  onClick={toggleShowPassword1}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {/* 根据 showPassword1 切换不同的图标 */}
+                  <i className={showPassword1 ? 'bi bi-eye-fill' : 'bi bi-eye'} />
+                </InputGroup.Text>
+              </InputGroup>
+              <Form.Text muted>
+                密码最低不少于8个字符，推荐数字与字母的结合
+              </Form.Text>
             </Form.Group>
+
             <Form.Group controlId="formConfirmPassword" className="mb-3">
               <Form.Label>确认密码</Form.Label>
-              <Form.Control
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-              />
+              <InputGroup>
+                <Form.Control
+                  type={showPassword2 ? 'text' : 'password'}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+                <InputGroup.Text
+                  onClick={toggleShowPassword2}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <i
+                    className={showPassword2 ? 'bi bi-eye-fill' : 'bi bi-eye'}
+                  />
+                </InputGroup.Text>
+              </InputGroup>
             </Form.Group>
-            <Button 
-              type="submit"
-              variant="dark"
-              className="w-100"
-            >
+
+            <Button type="submit" variant="dark" className="w-100">
               保存密码并登录
             </Button>
           </Form>
@@ -283,23 +312,32 @@ const LoginModal = ({ show, onHide }) => {
 
         {step === 3 && (
           <Form onSubmit={handleSubmit}>
-            <h5 className='text-center'>欢迎回来</h5>
+            <h5 className="text-center">欢迎回来</h5>
             <Form.Group controlId="formPassword" className="mb-3">
               <Form.Label>输入密码</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-              <Form.Text muted>请输入您的密码 （注：不低于8个字符）, 完成后点击登录按钮登入会员中心。</Form.Text>
+              <InputGroup>
+                <Form.Control
+                  type={showPassword3 ? 'text' : 'password'}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+                <InputGroup.Text
+                  onClick={toggleShowPassword3}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <i
+                    className={showPassword3 ? 'bi bi-eye-fill' : 'bi bi-eye'}
+                  />
+                </InputGroup.Text>
+              </InputGroup>
+              <Form.Text muted>
+                请输入您的密码 （注：不低于8个字符）, 完成后点击登录按钮登入会员中心。
+              </Form.Text>
             </Form.Group>
-            <Button
-              type='submit'
-              variant="dark"
-              className="w-100"
-            >
+
+            <Button type="submit" variant="dark" className="w-100">
               登录
             </Button>
           </Form>
