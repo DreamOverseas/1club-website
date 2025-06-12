@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import "../Styles/Footer.css";
 import { Container, Row, Col, Image, Button, Form, Alert } from 'react-bootstrap';
+import DoTermsAndConditions from "./DoTermsAndConditions";
 
 const Footer = () => {
     const [email, setEmail] = useState('');
@@ -44,6 +45,7 @@ const Footer = () => {
                             {/* <a href="/events" className="footer-quick-links footer-texts">活动</a> */}
                             <a href="/about-us" className="footer-quick-links footer-texts">关于我们</a>
                             <a href="/contact-us" className="footer-quick-links footer-texts">联系我们</a>
+                            <DoTermsAndConditions className="footer-quick-links footer-texts" defaultLang="zh" />
                         </span>
                     </Row>
                 </Col>
