@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "../Styles/Components.css";
 import axios from 'axios';
 import { Modal, Form, Button, Alert } from 'react-bootstrap';
+import DoTermsAndConditions from './DoTermsAndConditions';
 
 // Read Env
 const BACKEND_HOST = process.env.REACT_APP_CMS_API_ENDPOINT;
@@ -26,6 +27,8 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
     Diamond: "钻石会员 - $58,888/5年",
   }
 
+  const [agreed, setAgreed] = useState(false);
+
   // set default with useEffect
   useEffect(() => {
     if (membershipClass) {
@@ -49,6 +52,7 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
     if (!formData.Name.trim()) newErrors.name = '请提供您的名字';
     if (!formData.Email.trim()) newErrors.email = '请提供您的邮箱';
     if (!formData.Referee.trim()) newErrors.refree = '请提供您的举荐人';
+    if (!agreed) newErrors.tnc = '请阅读使用条款并勾选同意';
     if (!formData.MembershipClass.trim())
       newErrors.membershipClass = '请选择您申请的会员等级';
     return newErrors;
@@ -77,7 +81,7 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
             await axios.post( MAIL_API,
               { "Name": formData.Name,
                 "Email": formData.Email
-               },
+              },
               {
                 headers: {
                   'Content-Type': 'application/json'
@@ -228,6 +232,29 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
           <Form.Text id="fill-all-notice" muted>
             推荐所有项目全部填入内容，可以提高审核速度与通过率。
           </Form.Text>
+
+          <Form.Group controlId="formAgreement" className="mb-3">
+            <div className="d-flex align-items-center">
+              <Form.Check
+                required
+                type="checkbox"
+                id="formAgreementCheckbox"
+                className="me-2 mb-0"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                label="" 
+                isInvalid={!agreed}
+              />
+              <div>
+                <Form.Text className="me-1">我已阅读并同意</Form.Text>
+                <DoTermsAndConditions defaultLang="zh" />
+              </div>
+            </div>
+
+            <Form.Control.Feedback type="invalid" className="d-block">
+              {errors.membershipClass}
+            </Form.Control.Feedback>
+          </Form.Group>
 
           <div className="text-end">
             <Button variant="dark" className='member-applic-submit-button' type="submit">

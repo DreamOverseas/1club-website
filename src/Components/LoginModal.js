@@ -211,7 +211,7 @@ const LoginModal = ({ show, onHide }) => {
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>注册/登录</Modal.Title>
+        <Modal.Title>激活/登录</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {status && <Alert variant="info">{status}</Alert>}
