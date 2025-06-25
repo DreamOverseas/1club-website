@@ -10,9 +10,9 @@ const Navigation = () => {
   const [activeLink, setActiveLink] = useState(''); // Track the selected nav item
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navLinks = [/*'Prize', 'Events',*/ 'About us', 'Contact us', 'Membership'];
+  const navLinks = [/*'Events',*/ 'About us', 'Services', 'Contact us', 'Membership'];
   const navDisplays = {
-    'Prize': '抽奖',
+    'Services': '服务资源',
     'Events': '会员活动',
     'About us': '关于我们',
     'Contact us': '联系我们',

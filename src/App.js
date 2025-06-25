@@ -13,7 +13,7 @@ import Footer from "./Components/Footer";
 import Navigation from "./Components/Navigation";
 import Home from "./Views/Home";
 import Events from "./Views/Events";
-import Prize from "./Views/Prize";
+import Services from "./Views/Services";
 import AboutUs from "./Views/AboutUs";
 import Membership from "./Views/Membership";
 import ContactUs from "./Views/ContactUs";
@@ -26,7 +26,7 @@ function App() {
       <Navigation />
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route path='/prize' element={<Prize />} />
+        <Route path='/services' element={<Services />} />
         <Route path='/events' element={<Events />} />
         <Route path='/about-us' element={<AboutUs />} />
         <Route path='/membership' element={<Membership />} />
