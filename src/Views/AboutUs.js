@@ -13,8 +13,6 @@ const AboutUs = () => {
                 <meta name="keywords" content="Private Club, High-end, Club, Membership, Holiday, Accomadation, Service, Landscape" />
             </Helmet>
 
-            <div className="sticky-navbar-page-start-placeholder" />
-
             {/* ===== Page Contents start here ===== */}
             <Row className="mb-5">
                 <Col>
