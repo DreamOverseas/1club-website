@@ -252,7 +252,7 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
             </div>
 
             <Form.Control.Feedback type="invalid" className="d-block">
-              {errors.membershipClass}
+              {errors.tnc}
             </Form.Control.Feedback>
           </Form.Group>
 
