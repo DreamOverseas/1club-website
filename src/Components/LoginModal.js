@@ -59,7 +59,7 @@ const LoginModal = ({ show, onHide }) => {
         case 'Confirmed':
           if (
             (!memberData.Email && formData.name === memberData.Name) ||
-            (memberData.Email === formData.email)
+            (memberData.Email === formData.email.toLowerCase())
           ) {
             setFormData({ ...formData, docId: memberData.documentId });
             setStep(2);
@@ -69,7 +69,7 @@ const LoginModal = ({ show, onHide }) => {
           break;
 
         case 'Active':
-          if (formData.name !== memberData.Name || memberData.Email !== formData.email) {
+          if (formData.name !== memberData.Name || memberData.Email !== formData.email.toLowerCase()) {
             setError('会员信息不匹配，请核对后重试。');
             break;
           }
@@ -128,7 +128,7 @@ const LoginModal = ({ show, onHide }) => {
           break;
 
         case 'Suspended':
-          if (formData.name !== memberData.Name || memberData.Email !== formData.email) {
+          if (formData.name !== memberData.Name || memberData.Email !== formData.email.toLowerCase()) {
             setError('会员信息不匹配，请核对后重试。');
             break;
           }
@@ -166,7 +166,7 @@ const LoginModal = ({ show, onHide }) => {
       // console.log("Cleaned: ", cleaned_data);
       const payload_data = {
           data: {
-            Email: formData.email,
+            Email: formData.email.toLowerCase(),
             Name: formData.name,
             CurrentStatus: "Active",
             Password: formData.password

@@ -80,7 +80,7 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
           try {
             await axios.post( MAIL_API,
               { "Name": formData.Name,
-                "Email": formData.Email
+                "Email": formData.Email.toLowerCase()
               },
               {
                 headers: {
