@@ -21,22 +21,41 @@ const MemberPointMarket = () => {
 
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+    const endpoint = process.env.REACT_APP_CMS_API_ENDPOINT;
+    const apiKey = process.env.REACT_APP_CMS_API_KEY;
+    const currUser = JSON.parse(Cookies.get('user'));
+
     useEffect(() => {
         const fetchProducts = async () => {
-            const endpoint = process.env.REACT_APP_CMS_API_ENDPOINT;
-            const apiKey = process.env.REACT_APP_CMS_API_KEY;
-            const url = `${endpoint}/api/one-club-products?filters[ForOneClub][$eq]=True&populate=Icon`;
+            const all_product_url = `${endpoint}/api/one-club-products?filters[ForOneClub][$eq]=True&populate=Icon`;
+            const user_product_url = `${endpoint}/api/one-club-memberships?filters[MembershipNumber][$eq]=${currUser.number}&populate[AllowedProduct][populate]=Icon`;
 
             try {
-                const response = await fetch(url, {
+                const response = await fetch(user_product_url, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${apiKey}`
                     }
                 });
-                const data = await response.json();
+                const user_p_data = await response.json();
 
-                let items = data.data || [];
+                console.log("User Product data : ");
+                console.log(user_p_data);
+
+                let items = user_p_data.data[0].AllowedProduct || [];
+
+                if (items === undefined || items.length === 0) {
+                    const all_p_response = await fetch(all_product_url, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${apiKey}`
+                        }
+                    });
+                    const all_p_data = await all_p_response.json();
+                    items = all_p_data.data || [];
+                    console.log("All Product data : ");
+                    console.log(all_p_data);
+                }
 
                 items.sort((a, b) => a.Order - b.Order);
 
@@ -47,7 +66,7 @@ const MemberPointMarket = () => {
         };
 
         fetchProducts();
-    }, []);
+    }, [apiKey, currUser.number, endpoint]);
 
     const filteredProducts = products.filter((product) =>
         product.Name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -87,10 +106,6 @@ const MemberPointMarket = () => {
 
     // Used for update user points (function break-up)
     const updateUserPoint = async () => {
-        const endpoint = process.env.REACT_APP_CMS_API_ENDPOINT;
-        const apiKey = process.env.REACT_APP_CMS_API_KEY;
-
-        const currUser = JSON.parse(Cookies.get('user'));
 
         const userQueryUrl = `${endpoint}/api/one-club-memberships?filters[MembershipNumber][$eq]=${currUser.number}&filters[Email][$eq]=${currUser.email}`;
 
@@ -245,7 +260,7 @@ const MemberPointMarket = () => {
                     const { Name, Icon, Price, MaxDeduction } = product;
                     const iconUrl =
                         Icon?.url
-                            ? `${process.env.REACT_APP_CMS_API_ENDPOINT}${Icon.url}`
+                            ? `${endpoint}${Icon.url}`
                             : '';
 
                     return (
@@ -297,7 +312,7 @@ const MemberPointMarket = () => {
                             selectedProduct.Icon &&
                             selectedProduct.Icon && (
                                 <img
-                                    src={`${process.env.REACT_APP_CMS_API_ENDPOINT}${selectedProduct.Icon.url}`}
+                                    src={`${endpoint}${selectedProduct.Icon.url}`}
                                     alt={selectedProduct.Name}
                                     className="img-fluid mb-3"
                                 />
