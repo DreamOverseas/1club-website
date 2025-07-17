@@ -104,7 +104,6 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
           });
         } else {
           alert("提交失败了。");
-          console.log(response.data);
         }
       } catch (error) {
         console.error('Error during form submission:', error);

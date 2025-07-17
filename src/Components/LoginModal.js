@@ -118,7 +118,7 @@ const LoginModal = ({ show, onHide }) => {
               setError('无法连接到服务器，请检查网络连接。');
             } else {
               setError('发生未知错误，请稍后重试。');
-              console.log(err);
+              console.error(err);
             }
           }
           break;
@@ -141,7 +141,7 @@ const LoginModal = ({ show, onHide }) => {
       }
     } catch (err) {
       setError('请求失败，请稍后重试。');
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -162,6 +162,7 @@ const LoginModal = ({ show, onHide }) => {
       // console.log("Found: ", member_res);
       const curr_data = member_res.data.data;
       // console.log("Data: ", curr_data);
+      // eslint-disable-next-line no-unused-vars
       const { id, ...cleaned_data } = curr_data; // Currently no use?
       // console.log("Cleaned: ", cleaned_data);
       const payload_data = {
@@ -172,7 +173,6 @@ const LoginModal = ({ show, onHide }) => {
             Password: formData.password
           },
         };
-      console.log("Payload: ", payload_data);
       await axios.put(
         `${API_ENDPOINT}/api/one-club-memberships/${curr_data.documentId}`,
         payload_data,
@@ -204,7 +204,7 @@ const LoginModal = ({ show, onHide }) => {
     } catch (err) {
       window.alert(error);
       setError('更新失败，请稍后重试。');
-      console.log(err);
+      console.error(err);
     }
   };
 

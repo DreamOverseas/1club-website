@@ -39,9 +39,6 @@ const MemberPointMarket = () => {
                 });
                 const user_p_data = await response.json();
 
-                console.log("User Product data : ");
-                console.log(user_p_data);
-
                 let items = user_p_data.data[0].AllowedProduct || [];
 
                 if (items === undefined || items.length === 0) {
@@ -53,8 +50,6 @@ const MemberPointMarket = () => {
                     });
                     const all_p_data = await all_p_response.json();
                     items = all_p_data.data || [];
-                    console.log("All Product data : ");
-                    console.log(all_p_data);
                 }
 
                 items.sort((a, b) => a.Order - b.Order);
@@ -161,10 +156,10 @@ const MemberPointMarket = () => {
                     "discount_point": newDiscountPoint,
                 }), { expires: 7 });
             } else {
-                console.log("User not found or error fetching user data");
+                console.error("User not found or error fetching user data");
             }
         } catch (error) {
-            console.log("Error updating user info:", error);
+            console.error("Error updating user info:", error);
         }
     }
 
@@ -220,17 +215,17 @@ const MemberPointMarket = () => {
                     setShowSuccessModal(true);
                 } else {
                     const emailError = await emailResponse.json();
-                    console.log("Email API error:", emailError.message);
+                    console.error("Email API error:", emailError.message);
                     setLoadingRedeem(false);
                     setCurrDeduction(0);
                 }
             } else {
-                console.log("Coupon system error:", couponData.message);
+                console.error("Coupon system error:", couponData.message);
                 setLoadingRedeem(false);
                 setCurrDeduction(0);
             }
         } catch (error) {
-            console.log("Error in comfirmRedeemNow():", error);
+            console.error("Error in comfirmRedeemNow():", error);
             setLoadingRedeem(false);
             setCurrDeduction(0);
         }

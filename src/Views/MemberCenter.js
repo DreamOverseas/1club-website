@@ -16,7 +16,7 @@ const MemberCenter = () => {
             setUser(JSON.parse(userCookie));
         } else {
             navigate('/');
-            console.log("user not logged in.");
+            console.log("user not logged in");
         }
     }, [navigate]);
 
