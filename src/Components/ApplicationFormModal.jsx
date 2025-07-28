@@ -5,9 +5,9 @@ import { Modal, Form, Button, Alert } from 'react-bootstrap';
 import DoTermsAndConditions from './DoTermsAndConditions';
 
 // Read Env
-const BACKEND_HOST = process.env.REACT_APP_CMS_API_ENDPOINT;
-const API_KEY_1CLUB = process.env.REACT_APP_CMS_API_KEY;
-const MAIL_API = `${process.env.REACT_APP_EMAIL_API_ENDPOINT}/1club/membership-notify`;
+const BACKEND_HOST = import.meta.env.VITE_CMS_API_ENDPOINT;
+const API_KEY_1CLUB = import.meta.env.VITE_CMS_API_KEY;
+const MAIL_API = `${import.meta.env.VITE_EMAIL_API_ENDPOINT}/1club/membership-notify`;
 
 const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
   // Form State

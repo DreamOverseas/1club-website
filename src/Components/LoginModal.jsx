@@ -5,8 +5,8 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
 const LoginModal = ({ show, onHide }) => {
-  const API_ENDPOINT = process.env.REACT_APP_CMS_API_ENDPOINT;
-  const API_KEY = process.env.REACT_APP_CMS_API_KEY;
+  const API_ENDPOINT = import.meta.env.VITE_CMS_API_ENDPOINT;
+  const API_KEY = import.meta.env.VITE_CMS_API_KEY;
 
   // Managing Password showing
   const [showPassword1, setShowPassword1] = useState(false);

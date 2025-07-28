@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Cookies from 'js-cookie';
 import { Button, Modal, Form } from 'react-bootstrap';
 
-const CMS_endpoint = process.env.REACT_APP_CMS_API_ENDPOINT;
-const CMS_token = process.env.REACT_APP_CMS_API_KEY;
+const CMS_endpoint = import.meta.env.VITE_CMS_API_ENDPOINT;
+const CMS_token = import.meta.env.VITE_CMS_API_KEY;
 
 const DetailUpdateBtn = () => {
   const [showModal, setShowModal] = useState(false);

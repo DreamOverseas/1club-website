@@ -21,8 +21,8 @@ const MemberPointMarket = () => {
 
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-    const endpoint = process.env.REACT_APP_CMS_API_ENDPOINT;
-    const apiKey = process.env.REACT_APP_CMS_API_KEY;
+    const endpoint = import.meta.env.VITE_CMS_API_ENDPOINT;
+    const apiKey = import.meta.env.VITE_CMS_API_KEY;
     const currUser = JSON.parse(Cookies.get('user'));
 
     useEffect(() => {
@@ -166,7 +166,7 @@ const MemberPointMarket = () => {
     const comfirmRedeemNow = async () => {
         setLoadingRedeem(true);
         const currUser = JSON.parse(Cookies.get('user'));
-        const couponSysEndpoint = process.env.REACT_APP_COUPON_SYS_ENDPOINT;
+        const couponSysEndpoint = import.meta.env.VITE_COUPON_SYS_ENDPOINT;
         const expiryDate = new Date();
         expiryDate.setFullYear(expiryDate.getFullYear() + 1);
 
@@ -190,7 +190,7 @@ const MemberPointMarket = () => {
 
             if (couponResponse.ok && couponData.couponStatus === "active") {
                 const QRdata = couponData.QRdata;
-                const emailApiEndpoint = process.env.REACT_APP_EMAIL_API_ENDPOINT;
+                const emailApiEndpoint = import.meta.env.VITE_EMAIL_API_ENDPOINT;
                 const emailPayload = {
                     name: currUser.name,
                     email: currUser.email,
