@@ -25,7 +25,7 @@ const Home = () => {
 
             <div className="landing-title-section">
                 {/* Carousel as background */}
-                <Carousel controls={true} indicators={true} fade interval={4000} className="bg-carousel">
+                <Carousel controls={true} indicators={true} fade interval={3600} className="bg-carousel">
                     <Carousel.Item>
                         <img
                             src="/homepage/bg.webp"

@@ -1,0 +1,22 @@
+/* Make the tabs stick to top and sit above content */
+.sticky-category-nav {
+    position: sticky;
+    top: 72px;
+    z-index: 1000;
+    border-bottom: 2px solid #eaeaea;
+}
+
+/* Style for the centered category headings */
+.category-title {
+    font-size: 2rem;
+    font-weight: 600;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #87CEEB;
+    color: #333;
+}
+
+/* breathing room */
+section {
+    scroll-margin-top: 120px;
+}
