@@ -9,7 +9,6 @@ const Home = () => {
 
     const collabs = [{name:"Chateau", url: "https://chateaulemarais.au/"}, 
                     {name:"Thirdhome", url: "https://www.thirdhome.com/"}, 
-                    {name:"Airpay", url: "https://www.airpayfintech.com/"}, 
                     {name:"36OMedia", url: "https://do360.com/"}, 
                     {name:"WCO", url: "https://world-cooperation.org/"}, 
                     {name:"MI", url: "https://missinternational.world/"}, 
@@ -100,7 +99,7 @@ const Home = () => {
                     </Col>
                     <Col md={8} className="home-section-text">
                         <h1>世界任君探索</h1>
-                        <p>通过我们独家的旅行服务，在 90 多个国家/地区选择您的心仪目的地，这些服务由享有盛誉的 Thirdhome 提供支持。从豪华别墅到令人叹为观止的度假胜地，我们为您提供无与伦比的旅程，以满足您的愿望。沉浸在一个奢华与冒险相遇的世界里，每一次度假都是一次非凡的体验。</p>
+                        <p>通过我们独家的旅行服务，在 90 多个国家/地区选择您的心仪目的地。从豪华别墅到令人叹为观止的度假胜地，我们为您提供无与伦比的旅程，以满足您的愿望。沉浸在一个奢华与冒险相遇的世界里，每一次度假都是一次非凡的体验。</p>
                     </Col>
                 </Row>
                 <Row className="home-section">
