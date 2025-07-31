@@ -25,7 +25,7 @@
 }
 
 .membership-card {
-    background-image: url('profolio/membership-bg.webp');
+    background-image: url('/profolio/membership-bg.webp');
     background-size: cover;
 }
 
