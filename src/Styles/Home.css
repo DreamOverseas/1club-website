@@ -76,6 +76,12 @@
     height: auto;
 }
 
+.about-us-intro {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
 /* Animation for scroll text */
 @keyframes fadeInOut {
 

@@ -43,7 +43,6 @@ const Footer = () => {
                             <a href="/" className="footer-quick-links footer-texts">首页</a>
                             <a href="/membership" className="footer-quick-links footer-texts">会员</a>
                             <a href="/services" className="footer-quick-links footer-texts">服务</a>
-                            <a href="/about-us" className="footer-quick-links footer-texts">关于我们</a>
                             <a href="/contact-us" className="footer-quick-links footer-texts">联系我们</a>
                             <DoTermsAndConditions className="footer-quick-links footer-texts" defaultLang="zh" />
                         </span>

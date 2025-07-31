@@ -1,6 +1,5 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import "../Styles/Events.css";
 import { Container } from 'react-bootstrap';
 
 const Events = () => {

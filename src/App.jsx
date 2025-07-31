@@ -12,9 +12,7 @@ import "./App.css";
 import Footer from "./Components/Footer";
 import Navigation from "./Components/Navigation";
 import Home from "./Views/Home";
-import Events from "./Views/Events";
 import Services from "./Views/Services";
-import AboutUs from "./Views/AboutUs";
 import Membership from "./Views/Membership";
 import ContactUs from "./Views/ContactUs";
 import MemberCenter from "./Views/MemberCenter";
@@ -27,8 +25,6 @@ function App() {
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route path='/services' element={<Services />} />
-        <Route path='/events' element={<Events />} />
-        <Route path='/about-us' element={<AboutUs />} />
         <Route path='/membership' element={<Membership />} />
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/member-center' element={<MemberCenter />} />
