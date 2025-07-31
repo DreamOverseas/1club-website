@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useMediaQuery } from "react-responsive";
 import "../Styles/Home.css";
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col, Image, Carousel, Button } from 'react-bootstrap';
 
 const Home = () => {
     const onDesktop = useMediaQuery({ query: "(min-width: 768px)" });
@@ -24,15 +24,36 @@ const Home = () => {
             </Helmet>
 
             <div className="landing-title-section">
+                {/* Carousel as background */}
+                <Carousel controls={true} indicators={true} fade interval={4000} className="bg-carousel">
+                    <Carousel.Item>
+                        <img
+                            src="/homepage/bg.webp"
+                            alt="background 1"
+                            className="carousel-bg-img"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            src="/homepage/2.webp"
+                            alt="background 3"
+                            className="carousel-bg-img"
+                        />
+                    </Carousel.Item>
+                </Carousel>
+
+                {/* Foreground content */}
                 <div className="home-title-container">
-                    <h1 className="home-title">WELCOME  TO  1# CLUB</h1>
-                    <h4 className="home-subtitle">欢迎来到1号俱乐部，感受独特与卓越的碰撞</h4>
+                    <h1 className="home-title">WELCOME TO 1# CLUB</h1>
+                    <h4 className="home-subtitle">
+                        欢迎来到1号俱乐部，感受独特与卓越的碰撞
+                    </h4>
                 </div>
 
                 <div className="home-scroll-indicator">
                     <p>下滑展示更多内容</p>
                 </div>
-            </div>
+    </div>
 
             {/* Boardered contents starting here */}
             <Container> 
@@ -54,6 +75,20 @@ const Home = () => {
                                 • 专属会员制, 为您提供量身定制的高质量体验 •
                             </div>
                         </p>
+                        <Button
+                            variant="primary"
+                            style={{
+                                backgroundColor: '#87CEEB',
+                                borderColor: '#81dbffff',
+                                color: '#000',
+                                padding: '0.75rem 1.5rem',
+                                fontSize: '1rem',
+                                borderRadius: '2rem',
+                            }}
+                            href="/services"
+                        >
+                            服务详情
+                        </Button>
                     </Col>
                 </Row>
 
