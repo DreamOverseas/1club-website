@@ -1,7 +1,7 @@
 .landing-title-section {
     height: 100vh;
     /* Full viewport height */
-    background: url('../../public/homepage/bg.webp') no-repeat center center;
+    background: url('homepage/bg.webp') no-repeat center center;
     background-size: cover;
     position: relative;
     display: flex;
