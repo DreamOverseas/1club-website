@@ -63,7 +63,7 @@ const Home = () => {
                         <Image src="/aboutus/clublemarais.png" alt="Club Le Marais" fluid rounded />
                     </Col>
                     <Col md={7}>
-                        <p className="about-us-intro">
+                        <div className="about-us-intro">
                             <br />
                             <h4><strong>构建全球精英社交平台</strong></h4>
                             <div className="text-align-left">
@@ -74,7 +74,8 @@ const Home = () => {
                                 <br />
                                 • 专属会员制, 为您提供量身定制的高质量体验 •
                             </div>
-                        </p>
+                        </div>
+                        <br/><br/>
                         <Button
                             variant="primary"
                             style={{
@@ -132,7 +133,7 @@ const Home = () => {
                 <Row className="home-section justify-content-between">
                     <h1>荣誉合作</h1> <br />
                     {collabs.map((collab) => (
-                        <a className="home-collab-icon-container" href={collab.url} rel="noopener noreferrer" target="_blank">
+                        <a className="home-collab-icon-container" href={collab.url} rel="noopener noreferrer" key={collab.name} target="_blank">
                             <Image className="home-collab-icons" src={`/collab/${collab.name}.png`} alt={`${collab.name}`} />
                         </a>
                     ))}
