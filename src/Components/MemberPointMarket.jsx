@@ -27,9 +27,12 @@ const MemberPointMarket = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const all_product_url = `${endpoint}/api/one-club-products?filters[ForOneClub][$eq]=True&populate=Icon`;
-            const user_product_url = `${endpoint}/api/one-club-memberships?filters[MembershipNumber][$eq]=${currUser.number}&populate[AllowedProduct][populate]=Icon`;
+            const qs = new URLSearchParams();
+            qs.append('filters[MembershipNumber][$eq]', String(currUser.number));
+            qs.append('populate[AllowedProduct][populate]', '*');
 
+            const user_product_url = `${endpoint}/api/one-club-memberships?${qs.toString()}`;
+            const all_product_url = `${endpoint}/api/one-club-products?filters[ForOneClub][$eq]=True&populate=*`;
             try {
                 const response = await fetch(user_product_url, {
                     headers: {
@@ -94,7 +97,7 @@ const MemberPointMarket = () => {
         setCurrDeduction(newValue);
     };
 
-    const closeSuccessModal = () => { //TODO:
+    const closeSuccessModal = () => {
         setShowSuccessModal(false);
         window.location.reload();
     };
@@ -174,7 +177,7 @@ const MemberPointMarket = () => {
             title: redeemProduct.Name,
             description: redeemProduct.Description,
             expiry: expiryDate.toISOString(),
-            assigned_from: redeemProduct.Provider,
+            assigned_from: redeemProduct.Provider.Name,
             assigned_to: currUser.name,
         };
 
