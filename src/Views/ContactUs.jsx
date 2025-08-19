@@ -154,19 +154,19 @@ const ContactUs = () => {
                     </Row>
                     <Row>
                         <p>
-                            <i class="bi bi-pin-angle"></i> &nbsp;
+                            <i className="bi bi-pin-angle"></i> &nbsp;
                             Level 2, 171 La Trobe Street <br />Melbourne VIC 3000<br />Opening Mon-Fri 9:30-17:30
                         </p>
                     </Row>
                     <Row>
                         <p>
-                            <i class="bi bi-telephone-inbound"></i> &nbsp;
+                            <i className="bi bi-telephone-inbound"></i> &nbsp;
                             +61 (0)413 168 533
                         </p>
                     </Row>
                     <Row>
                         <p>
-                            <i class="bi bi-mailbox"></i> &nbsp;
+                            <i className="bi bi-mailbox"></i> &nbsp;
                             john.du@do360.com
                         </p>
                     </Row>
