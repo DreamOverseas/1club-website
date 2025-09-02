@@ -50,7 +50,7 @@ echo "[INFO] Branch: $BRANCH"
 echo "[INFO] Log: $LOG_FILE"
 
 echo "[INFO] Fetching latest from origin..."
-git -c core.sshCommand="$GIT_SSH" fetch --all --tags --prune
+git fetch --all --tags --prune
 
 if [[ "$CLEAN" == "1" ]]; then
   echo "[INFO] Cleaning untracked files (git clean -fdx)..."
