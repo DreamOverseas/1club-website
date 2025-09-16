@@ -48,6 +48,13 @@ const Navigation = () => {
         <Navbar.Collapse id="navbar-nav" className="justify-content-end">
           {/* Navigation Links are derived from Link name with lowercase and white spaces become hyphen */}
           <Nav className="me-4 d-flex align-items-center">
+            {/* Landing page (standalone) */}
+            <Nav.Link
+                href='/'
+                className='navigation-link-item'
+              >
+                首页
+              </Nav.Link>
             {navLinks.map((item) => (
               <Nav.Link
                 key={item}
