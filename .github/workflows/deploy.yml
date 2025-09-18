@@ -30,7 +30,7 @@ jobs:
           # WORKDIR
           script: |
             set -euo pipefail
-            cd /home/ecs-user/DO-Coupon-System
+            cd /home/ecs-user/1club-website
             echo "[INFO] Current dir: $(pwd)"
             # permission granting
             chmod +x ./deploy.sh
