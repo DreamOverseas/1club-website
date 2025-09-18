@@ -35,7 +35,21 @@ const Home = () => {
                     <Carousel.Item>
                         <img
                             src="/homepage/2.webp"
+                            alt="background 2"
+                            className="carousel-bg-img"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            src="/homepage/3.jpg"
                             alt="background 3"
+                            className="carousel-bg-img"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            src="/homepage/4.jpg"
+                            alt="background 4"
                             className="carousel-bg-img"
                         />
                     </Carousel.Item>
