@@ -239,7 +239,7 @@ const MemberPointMarket = () => {
         <Container className="my-4">
             <Row>
                 <Col>
-                    <h2>会员点商城 / Member's Point Redeem</h2>
+                    <h2>会员商城 / Member's Market</h2>
                 </Col>
                 <Col>
                     <Form className="mb-3">
@@ -278,8 +278,8 @@ const MemberPointMarket = () => {
                                     <Row className="text-center d-flex">
                                         <Col>
                                             <AlternatingText
-                                                text1={`${Price} 会员点`}
-                                                text2={`积分最高抵扣${Math.min(Price, MaxDeduction)}！`}
+                                                text1={`${Price} 现金`}
+                                                text2={`360币最高抵扣${Math.min(Price, MaxDeduction)}！`}
                                                 judge={MaxDeduction}
                                             />
                                         </Col>
@@ -319,7 +319,7 @@ const MemberPointMarket = () => {
                         <Row className="text-center">
                             <Col>
                                 <div>
-                                    {selectedProduct.Price} 会员点
+                                    {selectedProduct.Price} 现金
                                 </div>
                             </Col>
                         </Row>
@@ -357,10 +357,10 @@ const MemberPointMarket = () => {
                             return (
                                 <>
                                     <p>
-                                        会员点数：{cookiePoint} → <b>{cookiePoint - redeemProduct.Price + currDeduction}</b>
+                                        现金：{cookiePoint} → <b>{cookiePoint - redeemProduct.Price + currDeduction}</b>
                                     </p>
                                     <p>
-                                        积分：{cookieDiscountPoint} → <b>{cookieDiscountPoint - currDeduction}</b> <b style={{ color: 'SlateBlue' }}> </b>
+                                        360币：{cookieDiscountPoint} → <b>{cookieDiscountPoint - currDeduction}</b> <b style={{ color: 'SlateBlue' }}> </b>
                                     </p>
                                     <hr />
                                     {maxDeduction > 0 ?
@@ -419,7 +419,7 @@ const MemberPointMarket = () => {
                                     {(sufficientPoint && sufficientDiscountPoint) ?
                                         (loadingRedeem ? "正在为您兑换.." : "兑换")
                                         :
-                                        (sufficientPoint ? "积分不足" : "会员点不足")}
+                                        (sufficientPoint ? "360币不足" : "现金不足")}
                                 </Button>
                             );
                         })()}
