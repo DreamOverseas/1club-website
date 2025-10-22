@@ -364,17 +364,17 @@ const MemberPointMarket = () => {
                             return (
                                 <>
                                     <p>
-                                        现金：{cookiePoint} → <b>{cookiePoint - redeemProduct.Price + currDeduction}</b>
+                                        现金：{redeemProduct.Price - currDeduction} → 兑换后余额 <b>{cookiePoint - redeemProduct.Price + currDeduction}</b>
                                     </p>
                                     <p>
-                                        360币：{cookieDiscountPoint} → <b>{cookieDiscountPoint - currDeduction}</b> <b style={{ color: 'SlateBlue' }}> </b>
+                                        360币：{currDeduction} → 兑换后余额 <b>{cookieDiscountPoint - currDeduction}</b> <b style={{ color: 'SlateBlue' }}> </b>
                                     </p>
                                     <hr />
                                     {maxDeduction > 0 ?
                                         (<Form.Group>
                                             <Row className='d-flex'>
                                                 <Col md={7}>
-                                                    <Form.Label>抵扣点数 ({currDeduction}/{maxDeduction})</Form.Label>
+                                                    <Form.Label>点数抵扣 ({currDeduction}/{maxDeduction})</Form.Label>
                                                 </Col>
                                                 <Col md={5}>
                                                     <Row>
