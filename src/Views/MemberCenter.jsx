@@ -138,6 +138,10 @@ const MemberCenter = () => {
                         <Col sm={8}>{couponValue ? couponValue : "Calculating..."}</Col>
                     </Row>
                     <Row className="mb-3">
+                        <Col sm={4} className="text-muted">总价值</Col>
+                        <Col sm={8}>{couponValue ? (user.points + user.discount_point + user.loyalty_point + couponValue) : "Calculating..."}</Col>
+                    </Row>
+                    <Row className="mb-3">
                         <Col sm={4} className="text-muted">当前状态</Col>
                         <Col sm={8}>活跃</Col>
                     </Row>
