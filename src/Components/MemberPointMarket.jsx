@@ -157,6 +157,7 @@ const MemberPointMarket = () => {
                     "exp": currUser.exp,
                     "points": newPoint,
                     "discount_point": newDiscountPoint,
+                    "loyalty_point": currUser.loyalty_point,
                 }), { expires: 7 });
             } else {
                 console.error("User not found or error fetching user data");

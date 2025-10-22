@@ -101,6 +101,7 @@ const LoginModal = ({ show, onHide }) => {
                 "exp": memberData.ExpiryDate,
                 "points": memberData.Point,
                 "discount_point": memberData.DiscountPoint,
+                "loyalty_point": memberData.LoyaltyPoint,
               }), { expires: 7 });
               navigate('/member-center');
               window.location.reload();
@@ -198,6 +199,7 @@ const LoginModal = ({ show, onHide }) => {
         "exp": memberData.ExpiryDate,
         "points": memberData.Point,
         "discount_point": memberData.DiscountPoint,
+        "loyalty_point": memberData.LoyaltyPoint,
       }), { expires: 7 });
       navigate('/member-center');
       window.location.reload();

@@ -78,6 +78,10 @@ const MemberCenter = () => {
                         <Col sm={8}>{user.discount_point}</Col>
                     </Row>
                     <Row className="mb-3">
+                        <Col sm={4} className="text-muted">积分</Col>
+                        <Col sm={8}>{user.loyalty_point}</Col>
+                    </Row>
+                    <Row className="mb-3">
                         <Col sm={4} className="text-muted">当前状态</Col>
                         <Col sm={8}>活跃</Col>
                     </Row>
