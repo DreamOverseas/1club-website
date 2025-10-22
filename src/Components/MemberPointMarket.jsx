@@ -103,9 +103,9 @@ const MemberPointMarket = () => {
     };
 
     // Used for update user points (function break-up)
-    const updateUserPoint = async () => {
+    const updateUserPoint = async (cid) => {
 
-        const userQueryUrl = `${endpoint}/api/one-club-memberships?filters[MembershipNumber][$eq]=${currUser.number}&filters[Email][$eq]=${currUser.email}`;
+        const userQueryUrl = `${endpoint}/api/one-club-memberships?filters[MembershipNumber][$eq]=${currUser.number}&filters[Email][$eq]=${currUser.email}&populate=MyCoupon`;
 
         try {
             const userResponse = await fetch(userQueryUrl, {
@@ -125,10 +125,15 @@ const MemberPointMarket = () => {
                 const newPoint = oldPoint - (redeemProduct.Price - currDeduction);
                 const newDiscountPoint = oldDiscountPoint - currDeduction;
 
+                // get currently linked coupons and append new one
+                const existingCoupons = userRecord.MyCoupon?.map((c) => c.documentId) ?? [];
+                const updatedCoupons = [...new Set([...existingCoupons, cid])];
+
                 const updatePayload = {
                     data: {
                         Point: newPoint,
-                        DiscountPoint: newDiscountPoint
+                        DiscountPoint: newDiscountPoint,
+                        MyCoupon: updatedCoupons,
                     }
                 };
 
@@ -180,6 +185,7 @@ const MemberPointMarket = () => {
             expiry: expiryDate.toISOString(),
             assigned_from: redeemProduct.Provider.Name,
             assigned_to: currUser.name,
+            value: redeemProduct.Price - currDeduction,
         };
 
         try {
@@ -211,7 +217,7 @@ const MemberPointMarket = () => {
                 });
 
                 if (emailResponse.ok) {
-                    updateUserPoint();
+                    updateUserPoint(couponData.cid);
                     console.log("Redeemed.");
                     setLoadingRedeem(false);
                     setCurrDeduction(0);
