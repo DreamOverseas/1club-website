@@ -5,19 +5,63 @@ import { useNavigate } from 'react-router-dom';
 import '../Styles/MemberCenter.css';
 import MemberPointMarket from '../Components/MemberPointMarket';
 import DetailUpdateBtn from '../Components/DetailUpdateBtn';
+import axios from 'axios';
 
 const MemberCenter = () => {
+    const API_ENDPOINT = import.meta.env.VITE_CMS_API_ENDPOINT;
+    const API_KEY = import.meta.env.VITE_CMS_API_KEY;
+
     const [user, setUser] = useState(null);
+    const [couponValue, setCouponValue] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const userCookie = Cookies.get('user');
-        if (userCookie) {
-            setUser(JSON.parse(userCookie));
-        } else {
-            navigate('/');
-            console.log("user not logged in");
-        }
+        const fetchUserData = async () => {
+            const userCookie = Cookies.get('user');
+            if (userCookie) {
+                const userData = JSON.parse(userCookie);
+                try {
+                    const response = await axios.get(
+                        `${API_ENDPOINT}/api/one-club-memberships?filters[MembershipNumber][$eq]=${userData.number}`,
+                        { headers: { Authorization: `Bearer ${API_KEY}` } }
+                    );
+
+                    const memberData = response.data?.data[0];
+
+                    if (!memberData) {
+                        alert('会员号不存在，请检查后重试！');
+                        return;
+                    }
+
+                    Cookies.set('authToken', '1club-auth-token', { expires: 7 });
+                    Cookies.set(
+                        'user',
+                        JSON.stringify({
+                            name: memberData.Name,
+                            number: memberData.MembershipNumber,
+                            email: memberData.Email,
+                            class: memberData.MembershipClass,
+                            exp: memberData.ExpiryDate,
+                            points: memberData.Point,
+                            discount_point: memberData.DiscountPoint,
+                            loyalty_point: memberData.LoyaltyPoint,
+                        }),
+                        { expires: 7 }
+                    );
+
+                    // Update state with fetched user data
+                    setUser(JSON.parse(Cookies.get('user')));
+                } catch (err) {
+                    alert('发生错误，请稍后重试。');
+                    console.error(err);
+                }
+            } else {
+                navigate('/');
+                console.log('user not logged in');
+            }
+        };
+
+        fetchUserData();
     }, [navigate]);
 
     const handleLogout = () => {
@@ -80,6 +124,10 @@ const MemberCenter = () => {
                     <Row className="mb-3">
                         <Col sm={4} className="text-muted">积分</Col>
                         <Col sm={8}>{user.loyalty_point}</Col>
+                    </Row>
+                    <Row className="mb-3">
+                        <Col sm={4} className="text-muted">券面价值</Col>
+                        <Col sm={8}>{couponValue ? couponValue : "Calculating..."}</Col>
                     </Row>
                     <Row className="mb-3">
                         <Col sm={4} className="text-muted">当前状态</Col>
