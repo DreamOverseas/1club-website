@@ -22,7 +22,7 @@ const MemberCenter = () => {
                 const userData = JSON.parse(userCookie);
                 try {
                     const response = await axios.get(
-                        `${API_ENDPOINT}/api/one-club-memberships?filters[MembershipNumber][$eq]=${userData.number}`,
+                        `${API_ENDPOINT}/api/one-club-memberships?filters[MembershipNumber][$eq]=${userData.number}&populate=MyCoupon`,
                         { headers: { Authorization: `Bearer ${API_KEY}` } }
                     );
 
@@ -49,6 +49,14 @@ const MemberCenter = () => {
                         { expires: 7 }
                     );
 
+                    // Update Coupon Value
+                    let couponVal = 0;
+                    memberData.MyCoupon.forEach(coupon => {
+                        if (coupon.Active == true) {
+                            couponVal += coupon.Value;
+                        }
+                    });
+                    setCouponValue(couponVal);
                     // Update state with fetched user data
                     setUser(JSON.parse(Cookies.get('user')));
                 } catch (err) {
