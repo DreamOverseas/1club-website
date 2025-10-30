@@ -17,6 +17,7 @@ import Membership from "./Views/Membership";
 import ContactUs from "./Views/ContactUs";
 import MemberCenter from "./Views/MemberCenter";
 import MemberManagement from "./Views/MemberManagement";
+import StripeTest from "./Views/StripeTest";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/member-center' element={<MemberCenter />} />
         <Route path='/member-management-page' element={<MemberManagement />} />
+        <Route path='/test-stripe' element={<StripeTest />} />
       </Routes>
       <Footer />
     </div>
