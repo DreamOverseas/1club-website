@@ -13,10 +13,12 @@ export default function StripeCheckoutButton({ priceId, amount, title }) {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
 
+    const STRIPE_SERVICE_ENDPOINT = import.meta.env.VITE_PAYMENT_ENDPOINT;
+
     const handlePayment = async () => {
         setLoading(true);
         try {
-            const res = await fetch("http://localhost:3008/create-checkout-session", {
+            const res = await fetch(`${STRIPE_SERVICE_ENDPOINT}/create-checkout-session`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ priceId }),
