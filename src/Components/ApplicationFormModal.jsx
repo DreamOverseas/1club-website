@@ -1,31 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import "../Styles/Components.css";
-import axios from 'axios';
-import { Modal, Form, Button, Alert } from 'react-bootstrap';
-import DoTermsAndConditions from './DoTermsAndConditions';
+import axios from "axios";
+import { Modal, Form, Button, Alert } from "react-bootstrap";
+import DoTermsAndConditions from "./DoTermsAndConditions";
 
 // Read Env
 const BACKEND_HOST = import.meta.env.VITE_CMS_API_ENDPOINT;
-const API_KEY_1CLUB = import.meta.env.VITE_CMS_API_KEY;
-const MAIL_API = `${import.meta.env.VITE_EMAIL_API_ENDPOINT}/1club/membership-notify`;
+const API_KEY_360Club = import.meta.env.VITE_CMS_API_KEY;
+const MAIL_API = `${
+  import.meta.env.VITE_EMAIL_API_ENDPOINT
+}/360Club/membership-notify`;
 
 const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
   // Form State
   const [formData, setFormData] = useState({
-    Name: '',
-    Email: '',
-    Phone: '',
-    Address: '',
-    Referee: '',
-    Occupation: '',
-    MembershipClass: membershipClass || '',
+    Name: "",
+    Email: "",
+    Phone: "",
+    Address: "",
+    Referee: "",
+    Occupation: "",
+    MembershipClass: membershipClass || "",
   });
   //Display lookup
   const classDisplay = {
     Gold: "黄金会员 - $5888/5年",
     Platinum: "铂金会员 - $18,888/5年",
     Diamond: "钻石会员 - $58,888/5年",
-  }
+  };
 
   const [agreed, setAgreed] = useState(false);
 
@@ -49,12 +51,12 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
   // Form Validation
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.Name.trim()) newErrors.name = '请提供您的名字';
-    if (!formData.Email.trim()) newErrors.email = '请提供您的邮箱';
-    if (!formData.Referee.trim()) newErrors.refree = '请提供您的举荐人';
-    if (!agreed) newErrors.tnc = '请阅读使用条款并勾选同意';
+    if (!formData.Name.trim()) newErrors.name = "请提供您的名字";
+    if (!formData.Email.trim()) newErrors.email = "请提供您的邮箱";
+    if (!formData.Referee.trim()) newErrors.refree = "请提供您的举荐人";
+    if (!agreed) newErrors.tnc = "请阅读使用条款并勾选同意";
     if (!formData.MembershipClass.trim())
-      newErrors.membershipClass = '请选择您申请的会员等级';
+      newErrors.membershipClass = "请选择您申请的会员等级";
     return newErrors;
   };
 
@@ -70,53 +72,57 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
           { data: formData }, // Request payload
           {
             headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${API_KEY_1CLUB}`,
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${API_KEY_360Club}`,
             },
           }
         );
 
         if (response.status === 200 || response.status === 201) {
           try {
-            await axios.post( MAIL_API,
-              { "Name": formData.Name,
-                "Email": formData.Email.toLowerCase()
-              },
+            await axios.post(
+              MAIL_API,
+              { Name: formData.Name, Email: formData.Email.toLowerCase() },
               {
                 headers: {
-                  'Content-Type': 'application/json'
+                  "Content-Type": "application/json",
                 },
               }
             );
           } catch (error) {
-            console.error('Error message:', error.message);
-            alert("提交申请成功，但是内部邮件系统正在维护中...请通过电话或电子邮件联系我们。");
+            console.error("Error message:", error.message);
+            alert(
+              "提交申请成功，但是内部邮件系统正在维护中...请通过电话或电子邮件联系我们。"
+            );
           }
           setShowSuccess(true);
           setFormData({
-            Name: '',
-            Email: '',
-            Phone: '',
-            Address: '',
-            Referee: '',
-            Occupation: '',
-            MembershipClass: membershipClass || '',
+            Name: "",
+            Email: "",
+            Phone: "",
+            Address: "",
+            Referee: "",
+            Occupation: "",
+            MembershipClass: membershipClass || "",
           });
         } else {
           alert("提交失败了。");
         }
       } catch (error) {
-        console.error('Error during form submission:', error);
+        console.error("Error during form submission:", error);
         if (error.response) {
           // Server responded with a status code out of the 2xx range
-          console.error('Response data:', error.response.data);
-          console.error('Response status:', error.response.status);
+          console.error("Response data:", error.response.data);
+          console.error("Response status:", error.response.status);
         } else if (error.request) {
           // Request was made but no response was received
-          console.error('Request made but no response received:', error.request);
+          console.error(
+            "Request made but no response received:",
+            error.request
+          );
         } else {
           // Something happened in setting up the request
-          console.error('Error message:', error.message);
+          console.error("Error message:", error.message);
         }
       } finally {
         setIsSubmitting(false);
@@ -130,11 +136,15 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
   return (
     <Modal show={active} onHide={onClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title><b>会员申请表</b></Modal.Title>
+        <Modal.Title>
+          <b>会员申请表</b>
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {showSuccess && (
-          <Alert variant="success">提交成功！我们将会在审核通过后通知您，期待您的加入！</Alert>
+          <Alert variant="success">
+            提交成功！我们将会在审核通过后通知您，期待您的加入！
+          </Alert>
         )}
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formName" className="mb-3">
@@ -241,7 +251,7 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
                 className="me-2 mb-0"
                 checked={agreed}
                 onChange={(e) => setAgreed(e.target.checked)}
-                label="" 
+                label=""
                 isInvalid={!agreed}
               />
               <div>
@@ -256,10 +266,18 @@ const ApplicationFormModal = ({ active, membershipClass, onClose }) => {
           </Form.Group>
 
           <div className="text-end">
-            <Button variant="dark" className='member-applic-submit-button' type="submit">
+            <Button
+              variant="dark"
+              className="member-applic-submit-button"
+              type="submit"
+            >
               {isSubmitting ? (
                 <>
-                  <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
                   {"正在提交..."}
                 </>
               ) : (

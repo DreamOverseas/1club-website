@@ -17,11 +17,11 @@ const DoTermsAndConditions = ({ defaultLang = 'zh' }) => {
     const toggleLang = () => setLang(lang === 'zh' ? 'en' : 'zh');
     const toggleModal = () => setIsOpen(!isOpen);
 
-    const zhContent = `任何使用一号俱乐部（1# Club）网站的用户均应仔细阅读本条例。1# Club 是由出国梦集团（Dream Overseas Group Pty Ltd - ABN: 531 191 108 60）运营的线上平台：
+    const zhContent = `任何使用360俱乐部（360 Club）网站的用户均应仔细阅读本条例。360 Club 是由出国梦集团（Dream Overseas Group Pty Ltd - ABN: 531 191 108 60）运营的线上平台：
 
 - 服务协议
 第1条：服务条款的接受
-1、本服务条款所称的服务商、合作方是指完全同意所有条款并使用出国梦集团及其平台（包括但不限于一号俱乐部）各项软件服务（以下称为“本服务”）的出国服务商、合作方及其他用户（以下称为“服务商、合作方”）。通过开通服务应用软件，服务商、合作方便表明其接受并同意受本服务条款及其他声明的约束；同时，服务商、合作方保证其提交的信息真实、合法、有效、准确、及时和完整。
+1、本服务条款所称的服务商、合作方是指完全同意所有条款并使用出国梦集团及其平台（包括但不限于360俱乐部）各项软件服务（以下称为“本服务”）的出国服务商、合作方及其他用户（以下称为“服务商、合作方”）。通过开通服务应用软件，服务商、合作方便表明其接受并同意受本服务条款及其他声明的约束；同时，服务商、合作方保证其提交的信息真实、合法、有效、准确、及时和完整。
 2、本服务条款以《出国梦集团用户服务协议》为基础，服务商、合作方接受本服务条款，默认表示接受《出国梦集团用户服务协议》及其他全部声明等的相关条款。
 
 第2条：服务条款的变更和修改
@@ -29,7 +29,7 @@ const DoTermsAndConditions = ({ defaultLang = 'zh' }) => {
 2、出国梦集团有权利根据软件的使用情况，进行功能的新增、修改和删减。
 
 第3条：服务说明
-1、出国梦集团通过自己的计算机系统经由互联网向服务商、合作方提供包括1# Club 在内的营销软件服务。
+1、出国梦集团通过自己的计算机系统经由互联网向服务商、合作方提供包括360 Club 在内的营销软件服务。
 2、除非另有明确规定，增强或改变目前服务的任何新功能，包括新产品，均适用本服务条款。出国梦集团不保证服务一定会满足使用者需求，也不对服务的连续性、安全性、准确性作出担保。
 3、出国梦集团不对服务商、合作方在使用过程中与第三方产生的纠纷负责。
 4、在以下情况下，出国梦集团有权删除相关信息或终止服务：
@@ -50,18 +50,18 @@ const DoTermsAndConditions = ({ defaultLang = 'zh' }) => {
 除非另行通知，本服务条款自2025年1月1日起生效。
 
 第8条：数据上传与使用
-1、用户在1# Club 平台上传的内容（如文本、图像、视频、评论、资料等），一经上传即视为用户授权出国梦集团在全球范围内无偿、非独占、可再授权地使用、复制、修改、展示、发布该等内容。
+1、用户在360 Club 平台上传的内容（如文本、图像、视频、评论、资料等），一经上传即视为用户授权出国梦集团在全球范围内无偿、非独占、可再授权地使用、复制、修改、展示、发布该等内容。
 2、用户须确保上传内容不侵犯他人合法权益。若发生侵权，用户承担全部法律责任，并赔偿出国梦集团因此遭受的损失。
 3、出国梦集团有权根据平台内容管理规定对上传内容进行筛选、编辑、删除等处理。
 
 第9条：会员与登录机制
-1、1# Club 提供注册会员功能。用户需提供真实、合法的身份信息进行注册。
+1、360 Club 提供注册会员功能。用户需提供真实、合法的身份信息进行注册。
 2、会员账户仅限本人使用，不得转让、出租、出借。用户对账户操作及安全性负责。
 3、出于安全、运营或用户违规的原因，出国梦集团有权暂停或注销会员账户。
 4、特定功能或服务可能仅限注册会员使用，具体权限以平台公布为准。
 
 - 免责声明
-1、1# Club 网站发布或转载的内容由用户提供，其真实性、准确性和合法性由发布者承担。
+1、360 Club 网站发布或转载的内容由用户提供，其真实性、准确性和合法性由发布者承担。
 2、出国梦集团作为平台方，不对内容作任何保证或承担法律责任。
 3、若因用户上传内容侵犯他人权利，由上传者承担责任，网站不承担法律责任。
 4、因黑客攻击、通讯故障等导致服务中断的，出国梦集团不承担法律责任。
@@ -77,15 +77,15 @@ const DoTermsAndConditions = ({ defaultLang = 'zh' }) => {
 4、转载本网站内容需经原作者授权，并注明来源为“出国梦集团网站”。
 5、如有非法转载，出国梦集团保留追究法律责任的权利。`;
 
-    const enContent = `All users of the 1# Club website are advised to read these Terms and Conditions carefully. 1# Club is operated by Dream Overseas Group Pty Ltd (ABN: 531 191 108 60):
+    const enContent = `All users of the 360 Club website are advised to read these Terms and Conditions carefully. 360 Club is operated by Dream Overseas Group Pty Ltd (ABN: 531 191 108 60):
 
 I. Service Agreement
 
 Article 1: Acceptance of Terms
-“Service Providers” and “Partners” refer to all users who accept the full terms herein and utilize software services provided by Dream Overseas Group, including 1# Club. By enabling service applications, users agree to be bound by these terms and ensure the accuracy and legality of the information they submit.
+“Service Providers” and “Partners” refer to all users who accept the full terms herein and utilize software services provided by Dream Overseas Group, including 360 Club. By enabling service applications, users agree to be bound by these terms and ensure the accuracy and legality of the information they submit.
 
 Article 2: Modification of Terms
-Dream Overseas Group may update, add, or remove features of its software services—including those offered on 1# Club—based on operational needs. Users agree to abide by these changes.
+Dream Overseas Group may update, add, or remove features of its software services—including those offered on 360 Club—based on operational needs. Users agree to abide by these changes.
 
 Article 3: Description of Services
 Dream Overseas Group offers its services online, including marketing, project management, and other software functions. The use of services implies acceptance of these Terms. The Group does not guarantee uninterrupted, secure, or error-free services and is not liable for disputes between users and third parties.
@@ -103,13 +103,13 @@ Article 7: Effective Date
 These Terms take effect from Jan 1, 2025, unless otherwise stated.
 
 Article 8: Data Upload and Use
-Users uploading content (text, images, videos, etc.) to the 1# Club platform grant Dream Overseas Group a global, royalty-free license to use, edit, and display the content. Users must ensure their content does not infringe on third-party rights. The platform reserves the right to remove or edit user-submitted content.
+Users uploading content (text, images, videos, etc.) to the 360 Club platform grant Dream Overseas Group a global, royalty-free license to use, edit, and display the content. Users must ensure their content does not infringe on third-party rights. The platform reserves the right to remove or edit user-submitted content.
 
 Article 9: Membership and Login
-1# Club allows account registration. Users must submit valid and truthful information. Accounts are non-transferable. Dream Overseas Group reserves the right to suspend or cancel accounts in case of violations or security concerns. Some features are accessible to registered members only.
+360 Club allows account registration. Users must submit valid and truthful information. Accounts are non-transferable. Dream Overseas Group reserves the right to suspend or cancel accounts in case of violations or security concerns. Some features are accessible to registered members only.
 
 II. Disclaimer
-Content published on the 1# Club website is provided by users. Dream Overseas Group is not responsible for the accuracy or legality of such content. Any disputes or infringements are the sole responsibility of the content provider. Dream Overseas Group is not liable for technical disruptions or damages resulting therefrom. Use of the site implies acceptance of all statements and conditions.
+Content published on the 360 Club website is provided by users. Dream Overseas Group is not responsible for the accuracy or legality of such content. Any disputes or infringements are the sole responsibility of the content provider. Dream Overseas Group is not liable for technical disruptions or damages resulting therefrom. Use of the site implies acceptance of all statements and conditions.
 
 III. Copyright Notice
 This site is supported by Dream Overseas Group Pty Ltd. All content (including text, images, code, and design) is the intellectual property of the Group. Unauthorized reproduction, distribution, or commercial use is prohibited. User-submitted content remains the property of the original author, but uploading grants Dream Overseas Group permission to edit and use it. Reuse by third parties requires permission from the original author and must cite the source. Legal action may be taken against unauthorized use.

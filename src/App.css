@@ -1,5 +1,5 @@
 .App {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   text-align: center;
 }
 
@@ -39,12 +39,13 @@
   background-color: transparent;
 }
 
-.page-body-1club { /* Make sure the footer will not float in the mid-air */
+.page-body-360Club {
+  /* Make sure the footer will not float in the mid-air */
   min-height: calc(100vh - 120px); /* Calc: screen height - footer height */
 }
 
 @media (max-width: 768px) {
   .sticky-navbar-page-start-placeholder {
-      height: 80;
+    height: 80;
   }
 }

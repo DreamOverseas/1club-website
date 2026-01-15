@@ -1,5 +1,5 @@
 {
-  "name": "1club-website",
+  "name": "360Club-website",
   "version": "0.3.1",
   "private": true,
   "homepage": "/",
@@ -10,7 +10,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "1club-website": "file:",
+    "360Club-website": "file:",
     "ajv": "^8.17.1",
     "ajv-keywords": "^5.1.0",
     "axios": "^1.7.9",

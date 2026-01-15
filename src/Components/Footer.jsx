@@ -18,7 +18,7 @@ const Footer = () => {
             await axios.post('https://mail-service.do360.com/subscribe/quick-subscription/', {
                 // Using the 360media one for now since they are the same in function
                 "email": email,
-                "source": "1 Club"
+                "source": "360 Club"
             });
             setMessage("已成功订阅!");
             setEmail('');
@@ -70,7 +70,7 @@ const Footer = () => {
                             {/* Text Section */}
                             <Col xs={12}>
                                 <p className="footer-texts mb-2">
-                                    从 1# Club 获取最新资讯! <br />
+                                    从 360 Club 获取最新资讯! <br />
                                 </p>
                             </Col>
 

@@ -17,8 +17,8 @@ const Home = () => {
     return (
         <>
             <Helmet>
-                <title>1# Club - 1号俱乐部</title>
-                <meta name="description" content="Homepage - 1# Club, the private club for high-end customers." />
+                <title>360 Club - 360俱乐部</title>
+                <meta name="description" content="Homepage - 360 Club, the private club for high-end customers." />
                 <meta name="keywords" content="Private Club, High-end, Club, Membership, Holiday, Accomadation, Service, Landscape" />
             </Helmet>
 
@@ -57,9 +57,9 @@ const Home = () => {
 
                 {/* Foreground content */}
                 <div className="home-title-container">
-                    <h1 className="home-title">WELCOME TO 1# CLUB</h1>
+                    <h1 className="home-title">WELCOME TO 360 Club</h1>
                     <h4 className="home-subtitle">
-                        欢迎来到1号俱乐部，感受独特与卓越的碰撞
+                        欢迎来到360俱乐部，感受独特与卓越的碰撞
                     </h4>
                 </div>
 
@@ -81,9 +81,9 @@ const Home = () => {
                             <h4><strong>构建全球精英社交平台</strong></h4>
                             <div className="text-align-left">
                                 <br />
-                                • 1号俱乐部成立于澳大利亚，这片多元文化的土地，是通向世界的桥梁。在这里，您无需远行，即可结识来自中国及全球各地的精英人群 •
+                                • 360俱乐部成立于澳大利亚，这片多元文化的土地，是通向世界的桥梁。在这里，您无需远行，即可结识来自中国及全球各地的精英人群 •
                                 <br />
-                                • 作为一个专注于高进值人群的高端俱乐部，1号俱乐部携手 世界合作组织-WCO 资源，联通澳洲与海外会员网络，打造一个汇聚商业、文化与政治资源的国际化社交平台 •
+                                • 作为一个专注于高进值人群的高端俱乐部，360俱乐部携手 世界合作组织-WCO 资源，联通澳洲与海外会员网络，打造一个汇聚商业、文化与政治资源的国际化社交平台 •
                                 <br />
                                 • 专属会员制, 为您提供量身定制的高质量体验 •
                             </div>

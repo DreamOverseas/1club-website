@@ -1,62 +1,62 @@
 /* Navbar Container */
 .navbar {
-    font-family: 'Inter', sans-serif;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    margin-left: auto;
-    padding-top: 5px;
-    padding-bottom: 5px;
+  font-family: "Inter", sans-serif;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-.nav-logo-1club {
-    height: 50px;
-    width: auto;
-    padding: 0;
+.nav-logo-360Club {
+  height: 50px;
+  width: auto;
+  padding: 0;
 }
 
 .navigation-link-item {
-    font-size: small;
-    padding: 0.5rem 1rem;
-    margin-left: 10px;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    color: #000;
-    transition: all 0.3s ease;
+  font-size: small;
+  padding: 0.5rem 1rem;
+  margin-left: 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: #000;
+  transition: all 0.3s ease;
 }
 
 .navigation-link-item:hover {
-    border-color: lightgray;
+  border-color: lightgray;
 }
 
 .navigation-link-item.active-nav-item {
-    border-color: black;
+  border-color: black;
 }
 
 .nav-delimiter {
-    width: 1px;
-    height: 30px;
-    background-color: lightgray; 
-    margin: 0 1rem; 
+  width: 1px;
+  height: 30px;
+  background-color: lightgray;
+  margin: 0 1rem;
 }
 
 button.btn-dark {
-    background-color: black;
-    border: none;
-    transition: all 0.3s ease;
+  background-color: black;
+  border: none;
+  transition: all 0.3s ease;
 }
 
 button.btn-dark:hover {
-    background-color: #414141;
+  background-color: #414141;
 }
 
-.nav-button-text{
-    font-size: small;
+.nav-button-text {
+  font-size: small;
 }
-
 
 @media (max-width: 768px) {
-    .nav-delimiter {  /* Hide delimiter on mobile views */
-        height: 0px;
-        background-color: transparent; 
-        margin: 0;
-    }
+  .nav-delimiter {
+    /* Hide delimiter on mobile views */
+    height: 0px;
+    background-color: transparent;
+    margin: 0;
+  }
 }

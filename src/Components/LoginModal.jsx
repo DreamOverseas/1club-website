@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Modal, Form, Button, Alert, InputGroup } from 'react-bootstrap';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Modal, Form, Button, Alert, InputGroup } from "react-bootstrap";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const LoginModal = ({ show, onHide }) => {
   const API_ENDPOINT = import.meta.env.VITE_CMS_API_ENDPOINT;
@@ -17,15 +17,15 @@ const LoginModal = ({ show, onHide }) => {
   const toggleShowPassword3 = () => setShowPassword3((prev) => !prev);
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    membershipNumber: '',
-    password: '',
-    confirmPassword: '',
-    docId: '',
+    name: "",
+    email: "",
+    membershipNumber: "",
+    password: "",
+    confirmPassword: "",
+    docId: "",
   });
-  const [status, setStatus] = useState('');
-  const [error, setError] = useState('');
+  const [status, setStatus] = useState("");
+  const [error, setError] = useState("");
   const [step, setStep] = useState(1); // 1: Info Check, 2: Password Setup, 3: Login with pwd
 
   const navigate = useNavigate();
@@ -37,8 +37,8 @@ const LoginModal = ({ show, onHide }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setStatus('');
+    setError("");
+    setStatus("");
 
     try {
       const response = await axios.get(
@@ -51,26 +51,29 @@ const LoginModal = ({ show, onHide }) => {
       const memberData = response.data?.data[0];
 
       if (!memberData) {
-        setError('会员号不存在，请检查后重试！');
+        setError("会员号不存在，请检查后重试！");
         return;
       }
 
       switch (memberData.CurrentStatus) {
-        case 'Confirmed':
+        case "Confirmed":
           if (
             (!memberData.Email && formData.name === memberData.Name) ||
-            (memberData.Email === formData.email.toLowerCase())
+            memberData.Email === formData.email.toLowerCase()
           ) {
             setFormData({ ...formData, docId: memberData.documentId });
             setStep(2);
           } else {
-            setError('信息不匹配，请核对后重试。');
+            setError("信息不匹配，请核对后重试。");
           }
           break;
 
-        case 'Active':
-          if (formData.name !== memberData.Name || memberData.Email !== formData.email.toLowerCase()) {
-            setError('会员信息不匹配，请核对后重试。');
+        case "Active":
+          if (
+            formData.name !== memberData.Name ||
+            memberData.Email !== formData.email.toLowerCase()
+          ) {
+            setError("会员信息不匹配，请核对后重试。");
             break;
           }
 
@@ -92,56 +95,65 @@ const LoginModal = ({ show, onHide }) => {
             );
 
             if (response.status === 200) {
-              Cookies.set('authToken', '1club-auth-token', { expires: 7 });
-              Cookies.set('user', JSON.stringify({
-                "name": memberData.Name,
-                "number": memberData.MembershipNumber,
-                "email": memberData.Email,
-                "class": memberData.MembershipClass,
-                "exp": memberData.ExpiryDate,
-                "points": memberData.Point,
-                "discount_point": memberData.DiscountPoint,
-                "loyalty_point": memberData.LoyaltyPoint,
-              }), { expires: 7 });
-              navigate('/member-center');
+              Cookies.set("authToken", "360Club-auth-token", { expires: 7 });
+              Cookies.set(
+                "user",
+                JSON.stringify({
+                  name: memberData.Name,
+                  number: memberData.MembershipNumber,
+                  email: memberData.Email,
+                  class: memberData.MembershipClass,
+                  exp: memberData.ExpiryDate,
+                  points: memberData.Point,
+                  discount_point: memberData.DiscountPoint,
+                  loyalty_point: memberData.LoyaltyPoint,
+                }),
+                { expires: 7 }
+              );
+              navigate("/member-center");
               window.location.reload();
             }
           } catch (err) {
             if (err.response) {
               if (err.response.status === 401) {
-                setError('密码错误，请重试。');
+                setError("密码错误，请重试。");
               } else if (err.response.status === 404) {
-                setError('会员号不存在，请核对后重试。');
+                setError("会员号不存在，请核对后重试。");
               } else {
-                setError(err.response.data.message || '发生未知错误，请稍后重试。');
+                setError(
+                  err.response.data.message || "发生未知错误，请稍后重试。"
+                );
               }
             } else if (err.request) {
-              setError('无法连接到服务器，请检查网络连接。');
+              setError("无法连接到服务器，请检查网络连接。");
             } else {
-              setError('发生未知错误，请稍后重试。');
+              setError("发生未知错误，请稍后重试。");
               console.error(err);
             }
           }
           break;
 
-        case 'Applied':
-          setStatus('会员资格仍正在审核中，请您耐心等待...');
+        case "Applied":
+          setStatus("会员资格仍正在审核中，请您耐心等待...");
           break;
 
-        case 'Suspended':
-          if (formData.name !== memberData.Name || memberData.Email !== formData.email.toLowerCase()) {
-            setError('会员信息不匹配，请核对后重试。');
+        case "Suspended":
+          if (
+            formData.name !== memberData.Name ||
+            memberData.Email !== formData.email.toLowerCase()
+          ) {
+            setError("会员信息不匹配，请核对后重试。");
             break;
           }
-          setStatus('会员已过期或已被注销，如有问题欢迎随时联系我们！');
+          setStatus("会员已过期或已被注销，如有问题欢迎随时联系我们！");
           break;
 
         default:
-          setStatus('未找到会员或申请正在审核中，如有问题欢迎随时联系我们！');
+          setStatus("未找到会员或申请正在审核中，如有问题欢迎随时联系我们！");
           break;
       }
     } catch (err) {
-      setError('请求失败，请稍后重试。');
+      setError("请求失败，请稍后重试。");
       console.error(err);
     }
   };
@@ -149,12 +161,12 @@ const LoginModal = ({ show, onHide }) => {
   const handleSetPassword = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      setError('两次密码输入不一致，请重试。');
+      setError("两次密码输入不一致，请重试。");
       return;
     }
 
     try {
-      const member_res =await axios.get(
+      const member_res = await axios.get(
         `${API_ENDPOINT}/api/one-club-memberships/${formData.docId}`,
         {
           headers: { Authorization: `Bearer ${API_KEY}` },
@@ -167,13 +179,13 @@ const LoginModal = ({ show, onHide }) => {
       const { id, ...cleaned_data } = curr_data; // Currently no use?
       // console.log("Cleaned: ", cleaned_data);
       const payload_data = {
-          data: {
-            Email: formData.email.toLowerCase(),
-            Name: formData.name,
-            CurrentStatus: "Active",
-            Password: formData.password
-          },
-        };
+        data: {
+          Email: formData.email.toLowerCase(),
+          Name: formData.name,
+          CurrentStatus: "Active",
+          Password: formData.password,
+        },
+      };
       await axios.put(
         `${API_ENDPOINT}/api/one-club-memberships/${curr_data.documentId}`,
         payload_data,
@@ -189,23 +201,27 @@ const LoginModal = ({ show, onHide }) => {
       );
 
       const memberData = response.data.data[0];
-      Cookies.set('authToken', 'your-auth-token', { expires: 7 });
-      Cookies.set('user', JSON.stringify({
-        "name": memberData.Name,
-        "number": memberData.MembershipNumber,
-        "email": memberData.Email,
-        "class": memberData.MembershipClass,
-        "address": memberData.Address,
-        "exp": memberData.ExpiryDate,
-        "points": memberData.Point,
-        "discount_point": memberData.DiscountPoint,
-        "loyalty_point": memberData.LoyaltyPoint,
-      }), { expires: 7 });
-      navigate('/member-center');
+      Cookies.set("authToken", "your-auth-token", { expires: 7 });
+      Cookies.set(
+        "user",
+        JSON.stringify({
+          name: memberData.Name,
+          number: memberData.MembershipNumber,
+          email: memberData.Email,
+          class: memberData.MembershipClass,
+          address: memberData.Address,
+          exp: memberData.ExpiryDate,
+          points: memberData.Point,
+          discount_point: memberData.DiscountPoint,
+          loyalty_point: memberData.LoyaltyPoint,
+        }),
+        { expires: 7 }
+      );
+      navigate("/member-center");
       window.location.reload();
     } catch (err) {
       window.alert(error);
-      setError('更新失败，请稍后重试。');
+      setError("更新失败，请稍后重试。");
       console.error(err);
     }
   };
@@ -266,7 +282,7 @@ const LoginModal = ({ show, onHide }) => {
               <InputGroup>
                 <Form.Control
                   // 当 showPassword1 为 true 时，type 是 "text"（明文），否则是 "password"（密文）
-                  type={showPassword1 ? 'text' : 'password'}
+                  type={showPassword1 ? "text" : "password"}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
@@ -274,10 +290,12 @@ const LoginModal = ({ show, onHide }) => {
                 />
                 <InputGroup.Text
                   onClick={toggleShowPassword1}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 >
                   {/* 根据 showPassword1 切换不同的图标 */}
-                  <i className={showPassword1 ? 'bi bi-eye-fill' : 'bi bi-eye'} />
+                  <i
+                    className={showPassword1 ? "bi bi-eye-fill" : "bi bi-eye"}
+                  />
                 </InputGroup.Text>
               </InputGroup>
               <Form.Text muted>
@@ -289,7 +307,7 @@ const LoginModal = ({ show, onHide }) => {
               <Form.Label>确认密码</Form.Label>
               <InputGroup>
                 <Form.Control
-                  type={showPassword2 ? 'text' : 'password'}
+                  type={showPassword2 ? "text" : "password"}
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
@@ -297,10 +315,10 @@ const LoginModal = ({ show, onHide }) => {
                 />
                 <InputGroup.Text
                   onClick={toggleShowPassword2}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 >
                   <i
-                    className={showPassword2 ? 'bi bi-eye-fill' : 'bi bi-eye'}
+                    className={showPassword2 ? "bi bi-eye-fill" : "bi bi-eye"}
                   />
                 </InputGroup.Text>
               </InputGroup>
@@ -319,7 +337,7 @@ const LoginModal = ({ show, onHide }) => {
               <Form.Label>输入密码</Form.Label>
               <InputGroup>
                 <Form.Control
-                  type={showPassword3 ? 'text' : 'password'}
+                  type={showPassword3 ? "text" : "password"}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
@@ -327,15 +345,16 @@ const LoginModal = ({ show, onHide }) => {
                 />
                 <InputGroup.Text
                   onClick={toggleShowPassword3}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                 >
                   <i
-                    className={showPassword3 ? 'bi bi-eye-fill' : 'bi bi-eye'}
+                    className={showPassword3 ? "bi bi-eye-fill" : "bi bi-eye"}
                   />
                 </InputGroup.Text>
               </InputGroup>
               <Form.Text muted>
-                请输入您的密码 （注：不低于8个字符）, 完成后点击登录按钮登入会员中心。
+                请输入您的密码 （注：不低于8个字符）,
+                完成后点击登录按钮登入会员中心。
               </Form.Text>
             </Form.Group>
 
