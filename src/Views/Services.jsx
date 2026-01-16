@@ -23,14 +23,14 @@ const servicesData = [
   {
     title: "世贸中心 · WTC Elite Club",
     description: `坐落于墨尔本世贸中心头等舱楼层的 WTC Elite Club，以“协作、诚信、卓越”为核心价值，提供前所未有的定制化会晤空间与隽永服务。无论是高端商务谈判、跨国项目启动会，还是贵宾定制晚宴，场地都可根据贵宾需求进行灵活布局，并可配备专属礼宾、顶级餐饮与多语种同传等全方位支持。360 Club 与 WTC Elite Club 紧密携手，为会员定制专属会员卡及优先预约权益，让每一次商务社交都畅达无阻，助力会员在全球舞台上赢得信任与尊崇。`,
-    img: "/service/wtc_360 Club.jpg",
+    img: "/service/wtc_1club.jpg",
     link: "https://wtceliteclub.com.au/about/",
     category: "活动承办",
   },
   {
     title: "罗塞尼斯半岛度假村 · Roseneath Holiday Park",
     description: `坐落于维州 Lake Wellington 南岸的 174 英亩原始湖滨丛林度假胜地，以其 2 公里湖滨沙滩、季节性露天泳池、专业烧烤区和全方位露营厨房闻名，是家庭与好友亲近自然的理想之选。豪华小屋、独立度假屋与房车营位配置齐全，内部均设有暖心壁炉与私享小厨房，而公区免费高速 Wi-Fi 与儿童游乐设施则兼顾现代舒适与亲子友好。360 Club 与 Roseneath Holiday Park 深度合作，专为会员推出尊享帐篷豪华升级和定制湖畔私享活动，如清晨瑜伽、帆船巡游与名厨野炊，让静谧与探险交织的假日更加丰富难忘。`,
-    img: "/service/rhp_360 Club.jpg",
+    img: "/service/rhp_1club.jpg",
     link: "https://roseneathholidaypark.au/",
     category: "旅游",
   },
