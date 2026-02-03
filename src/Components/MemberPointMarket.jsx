@@ -230,7 +230,7 @@ const MemberPointMarket = () => {
         };
 
         const emailResponse = await fetch(
-          `${emailApiEndpoint}/360Club/coupon_distribute`,
+          `${emailApiEndpoint}/1club/coupon_distribute`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
